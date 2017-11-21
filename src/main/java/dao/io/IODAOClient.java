@@ -15,11 +15,6 @@ public class IODAOClient implements DAOClient {
     private ArrayList<Client> clients = new ArrayList<>();
 
     public IODAOClient() {
-        try {
-            clients = readClients();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     private void saveClients (ArrayList<Client> discs) throws IOException {
