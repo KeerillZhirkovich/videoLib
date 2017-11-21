@@ -2,6 +2,8 @@ import dao.io.IODAODisc;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import model.Disc;
 
@@ -15,33 +17,12 @@ public class MainForm extends javax.swing.JFrame {
     IODAODisc d=new IODAODisc();
     public MainForm() {
         initComponents();
-        for (int i=0;i<jTable1.getRowCount();i++)
-          ((DefaultTableModel)jTable1.getModel()).removeRow(i);
-        //discs=new IODAOFactory().getDAODisc().getDiscs();
-
-        Disc disc=new Disc("Звездные войны. Эпизод I: Скрытая угроза", "Star Wars Episode I: The Phantom Menace", "Джордж Лукас", "космическая опера, фантастика, приключения", 133, "английский", "США", 
-                "Рыцарей-джедаев Квай-Гон Джинна и его падавана Оби-Ван Кеноби назначают послами для урегулирования разросшегося конфликта между Торговой федерацией и планетой Набу… Однако переговорам не "
-                        + "суждено состояться — владыка ситхов приказывает лидерам Федерации уничтожить послов и приступить к оккупации Набу. Избежав смерти, джедаи вместе с королевой Набу Падме Амидалой "
-                        + "сбегают с планеты в надежде добраться до столицы мира планеты-города Корусанта и добиться там правды, выступив перед сенатом республики. По пути они вынуждены остановиться на "
-                        + "пустынной планете Татуин. Здесь джедаи обнаруживают необычного мальчика-раба по имени Энакин Скайуокер, в котором необычайно мощна Сила. Джедаи забирают мальчика с собой, чтобы "
-                        + "обучить искусству Светлой стороны Силы. Вскоре ситуация обостряется, когда джедаи узнают, что считавшиеся побеждёнными раз и навсегда ситхи возвращаются. Не получив поддержки от "
-                        + "сената, королева Падме с горсткой людей возвращается на Набу, где в ходе дерзкой атаки ей удаётся пленить лидеров Федерации.", 6.5, "Лиам Нисон, Юэн Макгрегор, Натали Портман, " +
-                        "Джейк Ллойд, Иан Макдермид, Рэй Парк", (short)1999, "", 1, "");
-        d.setDisc(disc);
-        disc=new Disc("Терминатор 2: Судный день", "Terminator 2: Judgment Day", "Джеймс Кэмерон", "фантастический боевик", 137, "английский", "США", "После поразительных событий, произошедших с Сарой Коннор более десяти лет назад, ее пришлось упрятать в сумасшедший дом. Никто не верит женщине, а ее рассказы считают вымыслом и бредом. Даже ее сын Джон думает, что его предназначение – победить в битве с киборгами – плод больного воображения ненормальной. Да и разговаривать с матерью у него особо не получается, ведь он живет с приемными родителями. Но в наше время прибывает робот, перепрограммированный на защиту мальчика, а вслед за ним и другой – киборг, способный принять любую личину.",
-                8.5,"Арнольд Шварценегг, Линда Хэмилтон, Эдвард Фёрлонг, Роберт Патрик", (short)1991, "", 2, "");
-        d.setDisc(disc);
-        discs=d.getDiscs();
-        int i=0;
-        Vector <String> v=new Vector(2);
-        DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
-        for (Disc dd:discs)
-        {
-             v.add(dd.getOriginalTitle());
-             dtm.insertRow(i, v);
-             //dtm.newRowsAdded(new TableModelEvent(dtm));
-        }
-        //dtm.addRow(v);
+        int x=jTable1.getRowCount();
+        for (int i=0;i<x;i++)
+          ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
+        //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
+        //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
+        ShowDiscsList();
     }
 
     /**
@@ -88,36 +69,29 @@ public class MainForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "№", "Название"
+                "Название"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                jTable1ComponentMoved(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(25);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(25);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(25);
-        }
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Название:");
@@ -354,26 +328,39 @@ public class MainForm extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(this, "Файл пуст.");
         //else
         //{
-        Disc disc=discs.get(jTable1.getSelectedRow());
-        origTittleF.setText(disc.getOriginalTitle());
-        russTittleF.setText(disc.getRussianTitle());
-        directorF.setText(disc.getDirector());
-        genreF.setText(disc.getGenre());
-        durationF.setText(Integer.toString(disc.getDuration()));
-        releaseyearF.setText(Short.toString(disc.getReleaseYear()));
-        ratingF.setText(Double.toString(disc.getRating()));
-        langF.setText(disc.getLanguages());
-        countryF.setText(disc.getCountry());
-        actorsF.setText(disc.getActors());
-        descriptionF.setText(disc.getDescription());
+        //if (jTable1.getSelectedRow()!=jTable1.getRowCount()-2 && jTable1.getSelectedRow()!=jTable1.getRowCount()-1)
+        //{
+            Disc disc=discs.get(jTable1.getSelectedRow());
+            origTittleF.setText(disc.getOriginalTitle());
+            russTittleF.setText(disc.getRussianTitle());
+            directorF.setText(disc.getDirector());
+            genreF.setText(disc.getGenre());
+            durationF.setText(Integer.toString(disc.getDuration()));
+            releaseyearF.setText(Short.toString(disc.getReleaseYear()));
+            ratingF.setText(Double.toString(disc.getRating()));
+            langF.setText(disc.getLanguages());
+            countryF.setText(disc.getCountry());
+            actorsF.setText(disc.getActors());
+            descriptionF.setText(disc.getDescription());
+        //}
+        //else 
+          //  ClearForms();
         //}
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        d.deleteDisc(jTable1.getSelectedRow());
-        ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());       
-        this.discs=d.getDiscs();
+        int x=jTable1.getSelectedRow();
+        if (x!=-1)
+        {
+            d.deleteDisc(x);
+            ((DefaultTableModel)jTable1.getModel()).removeRow(x);
+            ClearForms();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentMoved
+        JOptionPane.showMessageDialog(this, "Файл пуст.");
+    }//GEN-LAST:event_jTable1ComponentMoved
 
     /**
      * @param args the command line arguments
@@ -444,4 +431,50 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField releaseyearF;
     private javax.swing.JTextField russTittleF;
     // End of variables declaration//GEN-END:variables
+
+    private void ClearForms() {
+        origTittleF.setText("");
+        russTittleF.setText("");
+        directorF.setText("");
+        genreF.setText("");
+        durationF.setText("");
+        releaseyearF.setText("");
+        ratingF.setText("");
+        langF.setText("");
+        countryF.setText("");
+        actorsF.setText("");
+        descriptionF.setText("");
+    }
+
+    private void ShowDiscsList() {
+        discs=d.getDiscs();
+        Disc disc=new Disc("Звездные войны. Эпизод I: Скрытая угроза", "Star Wars Episode I: The Phantom Menace", "Джордж Лукас", "космическая опера, фантастика, приключения", 133, "английский", "США", 
+                "Рыцарей-джедаев Квай-Гон Джинна и его падавана Оби-Ван Кеноби назначают послами для урегулирования разросшегося конфликта между Торговой федерацией и планетой Набу… Однако переговорам не "
+                        + "суждено состояться — владыка ситхов приказывает лидерам Федерации уничтожить послов и приступить к оккупации Набу. Избежав смерти, джедаи вместе с королевой Набу Падме Амидалой "
+                        + "сбегают с планеты в надежде добраться до столицы мира планеты-города Корусанта и добиться там правды, выступив перед сенатом республики. По пути они вынуждены остановиться на "
+                        + "пустынной планете Татуин. Здесь джедаи обнаруживают необычного мальчика-раба по имени Энакин Скайуокер, в котором необычайно мощна Сила. Джедаи забирают мальчика с собой, чтобы "
+                        + "обучить искусству Светлой стороны Силы. Вскоре ситуация обостряется, когда джедаи узнают, что считавшиеся побеждёнными раз и навсегда ситхи возвращаются. Не получив поддержки от "
+                        + "сената, королева Падме с горсткой людей возвращается на Набу, где в ходе дерзкой атаки ей удаётся пленить лидеров Федерации.", 6.5, "Лиам Нисон, Юэн Макгрегор, Натали Портман, " +
+                        "Джейк Ллойд, Иан Макдермид, Рэй Парк", (short)1999, "", 1, "");
+        d.setDisc(disc);
+        disc=new Disc("Терминатор 2: Судный день", "Terminator 2: Judgment Day", "Джеймс Кэмерон", "фантастический боевик", 137, "английский", "США", "После поразительных событий, произошедших с Сарой Коннор более десяти лет назад, ее пришлось упрятать в сумасшедший дом. Никто не верит женщине, а ее рассказы считают вымыслом и бредом. Даже ее сын Джон думает, что его предназначение – победить в битве с киборгами – плод больного воображения ненормальной. Да и разговаривать с матерью у него особо не получается, ведь он живет с приемными родителями. Но в наше время прибывает робот, перепрограммированный на защиту мальчика, а вслед за ним и другой – киборг, способный принять любую личину.",
+                8.5,"Арнольд Шварценегг, Линда Хэмилтон, Эдвард Фёрлонг, Роберт Патрик", (short)1991, "", 2, "");
+        d.setDisc(disc);
+        disc=new Disc();
+        disc.setOriginalTitle("asd");
+        d.setDisc(disc);
+        discs=d.getDiscs();
+        int i=0;
+        Vector <String> v=new Vector(1);
+        DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
+        for (Disc dd:discs)
+        {
+             v.add(dd.getOriginalTitle());
+             dtm.insertRow(i,v);
+             v=new Vector(1);
+             i++;
+             //dtm.insertRow(i, v); i++;
+             //dtm.newRowsAdded(new TableModelEvent(dtm));
+        }
+    }
 }
