@@ -9,6 +9,16 @@ public class Client implements Serializable {
     private String surname;
     private String phone;
 
+    public Client() {
+
+    }
+
+    public Client(String name, String surname, String phone) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+    }
+
     public int getClientID() {
         return clientID;
     }

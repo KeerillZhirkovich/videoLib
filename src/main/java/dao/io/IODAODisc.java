@@ -29,14 +29,24 @@ public class IODAODisc implements DAODisc {
     }
 
     private ArrayList<Disc> readDiscs() throws IOException, ClassNotFoundException {
+        ArrayList<Disc> discs = new ArrayList<>();
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data\\discs"))){
-            return (ArrayList<Disc>) ois.readObject();
+            discs.addAll((ArrayList<Disc>) ois.readObject());
+            return discs;
         }
     }
 
     @Override
     public void setDisc(Disc disc) {
-        disc.setDiskID(discs.get(discs.size()-1).getDiskID()+1);
+
+        int id;
+
+        if(discs.size() == 0){
+            id = 1;
+        } else {
+            id = discs.get(discs.size()-1).getDiskID()+1;
+        }
+        disc.setDiskID(id);
         discs.add(disc);
         try {
             saveDiscs(discs);

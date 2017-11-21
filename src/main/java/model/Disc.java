@@ -18,6 +18,30 @@ public class Disc implements Serializable {
     private short releaseYear;
     private String comment;
 
+    public Disc ()
+    {
+        
+    }
+    
+    public Disc(String russianTitle, String originalTitle, String director, String genre, int duration,
+                String languages, String country, String description, double rating, String actors,
+                short releaseYear, String comment, int clientID, String imgUrl) {
+        this.russianTitle = russianTitle;
+        this.originalTitle = originalTitle;
+        this.director = director;
+        this.genre = genre;
+        this.duration = duration;
+        this.languages = languages;
+        this.country = country;
+        this.description = description;
+        this.rating = rating;
+        this.actors = actors;
+        this.releaseYear = releaseYear;
+        this.comment = comment;
+        this.clientID = clientID;
+        this.imgUrl = imgUrl;
+    }
+
     public String getDirector() {
         return director;
     }
