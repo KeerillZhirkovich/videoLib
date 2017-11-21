@@ -15,24 +15,41 @@ public class IODAOClient implements DAOClient {
     private ArrayList<Client> clients = new ArrayList<>();
 
     public IODAOClient() {
+        try {
+            clients = readClients();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveClients (ArrayList<Client> discs) throws IOException {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data\\discs"))){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data\\clients"))){
             oos.writeObject(discs);
         }
     }
 
     private ArrayList<Client> readClients() throws IOException, ClassNotFoundException {
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data\\discs"))){
-            return (ArrayList<Client>) ois.readObject();
+        
+        ArrayList<Client> clients = new ArrayList<>();
+
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data\\clients"))){
+            clients.addAll((ArrayList<Client>) ois.readObject());
+            return clients;
         }
     }
 
 
     @Override
     public void setClient(Client client) {
-        client.setClientID(clients.get(clients.size()-1).getClientID()+1);
+
+        int id;
+
+        if(clients.size() == 0){
+            id = 1;
+        } else {
+            id = clients.get(clients.size()-1).getClientID()+1;
+        }
+        client.setClientID(id);
         clients.add(client);
         try {
             saveClients(clients);

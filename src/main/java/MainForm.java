@@ -370,8 +370,9 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());
         d.deleteDisc(jTable1.getSelectedRow());
+        ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());       
+        this.discs=d.getDiscs();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
