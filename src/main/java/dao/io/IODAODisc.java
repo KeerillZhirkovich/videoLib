@@ -5,14 +5,17 @@ import model.Disc;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static dao.tools.FileChecker.fileIsEmpty;
 import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAODisc implements DAODisc {
 
     private ArrayList<Disc> discs = new ArrayList<>();
+    private static final String FILE_PATH = "data\\discs";
 
     public IODAODisc() {
         try {
@@ -23,16 +26,22 @@ public class IODAODisc implements DAODisc {
     }
 
     private void saveDiscs(ArrayList<Disc> discs) throws IOException {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data\\discs"))){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))){
             oos.writeObject(discs);
         }
     }
 
     private ArrayList<Disc> readDiscs() throws IOException, ClassNotFoundException {
+
         ArrayList<Disc> discs = new ArrayList<>();
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data\\discs"))){
-            discs.addAll((ArrayList<Disc>) ois.readObject());
+
+        if(fileIsEmpty(FILE_PATH)){
             return discs;
+        } else {
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+                discs.addAll((ArrayList<Disc>) ois.readObject());
+                return discs;
+            }
         }
     }
 
@@ -124,6 +133,10 @@ public class IODAODisc implements DAODisc {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sortDiscs() {
+        Collections.sort(discs);
     }
 
 }

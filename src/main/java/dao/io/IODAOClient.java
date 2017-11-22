@@ -8,11 +8,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
+import static dao.tools.FileChecker.fileIsEmpty;
 import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAOClient implements DAOClient {
 
     private ArrayList<Client> clients = new ArrayList<>();
+    private static final String FILE_PATH = "data\\clients";
 
     public IODAOClient() {
         try {
@@ -23,18 +25,22 @@ public class IODAOClient implements DAOClient {
     }
 
     private void saveClients (ArrayList<Client> discs) throws IOException {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data\\clients"))){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))){
             oos.writeObject(discs);
         }
     }
 
     private ArrayList<Client> readClients() throws IOException, ClassNotFoundException {
-        
+
         ArrayList<Client> clients = new ArrayList<>();
 
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data\\clients"))){
-            clients.addAll((ArrayList<Client>) ois.readObject());
+        if (fileIsEmpty(FILE_PATH)) {
             return clients;
+        } else {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+                clients.addAll((ArrayList<Client>) ois.readObject());
+                return clients;
+            }
         }
     }
 

@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Disc implements Serializable {
+public class Disc implements Serializable, Comparable<Disc> {
 
     private int diskID;
     private String russianTitle;
@@ -211,5 +211,10 @@ public class Disc implements Serializable {
         result = 31 * result + clientID;
         result = 31 * result + (imgUrl != null ? imgUrl.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(Disc o) {
+        return originalTitle.compareTo(o.getOriginalTitle());
     }
 }
