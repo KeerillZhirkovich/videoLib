@@ -70,8 +70,8 @@ public class IODAODisc implements DAODisc {
     }
 
     @Override
-    public void deleteDisc(int id) {
-        discs.remove(id);
+    public void deleteDisc(int num) {
+        discs.remove(num);
         try {
             saveDiscs(discs);
         } catch (IOException e) {
@@ -130,5 +130,27 @@ public class IODAODisc implements DAODisc {
     public void sortDiscs() {
         Collections.sort(discs);
     }
+    
+    public Disc getDiscByID(int id)
+    {
+        Disc d = null;
+        for (int i=0;i<discs.size();i++)
+            if (discs.get(i).getDiskID()==id)
+            {
+                d=discs.get(i);
+                break;
+            }
+        return d;
+    }
+    
+    public void deleteDiscByID(int id)
+    {
+        for (int i=0;i<discs.size();i++)      
+            if (discs.get(i).getDiskID()==id)
+            {
+                deleteDisc(i);
+                break;
+            }
+    }   
 
 }

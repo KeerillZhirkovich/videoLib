@@ -1,9 +1,9 @@
 import dao.io.IODAODisc;
-
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import javax.swing.*;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import model.Disc;
 
@@ -16,13 +16,20 @@ public class MainForm extends javax.swing.JFrame {
     private ArrayList<Disc> discs;
     IODAODisc d=new IODAODisc();
     public MainForm() {
-        ShowDiscsList();
         initComponents();
-        //int x=jTable1.getRowCount();
-        //for (int i=0;i<x;i++)
-          //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
-        //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
-        //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
+        Disc disc=new Disc("Звездные войны. Эпизод I: Скрытая угроза", "Star Wars Episode I: The Phantom Menace", "Джордж Лукас", "космическая опера, фантастика, приключения", 133, "английский", "США", 
+                "Рыцарей-джедаев Квай-Гон Джинна и его падавана Оби-Ван Кеноби назначают послами для урегулирования разросшегося конфликта между Торговой федерацией и планетой Набу… Однако переговорам не "
+                        + "суждено состояться — владыка ситхов приказывает лидерам Федерации уничтожить послов и приступить к оккупации Набу. Избежав смерти, джедаи вместе с королевой Набу Падме Амидалой "
+                        + "сбегают с планеты в надежде добраться до столицы мира планеты-города Корусанта и добиться там правды, выступив перед сенатом республики. По пути они вынуждены остановиться на "
+                        + "пустынной планете Татуин. Здесь джедаи обнаруживают необычного мальчика-раба по имени Энакин Скайуокер, в котором необычайно мощна Сила. Джедаи забирают мальчика с собой, чтобы "
+                        + "обучить искусству Светлой стороны Силы. Вскоре ситуация обостряется, когда джедаи узнают, что считавшиеся побеждёнными раз и навсегда ситхи возвращаются. Не получив поддержки от "
+                        + "сената, королева Падме с горсткой людей возвращается на Набу, где в ходе дерзкой атаки ей удаётся пленить лидеров Федерации.", 6.5, "Лиам Нисон, Юэн Макгрегор, Натали Портман, " +
+                        "Джейк Ллойд, Иан Макдермид, Рэй Парк", (short)1999, "", 1, "");
+        d.setDisc(disc);
+        disc=new Disc("Терминатор 2: Судный день", "Terminator 2: Judgment Day", "Джеймс Кэмерон", "фантастический боевик", 137, "английский", "США", "После поразительных событий, произошедших с Сарой Коннор более десяти лет назад, ее пришлось упрятать в сумасшедший дом. Никто не верит женщине, а ее рассказы считают вымыслом и бредом. Даже ее сын Джон думает, что его предназначение – победить в битве с киборгами – плод больного воображения ненормальной. Да и разговаривать с матерью у него особо не получается, ведь он живет с приемными родителями. Но в наше время прибывает робот, перепрограммированный на защиту мальчика, а вслед за ним и другой – киборг, способный принять любую личину.",
+                8.5,"Арнольд Шварценегг, Линда Хэмилтон, Эдвард Фёрлонг, Роберт Патрик", (short)1991, "", 2, "");
+        d.setDisc(disc);
+
         ShowDiscsList();
     }
 
@@ -37,7 +44,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jTextField5 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        //jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -71,28 +78,31 @@ public class MainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setAutoCreateRowSorter(true);
-        //jTable1.setModel(new javax.swing.table.DefaultTableModel(
-           // new Object [][] {
-             //   {null},
-            //    {null},
-             //   {null},
-             //   {null}
-          // },
-           // new String [] {
-           //     "Название"
-           // }
-       // ));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID диска", "Название фильма"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
-        jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
-                jTable1ComponentMoved(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
+        }
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Название:");
@@ -179,7 +189,7 @@ public class MainForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ratingF, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                                .addComponent(ratingF, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
                             .addComponent(genreF)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -272,18 +282,23 @@ public class MainForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)))
+                        .addGap(110, 110, 110))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +346,7 @@ public class MainForm extends javax.swing.JFrame {
         //{
         //if (jTable1.getSelectedRow()!=jTable1.getRowCount()-2 && jTable1.getSelectedRow()!=jTable1.getRowCount()-1)
         //{
-            Disc disc=discs.get(jTable1.getSelectedRow());
+            Disc disc=d.getDiscByID((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             origTittleF.setText(disc.getOriginalTitle());
             russTittleF.setText(disc.getRussianTitle());
             directorF.setText(disc.getDirector());
@@ -353,15 +368,12 @@ public class MainForm extends javax.swing.JFrame {
         int x=jTable1.getSelectedRow();
         if (x!=-1)
         {
-            d.deleteDisc(x);
-            ((DefaultTableModel)jTable1.getModel()).removeRow(x);
+            d.deleteDiscByID((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             ClearForms();
+            ClearList();
+            ShowDiscsList();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTable1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentMoved
-        JOptionPane.showMessageDialog(this, "Файл пуст.");
-    }//GEN-LAST:event_jTable1ComponentMoved
 
     /**
      * @param args the command line arguments
@@ -446,61 +458,25 @@ public class MainForm extends javax.swing.JFrame {
         actorsF.setText("");
         descriptionF.setText("");
     }
+    
+    private void ClearList()
+    {
+        DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
+        dm.getDataVector().removeAllElements();
+        dm.fireTableDataChanged();
+    }
 
     private void ShowDiscsList() {
         discs=d.getDiscs();
-        Disc disc=new Disc("Звездные войны. Эпизод I: Скрытая угроза", "Star Wars Episode I: The Phantom Menace", "Джордж Лукас", "космическая опера, фантастика, приключения", 133, "английский", "США", 
-                "Рыцарей-джедаев Квай-Гон Джинна и его падавана Оби-Ван Кеноби назначают послами для урегулирования разросшегося конфликта между Торговой федерацией и планетой Набу… Однако переговорам не "
-                        + "суждено состояться — владыка ситхов приказывает лидерам Федерации уничтожить послов и приступить к оккупации Набу. Избежав смерти, джедаи вместе с королевой Набу Падме Амидалой "
-                        + "сбегают с планеты в надежде добраться до столицы мира планеты-города Корусанта и добиться там правды, выступив перед сенатом республики. По пути они вынуждены остановиться на "
-                        + "пустынной планете Татуин. Здесь джедаи обнаруживают необычного мальчика-раба по имени Энакин Скайуокер, в котором необычайно мощна Сила. Джедаи забирают мальчика с собой, чтобы "
-                        + "обучить искусству Светлой стороны Силы. Вскоре ситуация обостряется, когда джедаи узнают, что считавшиеся побеждёнными раз и навсегда ситхи возвращаются. Не получив поддержки от "
-                        + "сената, королева Падме с горсткой людей возвращается на Набу, где в ходе дерзкой атаки ей удаётся пленить лидеров Федерации.", 6.5, "Лиам Нисон, Юэн Макгрегор, Натали Портман, " +
-                        "Джейк Ллойд, Иан Макдермид, Рэй Парк", (short)1999, "", 1, "");
-        d.setDisc(disc);
-        disc=new Disc("Терминатор 2: Судный день", "Terminator 2: Judgment Day", "Джеймс Кэмерон", "фантастический боевик", 137, "английский", "США", "После поразительных событий, произошедших с Сарой Коннор более десяти лет назад, ее пришлось упрятать в сумасшедший дом. Никто не верит женщине, а ее рассказы считают вымыслом и бредом. Даже ее сын Джон думает, что его предназначение – победить в битве с киборгами – плод больного воображения ненормальной. Да и разговаривать с матерью у него особо не получается, ведь он живет с приемными родителями. Но в наше время прибывает робот, перепрограммированный на защиту мальчика, а вслед за ним и другой – киборг, способный принять любую личину.",
-                8.5,"Арнольд Шварценегг, Линда Хэмилтон, Эдвард Фёрлонг, Роберт Патрик", (short)1991, "", 2, "");
-        d.setDisc(disc);
-        disc=new Disc();
-        disc.setOriginalTitle("asd");
-        d.setDisc(disc);
-        discs=d.getDiscs();
-        /*
-                Vector <String> v=new Vector(1);
+        
         DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
+        int i=0;
         for (Disc dd:discs)
         {
-             v.add(dd.getOriginalTitle());
-             dtm.insertRow(i,v);
-             v=new Vector(1);
+             dtm.insertRow(i,new Vector(1));
+             jTable1.setValueAt(dd.getDiskID(), i, 0);
+             jTable1.setValueAt(dd.getOriginalTitle(), i, 1);
              i++;
-             //dtm.insertRow(i, v); i++;
-             //dtm.newRowsAdded(new TableModelEvent(dtm));
-         */
-        String[] headers = {"id", "Оригинальное название"};
-        String[][] data = new String[discs.size()][2];
-        for (int i = 0; i < discs.size(); i++) {
-            data[i][0] = Integer.toString(discs.get(i).getDiskID());
-            data[i][1] = discs.get(i).getOriginalTitle();
         }
-        //Создаем новый контейнер JFrame
-        //JFrame jfrm = new JFrame("JTableExample");
-        //Устанавливаем диспетчер компоновки
-        //jfrm.getContentPane().setLayout(new FlowLayout());
-        //Устанавливаем размер окна
-       // jfrm.setSize(300, 170);
-        //Устанавливаем завершение программы при закрытии окна
-        //jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Создаем новую таблицу на основе двумерного массива данных и заголовков
-        jTable1 = new JTable(data, headers);
-        //Создаем панель прокрутки и включаем в ее состав нашу таблицу
-        jScrollPane2 = new JScrollPane(jTable1);
-        //Устаналиваем размеры прокручиваемой области
-        jTable1.setPreferredScrollableViewportSize(new Dimension(250, 100));
-
-        //Добавляем в контейнер нашу панель прокрути и таблицу вместе с ней
-       // jfrm.getContentPane().add(jscrlp);
-        //Отображаем контейнер
-       // jfrm.setVisible(true);
     }
 }
