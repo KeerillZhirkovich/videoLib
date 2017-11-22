@@ -172,11 +172,9 @@ public class Disc implements Serializable, Comparable<Disc> {
 
         Disc disc = (Disc) o;
 
-        if (diskID != disc.diskID) return false;
         if (duration != disc.duration) return false;
         if (Double.compare(disc.rating, rating) != 0) return false;
         if (releaseYear != disc.releaseYear) return false;
-        if (clientID != disc.clientID) return false;
         if (russianTitle != null ? !russianTitle.equals(disc.russianTitle) : disc.russianTitle != null) return false;
         if (originalTitle != null ? !originalTitle.equals(disc.originalTitle) : disc.originalTitle != null)
             return false;
@@ -184,32 +182,26 @@ public class Disc implements Serializable, Comparable<Disc> {
         if (genre != null ? !genre.equals(disc.genre) : disc.genre != null) return false;
         if (languages != null ? !languages.equals(disc.languages) : disc.languages != null) return false;
         if (country != null ? !country.equals(disc.country) : disc.country != null) return false;
-        if (description != null ? !description.equals(disc.description) : disc.description != null) return false;
         if (actors != null ? !actors.equals(disc.actors) : disc.actors != null) return false;
-        if (comment != null ? !comment.equals(disc.comment) : disc.comment != null) return false;
-        return imgUrl != null ? imgUrl.equals(disc.imgUrl) : disc.imgUrl == null;
+        return comment != null ? comment.equals(disc.comment) : disc.comment == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = diskID;
-        result = 31 * result + (russianTitle != null ? russianTitle.hashCode() : 0);
+        result = russianTitle != null ? russianTitle.hashCode() : 0;
         result = 31 * result + (originalTitle != null ? originalTitle.hashCode() : 0);
         result = 31 * result + (director != null ? director.hashCode() : 0);
         result = 31 * result + (genre != null ? genre.hashCode() : 0);
         result = 31 * result + duration;
         result = 31 * result + (languages != null ? languages.hashCode() : 0);
         result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
         temp = Double.doubleToLongBits(rating);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (actors != null ? actors.hashCode() : 0);
         result = 31 * result + (int) releaseYear;
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + clientID;
-        result = 31 * result + (imgUrl != null ? imgUrl.hashCode() : 0);
         return result;
     }
 

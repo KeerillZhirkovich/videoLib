@@ -1,9 +1,9 @@
 import dao.io.IODAODisc;
+
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import model.Disc;
 
@@ -16,10 +16,11 @@ public class MainForm extends javax.swing.JFrame {
     private ArrayList<Disc> discs;
     IODAODisc d=new IODAODisc();
     public MainForm() {
+        ShowDiscsList();
         initComponents();
-        int x=jTable1.getRowCount();
-        for (int i=0;i<x;i++)
-          ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
+        //int x=jTable1.getRowCount();
+        //for (int i=0;i<x;i++)
+          //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
         //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
         //((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getRowCount()-1);
         ShowDiscsList();
@@ -36,7 +37,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jTextField5 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        //jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -70,17 +71,17 @@ public class MainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Название"
-            }
-        ));
+        //jTable1.setModel(new javax.swing.table.DefaultTableModel(
+           // new Object [][] {
+             //   {null},
+            //    {null},
+             //   {null},
+             //   {null}
+          // },
+           // new String [] {
+           //     "Название"
+           // }
+       // ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -464,8 +465,8 @@ public class MainForm extends javax.swing.JFrame {
         disc.setOriginalTitle("asd");
         d.setDisc(disc);
         discs=d.getDiscs();
-        int i=0;
-        Vector <String> v=new Vector(1);
+        /*
+                Vector <String> v=new Vector(1);
         DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
         for (Disc dd:discs)
         {
@@ -475,6 +476,31 @@ public class MainForm extends javax.swing.JFrame {
              i++;
              //dtm.insertRow(i, v); i++;
              //dtm.newRowsAdded(new TableModelEvent(dtm));
+         */
+        String[] headers = {"id", "Оригинальное название"};
+        String[][] data = new String[discs.size()][2];
+        for (int i = 0; i < discs.size(); i++) {
+            data[i][0] = Integer.toString(discs.get(i).getDiskID());
+            data[i][1] = discs.get(i).getOriginalTitle();
         }
+        //Создаем новый контейнер JFrame
+        //JFrame jfrm = new JFrame("JTableExample");
+        //Устанавливаем диспетчер компоновки
+        //jfrm.getContentPane().setLayout(new FlowLayout());
+        //Устанавливаем размер окна
+       // jfrm.setSize(300, 170);
+        //Устанавливаем завершение программы при закрытии окна
+        //jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Создаем новую таблицу на основе двумерного массива данных и заголовков
+        jTable1 = new JTable(data, headers);
+        //Создаем панель прокрутки и включаем в ее состав нашу таблицу
+        jScrollPane2 = new JScrollPane(jTable1);
+        //Устаналиваем размеры прокручиваемой области
+        jTable1.setPreferredScrollableViewportSize(new Dimension(250, 100));
+
+        //Добавляем в контейнер нашу панель прокрути и таблицу вместе с ней
+       // jfrm.getContentPane().add(jscrlp);
+        //Отображаем контейнер
+       // jfrm.setVisible(true);
     }
 }

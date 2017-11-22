@@ -10,6 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static dao.tools.FileChecker.fileIsEmpty;
+import static dao.tools.Search.similarDisc;
 import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAODisc implements DAODisc {
@@ -49,6 +50,7 @@ public class IODAODisc implements DAODisc {
     public void setDisc(Disc disc) {
 
         int id;
+        LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
 
         if(discs.size() == 0){
             id = 1;
@@ -56,7 +58,10 @@ public class IODAODisc implements DAODisc {
             id = discs.get(discs.size()-1).getDiskID()+1;
         }
         disc.setDiskID(id);
-        discs.add(disc);
+        temp.add(disc);
+
+        discs = new ArrayList<>(temp);
+
         try {
             saveDiscs(discs);
         } catch (IOException e) {
@@ -85,26 +90,13 @@ public class IODAODisc implements DAODisc {
     }
 
     @Override
-    public ArrayList<Disc> getDiscsOnTheDataSet(String[] data) {
+    public ArrayList<Disc> getDiscsOnTheDataSet(Disc disc) {
 
         Set<Disc> result = new LinkedHashSet<>();
 
-        for(int i = 0; i < 9; i++){
-            data[i] = data[i].trim();
-        }
-
-        for (Disc disc: discs) {
-            boolean b = !data[4].isEmpty() && (Integer.parseInt(data[4]) == disc.getReleaseYear());
-            b = b && (!data[5].isEmpty() && ((Double.parseDouble(data[5]) <= disc.getRating())));
-            b = b && !data[0].isEmpty() && ifContainsSplit(disc.getOriginalTitle(), data[0]);
-            b = b && !data[1].isEmpty() && ifContainsSplit(disc.getRussianTitle(), data[1]);
-            b = b && !data[3].isEmpty() && ifContainsSplit(disc.getGenre(), data[3]);
-            b = b && !data[8].isEmpty() && ifContainsSplit(disc.getActors(), data[8]);
-            b = b && !data[2].isEmpty() && ifContainsSplit(disc.getDirector(), data[2]);
-            b = b && !data[6].isEmpty() && ifContainsSplit(disc.getLanguages(), data[6]);
-            b = b && !data[7].isEmpty() && ifContainsSplit(disc.getCountry(), data[7]);
-            if(b){
-                result.add(disc);
+        for (Disc d: discs) {
+            if(similarDisc(disc, d)) {
+                result.add(d);
             }
         }
 
