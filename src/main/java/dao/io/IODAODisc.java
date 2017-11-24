@@ -16,17 +16,13 @@ import static dao.tools.FileChecker.fileIsEmpty;
 public class IODAODisc implements DAODisc {
 
     private ArrayList<Disc> discs = new ArrayList<>();
-    private static final String FILE_PATH = "data\\discs";
+    private static final String FILE_PATH= "data\\discs";
 
-    public IODAODisc() {
-        try {
-            discs = readDiscs();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    public IODAODisc() throws IOException, ClassNotFoundException {
+        discs = readDiscs();
     }
 
-    private void saveDiscs(ArrayList<Disc> discs) throws IOException {
+    public void saveChanges() throws IOException {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))){
             oos.writeObject(discs);
         }
@@ -48,7 +44,6 @@ public class IODAODisc implements DAODisc {
 
     @Override
     public void setDisc(Disc disc) {
-
         int id;
         LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
 
@@ -134,14 +129,5 @@ public class IODAODisc implements DAODisc {
     
     public void deleteDiscByIndex(int index) {
         discs.remove(index);
-    }
-
-    @Override
-    public void saveChanges() {
-        try {
-            saveDiscs(discs);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

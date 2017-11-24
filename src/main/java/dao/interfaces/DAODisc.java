@@ -1,6 +1,7 @@
 package dao.interfaces;
 
 
+import java.io.IOException;
 import model.Disc;
 
 import java.util.ArrayList;
@@ -13,6 +14,5 @@ public interface DAODisc {
     Disc getDisc (int id);
     ArrayList<Disc> getDiscsOnTheDataSet (Disc disc); //Принимает объект Disc
     void loadFromFile(String url);
-    void saveChanges();
-
+    void saveChanges() throws IOException;
 }
