@@ -2,18 +2,10 @@ package dao.tools;
 
 public class WorkWithStrings {
 
-    public static boolean ifContainsSplit(String data, String str) {
+    public static String[] splitData (String data) {
 
-        str = str.replace(" ", ",");
-        String[] arr = str.split(",|.");
-        boolean b = false;
-
-        for (String s : arr) {
-            if(!s.isEmpty()){
-                b = data.contains(s);
-            }
-        }
-
-        return b;
+        data = data.replace(" ", ",");
+        String[] arr = data.split(",|.");
+        return arr;
     }
 }

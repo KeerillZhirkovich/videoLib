@@ -2,13 +2,15 @@ package dao.tools;
 
 import model.Disc;
 
-import static dao.tools.WorkWithStrings.ifContainsSplit;
+import java.util.ArrayList;
+
+//import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class Search {
 
-    public static boolean similarDisc(Disc disc1, Disc disc2) {
+    //public static ArrayList<Disc> similarDiscs(Disc disc1, Disc disc2) {
 
-        boolean result = false, check = false;
+      /*  boolean result = false, check = false;
         Disc discTemp = new Disc(disc1.getRussianTitle().trim(), disc1.getOriginalTitle().trim(),
                 disc1.getDirector().trim(), disc1.getGenre().trim(), disc1.getDuration(), disc1.getLanguages().trim(),
                 disc1.getCountry().trim(), disc1.getDescription().trim(), disc1.getRating(), disc1.getActors().trim(),
@@ -68,5 +70,5 @@ public class Search {
             result = true;
         }
         return result;
-    }
+    }*/
 }

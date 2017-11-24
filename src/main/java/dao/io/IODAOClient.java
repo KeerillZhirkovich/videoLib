@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 import static dao.tools.FileChecker.fileIsEmpty;
-import static dao.tools.WorkWithStrings.ifContainsSplit;
+//import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAOClient implements DAOClient {
 
@@ -57,20 +57,14 @@ public class IODAOClient implements DAOClient {
         }
         client.setClientID(id);
         clients.add(client);
-        try {
-            saveClients(clients);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void deleteClient(int id) {
-        clients.remove(id);
-        try {
-            saveClients(clients);
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i < clients.size(); i++) {
+            if (clients.get(i).getClientID() == id) {
+                deleteDiscByIndex(i);
+            }
         }
     }
 
@@ -81,8 +75,16 @@ public class IODAOClient implements DAOClient {
 
     @Override
     public Client getClient(int id) {
-        return clients.get(id);
-    }
+
+            Client client = null;
+
+            for (Client c : clients) {
+                if (c.getClientID() == id) {
+                    client = c;
+                }
+            }
+            return client;
+        }
 
     @Override
     public ArrayList<Client> getClientsOnTheDataSet(String[] data) {
@@ -95,8 +97,8 @@ public class IODAOClient implements DAOClient {
 
         for (Client client : clients){
             boolean b = !data[2].isEmpty() && data[2].equals(client.getPhone());
-            b = b && !data[0].isEmpty() && ifContainsSplit(client.getName(), data[0]);
-            b = b && !data[1].isEmpty() && ifContainsSplit(client.getSurname(), data[1]);
+           // b = b && !data[0].isEmpty() && ifContainsSplit(client.getName(), data[0]);
+           // b = b && !data[1].isEmpty() && ifContainsSplit(client.getSurname(), data[1]);
             if(b){
                 result.add(client);
             }
@@ -122,6 +124,18 @@ public class IODAOClient implements DAOClient {
         }
 
         clients = new ArrayList<>(updatedClients);
+    }
+
+    public Client getDiscByIndex(int index) {
+        return clients.get(index);
+    }
+
+    public void deleteDiscByIndex(int index) {
+        clients.remove(index);
+    }
+
+    @Override
+    public void saveChanges() {
         try {
             saveClients(clients);
         } catch (IOException e) {

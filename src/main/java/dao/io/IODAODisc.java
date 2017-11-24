@@ -10,8 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static dao.tools.FileChecker.fileIsEmpty;
-import static dao.tools.Search.similarDisc;
-import static dao.tools.WorkWithStrings.ifContainsSplit;
+//import static dao.tools.Search.similarDisc;
+//import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAODisc implements DAODisc {
 
@@ -61,21 +61,14 @@ public class IODAODisc implements DAODisc {
         temp.add(disc);
 
         discs = new ArrayList<>(temp);
-
-        try {
-            saveDiscs(discs);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
-    public void deleteDisc(int num) {
-        discs.remove(num);
-        try {
-            saveDiscs(discs);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void deleteDisc(int id) {
+        for (int i = 0; i < discs.size(); i++) {
+            if (discs.get(i).getDiskID() == id) {
+                deleteDiscByIndex(i);
+            }
         }
     }
 
@@ -86,7 +79,15 @@ public class IODAODisc implements DAODisc {
 
     @Override
     public Disc getDisc(int id) {
-        return discs.get(id);
+
+        Disc d = null;
+
+        for (Disc disc : discs) {
+            if (disc.getDiskID() == id) {
+                d = disc;
+            }
+        }
+        return d;
     }
 
     @Override
@@ -95,9 +96,9 @@ public class IODAODisc implements DAODisc {
         Set<Disc> result = new LinkedHashSet<>();
 
         for (Disc d: discs) {
-            if(similarDisc(disc, d)) {
-                result.add(d);
-            }
+          //  if(similarDisc(disc, d)) {
+            //    result.add(d);
+          //  }
         }
 
         return new ArrayList<>(result);
@@ -120,37 +121,27 @@ public class IODAODisc implements DAODisc {
         }
 
         discs = new ArrayList<>(updatedDiscs);
-        try {
-            saveDiscs(discs);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void sortDiscs() {
         Collections.sort(discs);
     }
     
-    public Disc getDiscByID(int id)
-    {
-        Disc d = null;
-        for (int i=0;i<discs.size();i++)
-            if (discs.get(i).getDiskID()==id)
-            {
-                d=discs.get(i);
-                break;
-            }
-        return d;
+    public Disc getDiscByIndex(int index) {
+        return discs.get(index);
     }
     
-    public void deleteDiscByID(int id)
-    {
-        for (int i=0;i<discs.size();i++)      
-            if (discs.get(i).getDiskID()==id)
-            {
-                deleteDisc(i);
-                break;
-            }
-    }   
+    public void deleteDiscByIndex(int index) {
+        discs.remove(index);
+    }
 
+    @Override
+    public void saveChanges() {
+        try {
+            saveDiscs(discs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

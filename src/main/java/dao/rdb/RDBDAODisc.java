@@ -28,7 +28,7 @@ public class RDBDAODisc implements DAODisc {
     }
 
     @Override
-    public ArrayList<Disc> getDiscsOnTheDataSet(String[] data) {
+    public ArrayList<Disc> getDiscsOnTheDataSet(Disc disc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

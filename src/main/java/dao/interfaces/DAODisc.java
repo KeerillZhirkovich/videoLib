@@ -12,6 +12,7 @@ public interface DAODisc {
     ArrayList<Disc> getDiscs();
     Disc getDisc (int id);
     ArrayList<Disc> getDiscsOnTheDataSet (Disc disc); //Принимает объект Disc
-    public void loadFromFile(String url);
+    void loadFromFile(String url);
+    void saveChanges();
 
 }

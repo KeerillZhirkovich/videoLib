@@ -2,8 +2,6 @@ import dao.io.IODAODisc;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import model.Disc;
 
@@ -14,10 +12,10 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form MainForm
      */
     private ArrayList<Disc> discs;
-    IODAODisc d=new IODAODisc();
+    IODAODisc daoDiscs =new IODAODisc();
     public MainForm() {
         initComponents();
-        Disc disc=new Disc("Звездные войны. Эпизод I: Скрытая угроза", "Star Wars Episode I: The Phantom Menace", "Джордж Лукас", "космическая опера, фантастика, приключения", 133, "английский", "США", 
+        Disc disc=new Disc("Звездные войны. Эпизд I: Скрытая угроза", "Star Wars Episode I: The Phantom Menace", "Джордж Лукас", "космическая опера, фантастика, приключения", 133, "английский", "США",
                 "Рыцарей-джедаев Квай-Гон Джинна и его падавана Оби-Ван Кеноби назначают послами для урегулирования разросшегося конфликта между Торговой федерацией и планетой Набу… Однако переговорам не "
                         + "суждено состояться — владыка ситхов приказывает лидерам Федерации уничтожить послов и приступить к оккупации Набу. Избежав смерти, джедаи вместе с королевой Набу Падме Амидалой "
                         + "сбегают с планеты в надежде добраться до столицы мира планеты-города Корусанта и добиться там правды, выступив перед сенатом республики. По пути они вынуждены остановиться на "
@@ -25,10 +23,10 @@ public class MainForm extends javax.swing.JFrame {
                         + "обучить искусству Светлой стороны Силы. Вскоре ситуация обостряется, когда джедаи узнают, что считавшиеся побеждёнными раз и навсегда ситхи возвращаются. Не получив поддержки от "
                         + "сената, королева Падме с горсткой людей возвращается на Набу, где в ходе дерзкой атаки ей удаётся пленить лидеров Федерации.", 6.5, "Лиам Нисон, Юэн Макгрегор, Натали Портман, " +
                         "Джейк Ллойд, Иан Макдермид, Рэй Парк", (short)1999, "", 1, "");
-        d.setDisc(disc);
+        //daoDiscs.setDisc(disc);
         disc=new Disc("Терминатор 2: Судный день", "Terminator 2: Judgment Day", "Джеймс Кэмерон", "фантастический боевик", 137, "английский", "США", "После поразительных событий, произошедших с Сарой Коннор более десяти лет назад, ее пришлось упрятать в сумасшедший дом. Никто не верит женщине, а ее рассказы считают вымыслом и бредом. Даже ее сын Джон думает, что его предназначение – победить в битве с киборгами – плод больного воображения ненормальной. Да и разговаривать с матерью у него особо не получается, ведь он живет с приемными родителями. Но в наше время прибывает робот, перепрограммированный на защиту мальчика, а вслед за ним и другой – киборг, способный принять любую личину.",
                 8.5,"Арнольд Шварценегг, Линда Хэмилтон, Эдвард Фёрлонг, Роберт Патрик", (short)1991, "", 2, "");
-        d.setDisc(disc);
+       // daoDiscs.setDisc(disc);
 
         ShowDiscsList();
     }
@@ -346,7 +344,7 @@ public class MainForm extends javax.swing.JFrame {
         //{
         //if (jTable1.getSelectedRow()!=jTable1.getRowCount()-2 && jTable1.getSelectedRow()!=jTable1.getRowCount()-1)
         //{
-            Disc disc=d.getDiscByID((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             origTittleF.setText(disc.getOriginalTitle());
             russTittleF.setText(disc.getRussianTitle());
             directorF.setText(disc.getDirector());
@@ -368,7 +366,7 @@ public class MainForm extends javax.swing.JFrame {
         int x=jTable1.getSelectedRow();
         if (x!=-1)
         {
-            d.deleteDiscByID((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            daoDiscs.deleteDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             ClearForms();
             ClearList();
             ShowDiscsList();
@@ -467,7 +465,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void ShowDiscsList() {
-        discs=d.getDiscs();
+        discs= daoDiscs.getDiscs();
         
         DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
         int i=0;
