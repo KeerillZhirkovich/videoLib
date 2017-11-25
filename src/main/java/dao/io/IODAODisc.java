@@ -50,7 +50,10 @@ public class IODAODisc implements DAODisc {
         if(discs.size() == 0){
             id = 1;
         } else {
-            id = discs.get(discs.size()-1).getDiskID()+1;
+            if (disc.getDiskID()==0)
+                id = discs.get(discs.size()-1).getDiskID()+1;
+            else
+                id =disc.getDiskID();
         }
         disc.setDiskID(id);
         temp.add(disc);
@@ -63,6 +66,7 @@ public class IODAODisc implements DAODisc {
         for (int i = 0; i < discs.size(); i++) {
             if (discs.get(i).getDiskID() == id) {
                 deleteDiscByIndex(i);
+                break;
             }
         }
     }
