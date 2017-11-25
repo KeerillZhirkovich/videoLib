@@ -9,63 +9,77 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 import static dao.tools.FileChecker.fileIsEmpty;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAOClient implements DAOClient {
 
-    private ArrayList<Client> clients = new ArrayList<>();
+    private ArrayList<Client> clients;
     private static final String FILE_PATH = "data\\clients";
 
-    public IODAOClient() {
-        try {
+    public IODAOClient() throws IOException {
             clients = readClients();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    }
+    
+    public Client getClientByID(int ID)
+    {
+        for (int i=0;i<clients.size();i++)
+            if (clients.get(i).getClientID()==ID)
+                return clients.get(i);
+        return null;
     }
 
-    private void saveClients (ArrayList<Client> discs) throws IOException {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))){
-            oos.writeObject(discs);
-        }
+    public void saveChanges () throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
+        oos.writeObject(clients);
     }
 
-    private ArrayList<Client> readClients() throws IOException, ClassNotFoundException {
+    private ArrayList<Client> readClients() throws IOException   {
 
         ArrayList<Client> clients = new ArrayList<>();
-
-        if (fileIsEmpty(FILE_PATH)) {
-            return clients;
-        } else {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
-                clients.addAll((ArrayList<Client>) ois.readObject());
+        try {
+            if (fileIsEmpty(FILE_PATH)) {
                 return clients;
+            } else {          
+                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH));
+                    clients.addAll((ArrayList<Client>) ois.readObject());
+                    return clients;           
             }
+        } catch (IOException | ClassNotFoundException ex) {     
+                throw new IOException(ex);            
         }
     }
 
 
     @Override
-    public void setClient(Client client) {
+    public void setClient(Client client) throws IOException{
 
         int id;
 
-        if(clients.size() == 0){
+        if(clients.isEmpty()){
             id = 1;
         } else {
-            id = clients.get(clients.size()-1).getClientID()+1;
+            if (client.getClientID()==0)
+                id = clients.get(clients.size()-1).getClientID()+1;
+            else
+                id=client.getClientID();
         }
         client.setClientID(id);
         clients.add(client);
+        saveChanges();
     }
 
     @Override
     public void deleteClient(int id) {
         for (int i = 0; i < clients.size(); i++) {
             if (clients.get(i).getClientID() == id) {
-                deleteDiscByIndex(i);
+                deleteByIndex(i);
             }
         }
+        try {
+            saveChanges();
+        } catch (IOException ex) { }
     }
 
     @Override
@@ -126,20 +140,11 @@ public class IODAOClient implements DAOClient {
         clients = new ArrayList<>(updatedClients);
     }
 
-    public Client getDiscByIndex(int index) {
+    public Client getClientByIndex(int index) {
         return clients.get(index);
     }
 
-    public void deleteDiscByIndex(int index) {
+    public void deleteByIndex(int index) {
         clients.remove(index);
-    }
-
-    @Override
-    public void saveChanges() {
-        try {
-            saveClients(clients);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -5,6 +5,8 @@ import dao.DAOFactory;
 import dao.interfaces.*;
 import dao.io.*;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class IODAOFactory implements DAOFactory {
 
@@ -17,7 +19,11 @@ public class IODAOFactory implements DAOFactory {
     }
 
     public DAOClient getDAOClient() {
-        return new IODAOClient();
+        try {
+            return new IODAOClient();
+        } catch (IOException ex) {
+            return null;
+        }
     }
 
 }

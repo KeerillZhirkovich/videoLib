@@ -15,7 +15,7 @@ import static dao.tools.FileChecker.fileIsEmpty;
 
 public class IODAODisc implements DAODisc {
 
-    private ArrayList<Disc> discs = new ArrayList<>();
+    private ArrayList<Disc> discs;
     private static final String FILE_PATH= "data\\discs";
 
     public IODAODisc() throws IOException, ClassNotFoundException {
@@ -23,9 +23,8 @@ public class IODAODisc implements DAODisc {
     }
 
     public void saveChanges() throws IOException {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))){
-            oos.writeObject(discs);
-        }
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
+        oos.writeObject(discs);
     }
 
     private ArrayList<Disc> readDiscs() throws IOException, ClassNotFoundException {
@@ -35,11 +34,12 @@ public class IODAODisc implements DAODisc {
         if(fileIsEmpty(FILE_PATH)){
             return discs;
         } else {
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH));
                 discs.addAll((ArrayList<Disc>) ois.readObject());
-                return discs;
-            }
+                //sortDiscs();
+                return discs;          
         }
+              
     }
 
     @Override
@@ -47,7 +47,7 @@ public class IODAODisc implements DAODisc {
         int id;
         LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
 
-        if(discs.size() == 0){
+        if(discs.isEmpty()){
             id = 1;
         } else {
             if (disc.getDiskID()==0)
@@ -78,14 +78,12 @@ public class IODAODisc implements DAODisc {
 
     @Override
     public Disc getDisc(int id) {
-
         Disc d = null;
-
-        for (Disc disc : discs) {
+        for (Disc disc : discs)
             if (disc.getDiskID() == id) {
                 d = disc;
+                break;
             }
-        }
         return d;
     }
 
@@ -123,8 +121,16 @@ public class IODAODisc implements DAODisc {
 
     }
 
-    public void sortDiscs() {
-        Collections.sort(discs);
+    private void sortDiscsByID()
+    {
+        for (int i=0;i<discs.size();i++)
+            for (int j=i+1;j<discs.size();j++)
+                   if (discs.get(i).getDiskID()>discs.get(j).getDiskID())
+                   {
+                       int v=discs.get(i).getDiskID();
+                       discs.get(i).setDiskID(discs.get(j).getDiskID());
+                       discs.get(j).setDiskID(v);
+                   }
     }
     
     public Disc getDiscByIndex(int index) {
@@ -133,5 +139,15 @@ public class IODAODisc implements DAODisc {
     
     public void deleteDiscByIndex(int index) {
         discs.remove(index);
+    }
+    
+    public void setClient(int discID, int clientID)
+    {
+        for (int i=0;i<discs.size();i++)
+            if (discs.get(i).getDiskID()==discID)
+            {
+                discs.get(i).setClientID(clientID);
+                break;
+            }
     }
 }
