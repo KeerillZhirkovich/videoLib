@@ -3,14 +3,11 @@ package dao.io;
 
 import dao.interfaces.DAOClient;
 import model.Client;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 import static dao.tools.FileChecker.fileIsEmpty;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 //import static dao.tools.WorkWithStrings.ifContainsSplit;
 
 public class IODAOClient implements DAOClient {
@@ -19,7 +16,7 @@ public class IODAOClient implements DAOClient {
     private static final String FILE_PATH = "data\\clients";
 
     public IODAOClient() throws IOException {
-            clients = readClients();
+        clients = readClients();
     }
     
     public Client getClientByID(int ID)
@@ -98,7 +95,7 @@ public class IODAOClient implements DAOClient {
                 }
             }
             return client;
-        }
+    }
 
     @Override
     public ArrayList<Client> getClientsOnTheDataSet(String[] data) {

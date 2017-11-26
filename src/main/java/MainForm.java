@@ -173,6 +173,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel13.setText("Диск на руках у:");
 
         jButton7.setText("Изменить клиента");
+        jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -180,6 +181,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         jButton8.setText("Диск сдан");
+        jButton8.setEnabled(false);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -324,6 +326,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         jButton3.setText("Удалить выбранный фильм");
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -399,6 +402,7 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -415,7 +419,7 @@ public class MainForm extends javax.swing.JFrame {
         Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
         try {
             daoClients=new IODAOClient();
-        } catch (IOException ex) { }
+        } catch (IOException ex) { JOptionPane.showMessageDialog(this, "Файл со списком клиентов не найден."); }
         origTittleF.setText(disc.getOriginalTitle());
         russTittleF.setText(disc.getRussianTitle());
         directorF.setText(disc.getDirector());
@@ -427,10 +431,10 @@ public class MainForm extends javax.swing.JFrame {
         countryF.setText(disc.getCountry());
         actorsF.setText(disc.getActors());
         descriptionF.setText(disc.getDescription());
-        if (disc.getClientID()==0)
-            clientF.setText("Диск не на руках");
-        else
-        {
+        //if (disc.getClientID()==0)
+            //clientF.setText("Диск не на руках");
+        //else
+        //{
             try {
                 clientF.setText(daoClients.getClientByID(disc.getClientID()).getName()+" "+daoClients.getClientByID(disc.getClientID()).getSurname());
             }
@@ -438,8 +442,11 @@ public class MainForm extends javax.swing.JFrame {
                 disc.setClientID(0);
                 clientF.setText("Диск не на руках");
             }
-        }
+        //}
+        jButton3.setEnabled(true);
         jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jButton8.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -526,7 +533,11 @@ public class MainForm extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         jTable1.clearSelection();
+        ClearFields();
+        jButton3.setEnabled(false);
         jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jButton8.setEnabled(false);
     }//GEN-LAST:event_formMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
