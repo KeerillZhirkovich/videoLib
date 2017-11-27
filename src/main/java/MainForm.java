@@ -3,8 +3,6 @@ import dao.io.IODAODisc;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
@@ -26,7 +24,7 @@ public class MainForm extends javax.swing.JFrame {
         {
             daoDiscs =new IODAODisc();
             daoClients = new IODAOClient();
-            ShowDiscsList();
+            ShowDiscsList(daoDiscs.getDiscs());
         } catch (ClassNotFoundException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Ошибка при чтении файла.");
         }   
@@ -81,7 +79,7 @@ public class MainForm extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        searchF = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,14 +185,6 @@ public class MainForm extends javax.swing.JFrame {
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("Поиск");
-        jButton9.setEnabled(true);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
             }
         });
 
@@ -366,9 +356,19 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("Введите ключевые слова");
+        searchF.setText("Введите ключевые слова");
+        searchF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchFMouseClicked(evt);
+            }
+        });
 
         jButton9.setText("Поиск");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -391,7 +391,7 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(jButton2))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
+                            .addComponent(searchF))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
@@ -417,7 +417,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -481,7 +481,7 @@ public class MainForm extends javax.swing.JFrame {
             daoDiscs.deleteDisc((int) jTable1.getValueAt(x, 0));
             ClearFields();
             ClearList();
-            ShowDiscsList();
+            ShowDiscsList(daoDiscs.getDiscs());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     
@@ -535,7 +535,7 @@ public class MainForm extends javax.swing.JFrame {
                 jButton8.setEnabled(true);
                 pressAdd=false;
                 ClearFields();
-                ShowDiscsList();
+                ShowDiscsList(daoDiscs.getDiscs());
             }
             else
                 JOptionPane.showMessageDialog(this, "Поля \"Название\" и \"Русское название\" не могут быть пустыми!");
@@ -553,7 +553,7 @@ public class MainForm extends javax.swing.JFrame {
         jButton8.setEnabled(true);
         pressAdd=false;
         ClearFields();
-        ShowDiscsList();
+        ShowDiscsList(daoDiscs.getDiscs());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -563,6 +563,8 @@ public class MainForm extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jButton7.setEnabled(false);
         jButton8.setEnabled(false);
+        if (trim("").equals(searchF.getText()))
+            searchF.setText("Введите ключевые слова");
     }//GEN-LAST:event_formMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -572,7 +574,7 @@ public class MainForm extends javax.swing.JFrame {
             ClearFields();
             jButton6.setEnabled(false);
             ClearList();
-            ShowDiscsList();
+            ShowDiscsList(daoDiscs.getDiscs());
         } catch (ClassNotFoundException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Ошибка при чтении файла.");
         }
@@ -652,11 +654,16 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String searchString = jTextField1.getText();
+        String searchString = searchF.getText();
         ClearFields();
         ClearList();
         ShowDiscsList(daoDiscs.getDiscsOnTheDataSet(searchString));
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void searchFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFMouseClicked
+        if ("Введите ключевые слова".equals(searchF.getText()))
+            searchF.setText("");
+    }//GEN-LAST:event_searchFMouseClicked
 
     /**
      * @param args the command line arguments
@@ -729,13 +736,13 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField langF;
     private javax.swing.JTextField origTittleF;
     private javax.swing.JTextField ratingF;
     private javax.swing.JTextField releaseyearF;
     private javax.swing.JTextField russTittleF;
+    private javax.swing.JTextField searchF;
     // End of variables declaration//GEN-END:variables
 
     private void ClearFields() {
@@ -767,30 +774,6 @@ public class MainForm extends javax.swing.JFrame {
         }
     }
 
-    private void ShowDiscsList() {
-        ClearList();
-        ArrayList<Disc> discs= daoDiscs.getDiscs();
-        
-        DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
-        
-//        int i=0;
-//        for (Disc disk:discs)
-//        {
-//             dtm.insertRow(i,new Vector(0));
-//             jTable1.setValueAt(disk.getDiskID(), i, 0);
-//             jTable1.setValueAt(disk.getRussianTitle(), i, 1);
-//             i++;
-//        }
-        
-        for (int j=0;j<discs.size();j++)
-        {
-             dtm.insertRow(j,new Vector(0));
-             jTable1.setValueAt(discs.get(j).getDiskID(), j, 0);
-             jTable1.setValueAt(discs.get(j).getRussianTitle(), j, 1);
-        }
-    }
-
-
     private void ShowDiscsList(ArrayList<Disc> discs) {
 
         ClearList();
@@ -808,36 +791,6 @@ public class MainForm extends javax.swing.JFrame {
 
     public static void setClient(int discID, int clientID) throws IOException, ClassNotFoundException
     {
-        daoDiscs.setClient(discID, clientID);
-        //daoDiscs= new IODAODisc();
-//                disc.setOriginalTitle(trim(origTittleF.getText()));
-//                disc.setRussianTitle(trim(russTittleF.getText()));
-//                disc.setDirector(trim(directorF.getText()));
-//                disc.setGenre(trim(genreF.getText()));
-//                try {
-//                    disc.setDuration(Integer.parseInt(trim(durationF.getText())));
-//                }
-//                catch (NumberFormatException e) {}
-//                try {
-//                    disc.setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
-//                }
-//                catch (NumberFormatException e) {}
-//                try {
-//                    disc.setRating(Double.parseDouble(trim(ratingF.getText())));
-//                }
-//                catch (NumberFormatException e) {}
-//                disc.setLanguages(trim(langF.getText()));
-//                disc.setCountry(trim(countryF.getText()));
-//                disc.setActors(trim(actorsF.getText()));
-//                disc.setDescription(trim(descriptionF.getText()));
-               // daoDiscs.setDisc(disc);
-//                jButton1.setEnabled(true);
-//                jButton2.setEnabled(true);
-//                jButton2.setEnabled(false);
-//                jButton3.setEnabled(true);
-//                jButton4.setEnabled(true);
-//                jButton5.setEnabled(true);
-//                pressAdd=false;
-        
+        daoDiscs.setClient(discID, clientID);       
     }
 }
