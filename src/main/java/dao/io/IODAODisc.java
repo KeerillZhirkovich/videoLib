@@ -91,13 +91,16 @@ public class IODAODisc implements DAODisc {
     public ArrayList<Disc> getDiscsOnTheDataSet(String searchString) {
 
         ArrayList<Disc> result = new ArrayList<>();
-        String[] keywords = splitData(searchString);
-        int maxRelevance = keywords.length;
+        ArrayList<String> keywords = splitData(searchString);
+        int maxRelevance = keywords.size();
         ArrayList<ObjectAndRelevance<Disc>> discAndRelevance = new ArrayList<>();
+
+        if (maxRelevance == 0) return discs;
 
         for (Disc disc : discs) {
             ObjectAndRelevance<Disc> discR = new ObjectAndRelevance<>(disc);
-            discR.setRelevance(relevance(keywords, disc.toString()));
+            String discString = disc.toString().toLowerCase();
+            discR.setRelevance(relevance(keywords, discString));
             discAndRelevance.add(discR);
         }
         Collections.sort(discAndRelevance);

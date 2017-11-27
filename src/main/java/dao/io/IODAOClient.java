@@ -99,13 +99,13 @@ public class IODAOClient implements DAOClient {
     public ArrayList<Client> getClientsOnTheDataSet(String searchString) {
 
         ArrayList<Client> result = new ArrayList<>();
-        String[] keywords = splitData(searchString);
-        int maxRelevance = keywords.length;
+        ArrayList<String> keywords = splitData(searchString);
+        int maxRelevance = keywords.size();
         ArrayList<ObjectAndRelevance<Client>> clientAndRelevance = new ArrayList<>();
 
         for (Client client : clients) {
             ObjectAndRelevance<Client> clientR = new ObjectAndRelevance<>(client);
-            clientR.setRelevance(relevance(keywords, client.toString()));
+            clientR.setRelevance(relevance(keywords, client.toString().toLowerCase()));
             clientAndRelevance.add(clientR);
         }
 

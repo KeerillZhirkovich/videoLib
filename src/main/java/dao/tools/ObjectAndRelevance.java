@@ -28,6 +28,6 @@ public class ObjectAndRelevance<T> implements Comparable<ObjectAndRelevance> {
 
     @Override
     public int compareTo(ObjectAndRelevance o) {
-        return this.relevance - o.relevance;
+        return o.relevance - this.relevance;
     }
 }

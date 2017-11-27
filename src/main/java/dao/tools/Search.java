@@ -1,8 +1,10 @@
 package dao.tools;
 
+import java.util.ArrayList;
+
 public class Search {
 
-    public static int relevance(String[] words, String data) {
+    public static int relevance(ArrayList<String> words, String data) {
 
         int result = 0;
 
