@@ -1,8 +1,11 @@
 import dao.io.IODAOClient;
 import dao.io.IODAODisc;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
@@ -25,6 +28,7 @@ public class MainForm extends javax.swing.JFrame {
             daoDiscs =new IODAODisc();
             daoClients = new IODAOClient();
             ShowDiscsList(daoDiscs.getDiscs());
+            jDesktopPane1.setVisible(false);
         } catch (ClassNotFoundException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Ошибка при чтении файла.");
         }   
@@ -111,6 +115,11 @@ public class MainForm extends javax.swing.JFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -441,37 +450,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-        try {
-            daoClients=new IODAOClient();
-        } catch (IOException ex) { JOptionPane.showMessageDialog(this, "Файл со списком клиентов не найден."); }
-        origTittleF.setText(disc.getOriginalTitle());
-        russTittleF.setText(disc.getRussianTitle());
-        directorF.setText(disc.getDirector());
-        genreF.setText(disc.getGenre());
-        durationF.setText(Integer.toString(disc.getDuration()));
-        releaseyearF.setText(Short.toString(disc.getReleaseYear()));
-        ratingF.setText(Double.toString(disc.getRating()));
-        langF.setText(disc.getLanguages());
-        countryF.setText(disc.getCountry());
-        actorsF.setText(disc.getActors());
-        descriptionF.setText(disc.getDescription());
-        //if (disc.getClientID()==0)
-            //clientF.setText("Диск не на руках");
-        //else
-        //{
-            try {
-                clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
-            }
-            catch (Exception e) { 
-                disc.setClientID(0);
-                clientF.setText("Диск не на руках");
-            }
-        //}
-        jButton3.setEnabled(true);
-        jButton6.setEnabled(true);
-        jButton7.setEnabled(true);
-        jButton8.setEnabled(true);
+        ShowFields();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -665,6 +644,11 @@ public class MainForm extends javax.swing.JFrame {
             searchF.setText("");
     }//GEN-LAST:event_searchFMouseClicked
 
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        if (evt.getKeyChar()==KeyEvent.VK_ENTER || evt.getKeyChar()==KeyEvent.VK_UP || evt.getKeyChar()==KeyEvent.VK_DOWN)
+            ShowFields();
+    }//GEN-LAST:event_jTable1KeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -792,5 +776,40 @@ public class MainForm extends javax.swing.JFrame {
     public static void setClient(int discID, int clientID) throws IOException, ClassNotFoundException
     {
         daoDiscs.setClient(discID, clientID);       
+    }
+    
+    public void ShowFields()
+    {
+        Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        try {
+            daoClients=new IODAOClient();
+        } catch (IOException ex) { JOptionPane.showMessageDialog(this, "Файл со списком клиентов не найден."); }
+        origTittleF.setText(disc.getOriginalTitle());
+        russTittleF.setText(disc.getRussianTitle());
+        directorF.setText(disc.getDirector());
+        genreF.setText(disc.getGenre());
+        durationF.setText(Integer.toString(disc.getDuration()));
+        releaseyearF.setText(Short.toString(disc.getReleaseYear()));
+        ratingF.setText(Double.toString(disc.getRating()));
+        langF.setText(disc.getLanguages());
+        countryF.setText(disc.getCountry());
+        actorsF.setText(disc.getActors());
+        descriptionF.setText(disc.getDescription());
+        //if (disc.getClientID()==0)
+            //clientF.setText("Диск не на руках");
+        //else
+        //{
+            try {
+                clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
+            }
+            catch (Exception e) { 
+                disc.setClientID(0);
+                clientF.setText("Диск не на руках");
+            }
+        //}
+        jButton3.setEnabled(true);
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jButton8.setEnabled(true);
     }
 }

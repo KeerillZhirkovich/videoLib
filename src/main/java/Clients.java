@@ -205,6 +205,7 @@ public class Clients extends javax.swing.JFrame {
         {
             try {
                 MainForm.setClient(discID, daoClients.getClient((int) jTable1.getValueAt(x, 0)).getClientID());
+                dispose();
             } catch (IOException | ClassNotFoundException ex) {  }
         }
         else
