@@ -116,10 +116,8 @@ public class IODAODisc implements DAODisc {
         Collections.sort(discAndRelevance);
 
         if (discAndRelevance.get(0).getRelevance() == maxRelevance) {
-            int i = 0;
-            while (discAndRelevance.get(i).getRelevance() == maxRelevance) {
-                result.add(discAndRelevance.get(i).getData());
-                i++;
+            for (ObjectAndRelevance<Disc> disc : discAndRelevance) {
+                result.add(disc.getData());
             }
             return result;
         } else {
