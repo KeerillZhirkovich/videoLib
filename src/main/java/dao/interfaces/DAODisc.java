@@ -12,7 +12,7 @@ public interface DAODisc {
     void deleteDisc (int id);
     ArrayList<Disc> getDiscs();
     Disc getDisc (int id);
-    ArrayList<Disc> getDiscsOnTheDataSet (Disc disc); //Принимает объект Disc
+    ArrayList<Disc> getDiscsOnTheDataSet (String keywords);
     void loadFromFile(String url);
     void saveChanges() throws IOException;
 }

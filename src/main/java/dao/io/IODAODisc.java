@@ -1,22 +1,22 @@
 package dao.io;
 
 import dao.interfaces.DAODisc;
+import dao.tools.ObjectAndRelevance;
 import model.Disc;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.Set;
 
 import static dao.tools.FileChecker.fileIsEmpty;
-//import static dao.tools.Search.similarDisc;
-//import static dao.tools.WorkWithStrings.ifContainsSplit;
+import static dao.tools.Search.relevance;
+import static dao.tools.WorkWithStrings.splitData;
 
 public class IODAODisc implements DAODisc {
 
     private ArrayList<Disc> discs;
-    private static final String FILE_PATH= "data\\discs";
+    private static final String FILE_PATH = "data\\discs";
 
     public IODAODisc() throws IOException, ClassNotFoundException {
         discs = readDiscs();
@@ -88,18 +88,35 @@ public class IODAODisc implements DAODisc {
     }
 
     @Override
-    public ArrayList<Disc> getDiscsOnTheDataSet(Disc disc) {
+    public ArrayList<Disc> getDiscsOnTheDataSet(String searchString) {
 
-        Set<Disc> result = new LinkedHashSet<>();
+        ArrayList<Disc> result = new ArrayList<>();
+        String[] keywords = splitData(searchString);
+        int maxRelevance = keywords.length;
+        ArrayList<ObjectAndRelevance<Disc>> discAndRelevance = new ArrayList<>();
 
-        for (Disc d: discs) {
-          //  if(similarDisc(disc, d)) {
-            //    result.add(d);
-          //  }
+        for (Disc disc : discs) {
+            ObjectAndRelevance<Disc> discR = new ObjectAndRelevance<>(disc);
+            discR.setRelevance(relevance(keywords, disc.toString()));
+            discAndRelevance.add(discR);
         }
+        Collections.sort(discAndRelevance);
 
-        return new ArrayList<>(result);
+        if (discAndRelevance.get(0).getRelevance() == maxRelevance) {
+            int i = 0;
+            while (discAndRelevance.get(i).getRelevance() == maxRelevance) {
+                result.add(discAndRelevance.get(i).getData());
+                i++;
+            }
+            return result;
+        } else {
+            for (ObjectAndRelevance<Disc> dar : discAndRelevance) {
+                result.add(dar.getData());
+            }
+            return result;
+        }
     }
+
 
     public void loadFromFile(String url) {
 

@@ -13,7 +13,7 @@ public interface DAOClient {
                                     или лучше делать проверку? */
     ArrayList<Client> getClients();
     Client getClient (int id);
-    ArrayList<Client> getClientsOnTheDataSet (String[] data); //Принимает массив значений всех полей Disc
+    ArrayList<Client> getClientsOnTheDataSet (String data);
     void loadFromFile(String url);
     void saveChanges() throws IOException;
 

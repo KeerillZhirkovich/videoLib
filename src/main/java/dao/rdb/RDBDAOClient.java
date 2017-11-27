@@ -28,7 +28,7 @@ public class RDBDAOClient implements DAOClient {
     }
 
     @Override
-    public ArrayList<Client> getClientsOnTheDataSet(String[] data) {
+    public ArrayList<Client> getClientsOnTheDataSet(String data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

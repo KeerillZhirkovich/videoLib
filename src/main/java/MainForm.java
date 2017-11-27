@@ -436,7 +436,7 @@ public class MainForm extends javax.swing.JFrame {
         //else
         //{
             try {
-                clientF.setText(daoClients.getClientByID(disc.getClientID()).getName()+" "+daoClients.getClientByID(disc.getClientID()).getSurname());
+                clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
             }
             catch (Exception e) { 
                 disc.setClientID(0);

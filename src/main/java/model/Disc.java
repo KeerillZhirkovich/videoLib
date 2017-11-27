@@ -209,4 +209,11 @@ public class Disc implements Serializable, Comparable<Disc> {
     public int compareTo(Disc o) {
         return originalTitle.compareTo(o.getOriginalTitle());
     }
+
+ //   @Override
+   // public String toString() {
+     //   return  russianTitle + ' ' + originalTitle + ' ' +
+       //         director + ' ' + genre + ' ' + languages + ' ' +
+         //       country + ' ' + actors + ' ' + releaseYear;
+   // }
 }

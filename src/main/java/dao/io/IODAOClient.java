@@ -2,13 +2,19 @@ package dao.io;
 
 
 import dao.interfaces.DAOClient;
+import dao.tools.ObjectAndRelevance;
 import model.Client;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 
 import static dao.tools.FileChecker.fileIsEmpty;
-//import static dao.tools.WorkWithStrings.ifContainsSplit;
+import static dao.tools.Search.relevance;
+import static dao.tools.WorkWithStrings.splitData;
+
+
 
 public class IODAOClient implements DAOClient {
 
@@ -17,14 +23,6 @@ public class IODAOClient implements DAOClient {
 
     public IODAOClient() throws IOException {
         clients = readClients();
-    }
-    
-    public Client getClientByID(int ID)
-    {
-        for (int i=0;i<clients.size();i++)
-            if (clients.get(i).getClientID()==ID)
-                return clients.get(i);
-        return null;
     }
 
     public void saveChanges () throws IOException {
@@ -98,25 +96,36 @@ public class IODAOClient implements DAOClient {
     }
 
     @Override
-    public ArrayList<Client> getClientsOnTheDataSet(String[] data) {
+    public ArrayList<Client> getClientsOnTheDataSet(String searchString) {
 
         ArrayList<Client> result = new ArrayList<>();
+        String[] keywords = splitData(searchString);
+        int maxRelevance = keywords.length;
+        ArrayList<ObjectAndRelevance<Client>> clientAndRelevance = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++){
-            data[i] = data[i].trim();
+        for (Client client : clients) {
+            ObjectAndRelevance<Client> clientR = new ObjectAndRelevance<>(client);
+            clientR.setRelevance(relevance(keywords, client.toString()));
+            clientAndRelevance.add(clientR);
         }
 
-        for (Client client : clients){
-            boolean b = !data[2].isEmpty() && data[2].equals(client.getPhone());
-           // b = b && !data[0].isEmpty() && ifContainsSplit(client.getName(), data[0]);
-           // b = b && !data[1].isEmpty() && ifContainsSplit(client.getSurname(), data[1]);
-            if(b){
-                result.add(client);
+        Collections.sort(clientAndRelevance);
+
+        if (clientAndRelevance.get(0).getRelevance() == maxRelevance) {
+            int i = 0;
+            while (clientAndRelevance.get(i).getRelevance() == maxRelevance) {
+                result.add(clientAndRelevance.get(i).getData());
+                i++;
             }
+            return result;
+        } else {
+            for (ObjectAndRelevance<Client> car : clientAndRelevance) {
+                result.add(car.getData());
+            }
+            return result;
         }
-
-        return result;
     }
+
 
     public void loadFromFile(String url) {
 
