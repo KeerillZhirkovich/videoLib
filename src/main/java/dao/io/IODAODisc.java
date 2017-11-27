@@ -101,8 +101,18 @@ public class IODAODisc implements DAODisc {
             ObjectAndRelevance<Disc> discR = new ObjectAndRelevance<>(disc);
             String discString = disc.toString().toLowerCase();
             discR.setRelevance(relevance(keywords, discString));
-            discAndRelevance.add(discR);
+            if (discR.getRelevance() != 0) discAndRelevance.add(discR);
         }
+
+        if (discAndRelevance.isEmpty()) {
+            Disc emptyDisc = new Disc();
+
+            emptyDisc.setRussianTitle("Ничего не найдено");
+            result.add(emptyDisc);
+
+            return result;
+        }
+
         Collections.sort(discAndRelevance);
 
         if (discAndRelevance.get(0).getRelevance() == maxRelevance) {
