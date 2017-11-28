@@ -1,12 +1,9 @@
 
 import dao.io.IODAOClient;
-import dao.io.IODAODisc;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Objects.isNull;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
@@ -30,13 +27,14 @@ public class Clients extends javax.swing.JFrame {
     private static IODAOClient daoClients;
     public Clients() {
         initComponents();
-        try 
-        {
+//        try 
+//        {
             daoClients = new IODAOClient();
             ShowClientsList();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Ошибка при чтении файла.");
-        }   
+//        } catch (IOException ex) 
+//        {
+//
+//        }   
     }
 
     /**

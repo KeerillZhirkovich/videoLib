@@ -15,11 +15,17 @@ import static dao.tools.WorkWithStrings.splitData;
 
 public class IODAODisc implements DAODisc {
 
-    private ArrayList<Disc> discs;
+    private ArrayList<Disc> discs= new ArrayList<>();
     private static final String FILE_PATH = "data\\discs";
 
-    public IODAODisc() throws IOException, ClassNotFoundException {
-        discs = readDiscs();
+    public IODAODisc() {
+        try {
+            discs = readDiscs();
+        }
+        catch (ClassNotFoundException| IOException e) {
+            //discs= new ArrayList<>();
+            //throw new IOException();
+        } 
     }
 
     public void saveChanges() throws IOException {
@@ -38,8 +44,7 @@ public class IODAODisc implements DAODisc {
                 discs.addAll((ArrayList<Disc>) ois.readObject());
                 //sortDiscs();
                 return discs;          
-        }
-              
+        }              
     }
 
     @Override
@@ -101,18 +106,8 @@ public class IODAODisc implements DAODisc {
             ObjectAndRelevance<Disc> discR = new ObjectAndRelevance<>(disc);
             String discString = disc.toString().toLowerCase();
             discR.setRelevance(relevance(keywords, discString));
-            if (discR.getRelevance() != 0) discAndRelevance.add(discR);
+            discAndRelevance.add(discR);
         }
-
-        if (discAndRelevance.isEmpty()) {
-            Disc emptyDisc = new Disc();
-
-            emptyDisc.setRussianTitle("Ничего не найдено");
-            result.add(emptyDisc);
-
-            return result;
-        }
-
         Collections.sort(discAndRelevance);
 
         if (discAndRelevance.get(0).getRelevance() == maxRelevance) {

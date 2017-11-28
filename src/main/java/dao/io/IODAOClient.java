@@ -18,11 +18,17 @@ import static dao.tools.WorkWithStrings.splitData;
 
 public class IODAOClient implements DAOClient {
 
-    private ArrayList<Client> clients;
+    private ArrayList<Client> clients = new ArrayList<Client>();
     private static final String FILE_PATH = "data\\clients";
 
-    public IODAOClient() throws IOException {
-        clients = readClients();
+    public IODAOClient() {
+        try {
+            clients = readClients();
+        }
+        catch (IOException e) {
+            
+        }
+
     }
 
     public void saveChanges () throws IOException {

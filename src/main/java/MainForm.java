@@ -3,9 +3,8 @@ import dao.io.IODAODisc;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import static java.util.Objects.isNull;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
@@ -17,21 +16,31 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
-    //private ArrayList<Disc> discs;
+    private ArrayList<Disc> discs;
     private static IODAODisc daoDiscs;
     private static IODAOClient daoClients;
     private static Clients clientsForm=new Clients();
     public MainForm() {
         initComponents();
-        try 
-        {
+        clientF.setText("");
+//        try 
+//        {
             daoDiscs =new IODAODisc();
+            discs=daoDiscs.getDiscs();
+            if (daoDiscs.getDiscs().isEmpty())
+                setEnableFields(false);
+            else
+            {   
+                ShowDiscsList(discs);
+                jTable1.setRowSelectionInterval(0, 0);
+                ShowFields();
+            }
+            jTable1.requestFocus();
+//        } catch (IOException ex) {
+//            blockForms();
+//        }  
             daoClients = new IODAOClient();
-            ShowDiscsList(daoDiscs.getDiscs());
-            jDesktopPane1.setVisible(false);
-        } catch (ClassNotFoundException | IOException ex) {
-            JOptionPane.showMessageDialog(this, "Ошибка при чтении файла.");
-        }   
+            jDesktopPane1.setVisible(false);       
     }
 
     /**
@@ -74,15 +83,12 @@ public class MainForm extends javax.swing.JFrame {
         actorsF = new javax.swing.JTextPane();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        clientF = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        clientF = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         searchF = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
 
@@ -95,7 +101,6 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -142,37 +147,101 @@ public class MainForm extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Длительность:");
 
+        origTittleF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                origTittleFKeyReleased(evt);
+            }
+        });
+
+        russTittleF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                russTittleFKeyReleased(evt);
+            }
+        });
+
+        directorF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                directorFKeyReleased(evt);
+            }
+        });
+
+        genreF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                genreFKeyReleased(evt);
+            }
+        });
+
+        durationF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                durationFKeyReleased(evt);
+            }
+        });
+
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Год выхода:");
+
+        releaseyearF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                releaseyearFKeyReleased(evt);
+            }
+        });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Рейтинг IMDb:");
 
+        ratingF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ratingFKeyReleased(evt);
+            }
+        });
+
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Языки:");
+
+        langF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                langFKeyReleased(evt);
+            }
+        });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Страна:");
 
+        countryF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                countryFKeyReleased(evt);
+            }
+        });
+
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("В гланых ролях:");
 
+        descriptionF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                descriptionFKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(descriptionF);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 139, Short.MAX_VALUE)
+            .addGap(0, 82, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
         );
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("мин");
 
+        actorsF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                actorsFKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(actorsF);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -182,7 +251,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel13.setText("Диск на руках у:");
 
         jButton7.setText("Изменить клиента");
-        jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -190,12 +258,13 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         jButton8.setText("Диск сдан");
-        jButton8.setEnabled(false);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
+
+        clientF.setText("jLabel14");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,19 +273,22 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(clientF, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel13))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel11)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clientF, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,12 +331,14 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel9)
-                                        .addGap(202, 202, 202))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel9)
+                                            .addGap(202, 202, 202))
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -307,15 +381,15 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addGap(9, 9, 9)
+                        .addGap(69, 69, 69)
                         .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clientF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(jButton8)
+                    .addComponent(clientF))
                 .addContainerGap())
         );
 
@@ -326,16 +400,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Отмена");
-        jButton2.setEnabled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Удалить выбранный фильм");
-        jButton3.setEnabled(false);
+        jButton3.setText("Удалить диск");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -346,22 +411,6 @@ public class MainForm extends javax.swing.JFrame {
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Обновить список");
-        jButton5.setToolTipText("");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Изменить описание");
-        jButton6.setEnabled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
             }
         });
 
@@ -383,56 +432,46 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(searchF))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(299, 299, 299)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addGap(18, 18, 18)
-                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -450,7 +489,12 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        ShowFields();
+        int x = jTable1.getSelectedRow();
+        if (!isNull(jTable1.getValueAt(x, 0))) {
+            ShowFields();
+        }
+        ShowDiscsList(discs);
+        jTable1.setRowSelectionInterval(x, x);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -460,159 +504,40 @@ public class MainForm extends javax.swing.JFrame {
             daoDiscs.deleteDisc((int) jTable1.getValueAt(x, 0));
             ClearFields();
             ClearList();
-            ShowDiscsList(daoDiscs.getDiscs());
+            discs=daoDiscs.getDiscs();
+            ShowDiscsList(discs);
         }
+        if (daoDiscs.getDiscs().isEmpty())
+            setEnableFields(false);
+        else
+            if (x!=0)
+            {
+                jTable1.setRowSelectionInterval(x-1, x-1);
+                ShowFields();
+                jTable1.setRowSelectionInterval(x-1, x-1);
+            }
+            else
+            {
+                jTable1.setRowSelectionInterval(0, 0);
+                ShowFields();
+                jTable1.setRowSelectionInterval(0, 0);     
+            }
+
     }//GEN-LAST:event_jButton3ActionPerformed
     
     private boolean  pressAdd=false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!pressAdd)
-        {
-            pressAdd=true;
-            ClearFields();
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(false);
-            jButton4.setEnabled(false);
-            jButton5.setEnabled(false);
-            jButton6.setEnabled(false);
-            jButton7.setEnabled(false);
-            jButton8.setEnabled(false);
-            jTable1.clearSelection();
-        }
-        else
-        {
-            if (!"".equals(trim(origTittleF.getText())) && !"".equals(trim(russTittleF.getText())))
-            {
-                Disc disc=new Disc();
-                disc.setOriginalTitle(trim(origTittleF.getText()));
-                disc.setRussianTitle(trim(russTittleF.getText()));
-                disc.setDirector(trim(directorF.getText()));
-                disc.setGenre(trim(genreF.getText()));
-                try {
-                    disc.setDuration(Integer.parseInt(trim(durationF.getText())));
-                }
-                catch (NumberFormatException e) {}
-                try {
-                    disc.setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
-                }
-                catch (NumberFormatException e) {}
-                try {
-                    disc.setRating(Double.parseDouble(trim(ratingF.getText())));
-                }
-                catch (NumberFormatException e) {}
-                disc.setLanguages(trim(langF.getText()));
-                disc.setCountry(trim(countryF.getText()));
-                disc.setActors(trim(actorsF.getText()));
-                disc.setDescription(trim(descriptionF.getText()));
-                daoDiscs.setDisc(disc);
-                jButton2.setEnabled(false);
-                jButton3.setEnabled(true);
-                jButton4.setEnabled(true);
-                jButton5.setEnabled(true);
-                jButton6.setEnabled(false);
-                jButton7.setEnabled(true);
-                jButton8.setEnabled(true);
-                pressAdd=false;
-                ClearFields();
-                ShowDiscsList(daoDiscs.getDiscs());
-            }
-            else
-                JOptionPane.showMessageDialog(this, "Поля \"Название\" и \"Русское название\" не могут быть пустыми!");
-        }
+        ClearFields();
+        Disc disc =new Disc();
+        disc.setRussianTitle("");
+        daoDiscs.setDisc(disc);
+        discs=daoDiscs.getDiscs();
+        ShowDiscsList(discs);
+        jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
+        ShowFields();
+        setEnableFields(true);
+        //jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jButton1.setEnabled(true);
-        jButton2.setEnabled(false);
-        jButton3.setEnabled(true);
-        jButton4.setEnabled(true);
-        jButton5.setEnabled(true);
-        jButton6.setEnabled(false);
-        jButton7.setEnabled(true);
-        jButton8.setEnabled(true);
-        pressAdd=false;
-        ClearFields();
-        ShowDiscsList(daoDiscs.getDiscs());
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        jTable1.clearSelection();
-        ClearFields();
-        jButton3.setEnabled(false);
-        jButton6.setEnabled(false);
-        jButton7.setEnabled(false);
-        jButton8.setEnabled(false);
-        if (trim("").equals(searchF.getText()))
-            searchF.setText("Введите ключевые слова");
-    }//GEN-LAST:event_formMouseClicked
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try 
-        {
-            daoDiscs =new IODAODisc();
-            ClearFields();
-            jButton6.setEnabled(false);
-            ClearList();
-            ShowDiscsList(daoDiscs.getDiscs());
-        } catch (ClassNotFoundException | IOException ex) {
-            JOptionPane.showMessageDialog(this, "Ошибка при чтении файла.");
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (!pressAdd)
-        {
-            pressAdd=true;
-            jButton1.setEnabled(false);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(false);
-            jButton4.setEnabled(false);
-            jButton5.setEnabled(false);
-            jButton7.setEnabled(false);
-            jButton8.setEnabled(false);
-        }
-        else
-        {
-            if (!"".equals(trim(origTittleF.getText())) && !"".equals(trim(russTittleF.getText())))
-            {
-                Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-                //daoDiscs.deleteDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-                disc.setOriginalTitle(trim(origTittleF.getText()));
-                disc.setRussianTitle(trim(russTittleF.getText()));
-                disc.setDirector(trim(directorF.getText()));
-                disc.setGenre(trim(genreF.getText()));
-                try {
-                    disc.setDuration(Integer.parseInt(trim(durationF.getText())));
-                }
-                catch (NumberFormatException e) {}
-                try {
-                    disc.setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
-                }
-                catch (NumberFormatException e) {}
-                try {
-                    disc.setRating(Double.parseDouble(trim(ratingF.getText())));
-                }
-                catch (NumberFormatException e) {}
-                disc.setLanguages(trim(langF.getText()));
-                disc.setCountry(trim(countryF.getText()));
-                disc.setActors(trim(actorsF.getText()));
-                disc.setDescription(trim(descriptionF.getText()));
-                //daoDiscs.setDisc(disc);
-                jButton1.setEnabled(true);
-                jButton2.setEnabled(true);
-                jButton2.setEnabled(false);
-                jButton3.setEnabled(true);
-                jButton4.setEnabled(true);
-                jButton5.setEnabled(true);
-                jButton7.setEnabled(true);
-                jButton8.setEnabled(true);
-                pressAdd=false;
-                //ShowDiscsList();
-            }
-            else
-                JOptionPane.showMessageDialog(this, "Поля \"Название\" и \"Русское название\" не могут быть пустыми!");
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         int x=jTable1.getSelectedRow();
@@ -636,7 +561,12 @@ public class MainForm extends javax.swing.JFrame {
         String searchString = searchF.getText();
         ClearFields();
         ClearList();
-        ShowDiscsList(daoDiscs.getDiscsOnTheDataSet(searchString));
+        discs=daoDiscs.getDiscsOnTheDataSet(searchString);
+        ShowDiscsList(discs);
+        jTable1.setRowSelectionInterval(0, 0);
+        if ("".equals(searchF.getText()))
+            searchF.setText("Введите ключевые слова");
+        ShowFields();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void searchFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFMouseClicked
@@ -648,6 +578,92 @@ public class MainForm extends javax.swing.JFrame {
         if (evt.getKeyChar()==KeyEvent.VK_ENTER || evt.getKeyChar()==KeyEvent.VK_UP || evt.getKeyChar()==KeyEvent.VK_DOWN)
             ShowFields();
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void origTittleFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_origTittleFKeyReleased
+        try {    
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setOriginalTitle(trim(origTittleF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_origTittleFKeyReleased
+
+    private void russTittleFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_russTittleFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRussianTitle(trim(russTittleF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_russTittleFKeyReleased
+
+    private void directorFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_directorFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDirector(trim(directorF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_directorFKeyReleased
+
+    private void genreFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genreFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setGenre(trim(genreF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_genreFKeyReleased
+
+    private void durationFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_durationFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(Integer.parseInt(trim(durationF.getText())));
+        } catch (Exception e) { 
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(0);
+        }
+    }//GEN-LAST:event_durationFKeyReleased
+
+    private void releaseyearFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_releaseyearFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
+        } catch (Exception e) {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear((short)0);
+        }
+    }//GEN-LAST:event_releaseyearFKeyReleased
+
+    private void ratingFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ratingFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(Double.parseDouble(trim(ratingF.getText())));
+        } catch (Exception e) { 
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(0);
+        }
+    }//GEN-LAST:event_ratingFKeyReleased
+
+    private void langFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_langFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setLanguages(trim(langF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_langFKeyReleased
+
+    private void countryFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_countryFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setCountry(trim(countryF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_countryFKeyReleased
+
+    private void actorsFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actorsFKeyReleased
+        try {
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setActors(trim(actorsF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_actorsFKeyReleased
+
+    private void descriptionFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionFKeyReleased
+        try {    
+            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDescription(trim(descriptionF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_descriptionFKeyReleased
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if ("".equals(searchF.getText()))
+            searchF.setText("Введите ключевые слова");
+        ShowDiscsList(daoDiscs.getDiscs());
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
@@ -686,18 +702,15 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane actorsF;
-    private javax.swing.JTextField clientF;
+    private javax.swing.JLabel clientF;
     private javax.swing.JTextField countryF;
     private javax.swing.JTextPane descriptionF;
     private javax.swing.JTextField directorF;
     private javax.swing.JTextField durationF;
     private javax.swing.JTextField genreF;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -746,20 +759,14 @@ public class MainForm extends javax.swing.JFrame {
     
     private void ClearList()
     {
-//        DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
-//        dm.getDataVector().removeAllElements();
-//        dm.fireTableDataChanged();
-//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-//        model.setRowCount(0);
         DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
-        while(dm.getRowCount() > 0)
-        {
+        while(dm.getRowCount() > 0) {
             dm.removeRow(0);
         }
     }
 
     private void ShowDiscsList(ArrayList<Disc> discs) {
-
+        int x = jTable1.getSelectedRow();
         ClearList();
 
         DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
@@ -770,6 +777,9 @@ public class MainForm extends javax.swing.JFrame {
             jTable1.setValueAt(discs.get(j).getDiskID(), j, 0);
             jTable1.setValueAt(discs.get(j).getRussianTitle(), j, 1);
         }
+        
+        if (x>=0)
+            jTable1.setRowSelectionInterval(x, x);
     }
 
 
@@ -781,9 +791,7 @@ public class MainForm extends javax.swing.JFrame {
     public void ShowFields()
     {
         Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-        try {
-            daoClients=new IODAOClient();
-        } catch (IOException ex) { JOptionPane.showMessageDialog(this, "Файл со списком клиентов не найден."); }
+
         origTittleF.setText(disc.getOriginalTitle());
         russTittleF.setText(disc.getRussianTitle());
         directorF.setText(disc.getDirector());
@@ -795,10 +803,6 @@ public class MainForm extends javax.swing.JFrame {
         countryF.setText(disc.getCountry());
         actorsF.setText(disc.getActors());
         descriptionF.setText(disc.getDescription());
-        //if (disc.getClientID()==0)
-            //clientF.setText("Диск не на руках");
-        //else
-        //{
             try {
                 clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
             }
@@ -806,10 +810,24 @@ public class MainForm extends javax.swing.JFrame {
                 disc.setClientID(0);
                 clientF.setText("Диск не на руках");
             }
-        //}
-        jButton3.setEnabled(true);
-        jButton6.setEnabled(true);
-        jButton7.setEnabled(true);
-        jButton8.setEnabled(true);
+        
+        if (daoDiscs.getDiscs().isEmpty())
+                setEnableFields(false);
+//            else
+//                jTable1.setRowSelectionInterval(0, 0);
+    }
+
+    private void setEnableFields(boolean flag) {
+       origTittleF.setEnabled(flag);
+       russTittleF.setEnabled(flag);
+       directorF.setEnabled(flag);
+       genreF.setEnabled(flag);
+       durationF.setEnabled(flag);
+       releaseyearF.setEnabled(flag);
+       ratingF.setEnabled(flag);
+       langF.setEnabled(flag);
+       countryF.setEnabled(flag);
+       actorsF.setEnabled(flag);
+       descriptionF.setEnabled(flag);
     }
 }
