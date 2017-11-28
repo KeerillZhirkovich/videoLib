@@ -3,23 +3,27 @@ package dao.io;
 import dao.interfaces.DAODisc;
 import dao.tools.ObjectAndRelevance;
 import model.Disc;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-
 import static dao.tools.FileChecker.fileIsEmpty;
 import static dao.tools.Search.relevance;
 import static dao.tools.WorkWithStrings.splitData;
 
 public class IODAODisc implements DAODisc {
 
-    private ArrayList<Disc> discs;
-    private static final String FILE_PATH = "data\\discs";
+    private ArrayList<Disc> discs = new ArrayList<>();
+    private static final String FILE_PATH = "src\\data\\discs";
 
-    public IODAODisc() throws IOException, ClassNotFoundException {
-        discs = readDiscs();
+    public IODAODisc() {
+        try {
+            discs = readDiscs();
+        }
+        catch (ClassNotFoundException| IOException e) {
+            //discs= new ArrayList<>();
+            //throw new IOException();
+        } 
     }
 
     public void saveChanges() throws IOException {

@@ -4,12 +4,10 @@ package dao.io;
 import dao.interfaces.DAOClient;
 import dao.tools.ObjectAndRelevance;
 import model.Client;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-
 import static dao.tools.FileChecker.fileIsEmpty;
 import static dao.tools.Search.relevance;
 import static dao.tools.WorkWithStrings.splitData;
@@ -19,16 +17,14 @@ import static dao.tools.WorkWithStrings.splitData;
 public class IODAOClient implements DAOClient {
 
     private ArrayList<Client> clients = new ArrayList<Client>();
-    private static final String FILE_PATH = "data\\clients";
+    private static final String FILE_PATH = "src\\data\\clients";
 
     public IODAOClient() {
         try {
             clients = readClients();
         }
         catch (IOException e) {
-            
         }
-
     }
 
     public void saveChanges () throws IOException {

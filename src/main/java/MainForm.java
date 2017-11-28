@@ -20,6 +20,7 @@ public class MainForm extends javax.swing.JFrame {
     private static IODAODisc daoDiscs;
     private static IODAOClient daoClients;
     private static Clients clientsForm=new Clients();
+    private int select;
     public MainForm() {
         initComponents();
         clientF.setText("");
@@ -118,8 +119,11 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
             }
         });
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -332,13 +336,12 @@ public class MainForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel9)
-                                            .addGap(202, 202, 202))
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)))))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9)
+                                        .addGap(202, 202, 202))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -488,15 +491,6 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int x = jTable1.getSelectedRow();
-        if (!isNull(jTable1.getValueAt(x, 0))) {
-            ShowFields();
-        }
-        ShowDiscsList(discs);
-        jTable1.setRowSelectionInterval(x, x);
-    }//GEN-LAST:event_jTable1MouseClicked
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int x=jTable1.getSelectedRow();
         if (x!=-1)
@@ -525,7 +519,6 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
     
-    private boolean  pressAdd=false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ClearFields();
         Disc disc =new Disc();
@@ -662,8 +655,21 @@ public class MainForm extends javax.swing.JFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if ("".equals(searchF.getText()))
             searchF.setText("Введите ключевые слова");
-        ShowDiscsList(daoDiscs.getDiscs());
+        ShowDiscsList(discs);
     }//GEN-LAST:event_formMouseClicked
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        jTable1.setRowSelectionInterval(select, select);
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        select = jTable1.getSelectedRow();
+        if (!isNull(jTable1.getValueAt(select, 0))) {
+            ShowFields();
+        }
+        ShowDiscsList(discs);
+        jTable1.setRowSelectionInterval(select, select);
+    }//GEN-LAST:event_jTable1MousePressed
 
     /**
      * @param args the command line arguments
@@ -790,31 +796,35 @@ public class MainForm extends javax.swing.JFrame {
     
     public void ShowFields()
     {
-        Disc disc= daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        int first=(int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        if (first!=0)
+        {
+            Disc disc= daoDiscs.getDisc(first);
 
-        origTittleF.setText(disc.getOriginalTitle());
-        russTittleF.setText(disc.getRussianTitle());
-        directorF.setText(disc.getDirector());
-        genreF.setText(disc.getGenre());
-        durationF.setText(Integer.toString(disc.getDuration()));
-        releaseyearF.setText(Short.toString(disc.getReleaseYear()));
-        ratingF.setText(Double.toString(disc.getRating()));
-        langF.setText(disc.getLanguages());
-        countryF.setText(disc.getCountry());
-        actorsF.setText(disc.getActors());
-        descriptionF.setText(disc.getDescription());
-            try {
-                clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
-            }
-            catch (Exception e) { 
-                disc.setClientID(0);
-                clientF.setText("Диск не на руках");
-            }
-        
-        if (daoDiscs.getDiscs().isEmpty())
-                setEnableFields(false);
-//            else
-//                jTable1.setRowSelectionInterval(0, 0);
+            origTittleF.setText(disc.getOriginalTitle());
+            russTittleF.setText(disc.getRussianTitle());
+            directorF.setText(disc.getDirector());
+            genreF.setText(disc.getGenre());
+            durationF.setText(Integer.toString(disc.getDuration()));
+            releaseyearF.setText(Short.toString(disc.getReleaseYear()));
+            ratingF.setText(Double.toString(disc.getRating()));
+            langF.setText(disc.getLanguages());
+            countryF.setText(disc.getCountry());
+            actorsF.setText(disc.getActors());
+            descriptionF.setText(disc.getDescription());
+                try {
+                    clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
+                }
+                catch (Exception e) { 
+                    disc.setClientID(0);
+                    clientF.setText("Диск не на руках");
+                }
+
+            if (daoDiscs.getDiscs().isEmpty())
+                    setEnableFields(false);
+    //            else
+    //                jTable1.setRowSelectionInterval(0, 0);
+        }
     }
 
     private void setEnableFields(boolean flag) {
