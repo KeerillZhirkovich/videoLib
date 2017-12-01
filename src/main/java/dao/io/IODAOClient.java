@@ -50,7 +50,7 @@ public class IODAOClient implements DAOClient {
 
 
     @Override
-    public void setClient(Client client) throws IOException{
+    public void setClient(Client client) {
 
         int id;
 
@@ -64,7 +64,6 @@ public class IODAOClient implements DAOClient {
         }
         client.setClientID(id);
         clients.add(client);
-        saveChanges();
     }
 
     @Override
@@ -74,9 +73,6 @@ public class IODAOClient implements DAOClient {
                 deleteByIndex(i);
             }
         }
-        try {
-            saveChanges();
-        } catch (IOException ex) { }
     }
 
     @Override

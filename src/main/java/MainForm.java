@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
+import model.Client;
 import model.Disc;
 
 
@@ -19,8 +20,8 @@ public class MainForm extends javax.swing.JFrame {
     private ArrayList<Disc> discs;
     private static IODAODisc daoDiscs;
     private static IODAOClient daoClients;
-    private static Clients clientsForm=new Clients();
-    private int select;
+    private int selectDisc;
+    private int selectClient;
     public MainForm() {
         initComponents();
         clientF.setText("");
@@ -28,19 +29,31 @@ public class MainForm extends javax.swing.JFrame {
 //        {
             daoDiscs =new IODAODisc();
             discs=daoDiscs.getDiscs();
+            daoClients = new IODAOClient();
             if (daoDiscs.getDiscs().isEmpty())
                 setEnableFields(false);
             else
             {   
                 ShowDiscsList(discs);
+
                 jTable1.setRowSelectionInterval(0, 0);
+
                 ShowFields();
+
             }
             jTable1.requestFocus();
+            
+            if (daoClients.getClients().isEmpty())
+                setClientFieldsEnable(false);
+            else
+            {
+                ShowClientsList();
+                jTable2.setRowSelectionInterval(0, 0);
+                ShowClientFields();
+            }
 //        } catch (IOException ex) {
 //            blockForms();
 //        }  
-            daoClients = new IODAOClient();
             jDesktopPane1.setVisible(false);       
     }
 
@@ -84,7 +97,6 @@ public class MainForm extends javax.swing.JFrame {
         actorsF = new javax.swing.JTextPane();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         clientF = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -92,6 +104,18 @@ public class MainForm extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         searchF = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        clientSurnameF = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        clientPhoneF = new javax.swing.JTextField();
+        clientNameF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Видеотека");
@@ -254,13 +278,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Диск на руках у:");
 
-        jButton7.setText("Изменить клиента");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
         jButton8.setText("Диск сдан");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,7 +292,7 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -288,11 +305,9 @@ public class MainForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel11)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clientF, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton7)
+                        .addComponent(clientF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +357,7 @@ public class MainForm extends javax.swing.JFrame {
                                         .addComponent(jLabel9)
                                         .addGap(202, 202, 202))
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))))))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +405,6 @@ public class MainForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jButton7)
                     .addComponent(jButton8)
                     .addComponent(clientF))
                 .addContainerGap())
@@ -431,6 +445,92 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setAutoCreateRowSorter(true);
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID клиента", "Имя", "Фамилия", "Телефон"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable2MouseReleased(evt);
+            }
+        });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable2KeyReleased(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable2);
+
+        jButton2.setText("Добавить клиента");
+
+        jButton5.setText("Добавить клиента");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Удалить клиента");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("Выдать диск");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Имя:");
+
+        jLabel15.setText("Фамилия:");
+
+        clientSurnameF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                clientSurnameFKeyReleased(evt);
+            }
+        });
+
+        jLabel16.setText("Телефон:");
+
+        clientPhoneF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                clientPhoneFKeyReleased(evt);
+            }
+        });
+
+        clientNameF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                clientNameFKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -440,41 +540,97 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(589, 589, 589))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(299, 299, 299)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8))
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 601, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addGap(0, 601, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addGap(27, 27, 27))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6)
+                            .addComponent(jButton10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3))
+                        .addGap(27, 27, 27))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -485,6 +641,7 @@ public class MainForm extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             daoDiscs.saveChanges();
+            daoClients.saveChanges();
             JOptionPane.showMessageDialog(this, "Успешно сохранено.");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Сохранение не удалось.");
@@ -497,7 +654,7 @@ public class MainForm extends javax.swing.JFrame {
         {
             daoDiscs.deleteDisc((int) jTable1.getValueAt(x, 0));
             ClearFields();
-            ClearList();
+            ClearListDiscs();
             discs=daoDiscs.getDiscs();
             ShowDiscsList(discs);
         }
@@ -527,19 +684,11 @@ public class MainForm extends javax.swing.JFrame {
         discs=daoDiscs.getDiscs();
         ShowDiscsList(discs);
         jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
+        selectDisc=jTable1.getSelectedRow();
         ShowFields();
         setEnableFields(true);
         //jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        int x=jTable1.getSelectedRow();
-        if (x!=-1)
-        {
-            Clients.setDiscID(daoDiscs.getDisc((int) jTable1.getValueAt(x, 0)).getDiskID());
-            clientsForm.setVisible(true);
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         int x=jTable1.getSelectedRow();
@@ -553,7 +702,7 @@ public class MainForm extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         String searchString = searchF.getText();
         ClearFields();
-        ClearList();
+        ClearListDiscs();
         discs=daoDiscs.getDiscsOnTheDataSet(searchString);
         ShowDiscsList(discs);
         jTable1.setRowSelectionInterval(0, 0);
@@ -659,17 +808,112 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
-        jTable1.setRowSelectionInterval(select, select);
+        jTable1.setRowSelectionInterval(selectDisc, selectDisc);
     }//GEN-LAST:event_jTable1MouseReleased
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        select = jTable1.getSelectedRow();
-        if (!isNull(jTable1.getValueAt(select, 0))) {
+        selectDisc = jTable1.getSelectedRow();
+        if (!isNull(jTable1.getValueAt(selectDisc, 0))) {
             ShowFields();
         }
         ShowDiscsList(discs);
-        jTable1.setRowSelectionInterval(select, select);
+        jTable1.setRowSelectionInterval(selectDisc, selectDisc);
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int x=jTable2.getSelectedRow();
+        if (x!=-1)
+        {
+            daoClients.deleteClient((int) jTable2.getValueAt(x, 0));
+            ClearListClients();
+            ShowClientsList();
+            if (x!=0)
+            {
+                jTable2.setRowSelectionInterval(x-1, x-1);
+                ShowClientFields();
+                jTable2.setRowSelectionInterval(x-1, x-1);
+            }
+            else
+            {
+                jTable2.setRowSelectionInterval(0, 0);
+                ShowClientFields();
+                jTable2.setRowSelectionInterval(0, 0);     
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        clientNameF.setText("");
+        clientSurnameF.setText("");
+        clientPhoneF.setText("");
+        Client client =new Client();
+        client.setName("");
+        client.setSurname("");
+        client.setPhone("");
+        //try {
+            //        disc.setRussianTitle("");
+            daoClients.setClient(client);
+//        } catch (IOException ex) {
+//
+//        }
+//        discs=daoDiscs.getDiscs();
+        ShowClientsList();
+        setClientFieldsEnable(true);
+        jTable2.setRowSelectionInterval(jTable2.getRowCount()-1, jTable2.getRowCount()-1);
+        selectClient=jTable2.getSelectedRow();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        int x=jTable1.getSelectedRow();
+        int y=jTable2.getSelectedRow();
+        if (x!=-1 && y!=-1)
+        {
+            daoDiscs.getDisc((int)jTable1.getValueAt(x, 0)).setClientID((int)jTable2.getValueAt(y, 0));
+            ShowFields();
+        }
+        else
+        JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        selectClient = jTable2.getSelectedRow();
+        if (!isNull(jTable2.getValueAt(selectClient, 0))) {
+            ShowClientFields();
+        }
+        ShowClientsList();
+        jTable2.setRowSelectionInterval(selectClient, selectClient);
+    }//GEN-LAST:event_jTable2MousePressed
+
+    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        jTable2.setRowSelectionInterval(selectClient, selectClient);
+    }//GEN-LAST:event_jTable2MouseReleased
+
+    private void clientNameFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientNameFKeyReleased
+        try {    
+            daoClients.getClient((int) jTable2.getValueAt(selectClient, 0)).setName(trim(clientNameF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_clientNameFKeyReleased
+
+    private void clientSurnameFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientSurnameFKeyReleased
+        try {    
+            daoClients.getClient((int) jTable2.getValueAt(selectClient, 0)).setSurname(trim(clientSurnameF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_clientSurnameFKeyReleased
+
+    private void clientPhoneFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientPhoneFKeyReleased
+        try {    
+            daoClients.getClient((int) jTable2.getValueAt(selectClient, 0)).setPhone(trim(clientPhoneF.getText()));
+        } catch (Exception e) { 
+        }
+    }//GEN-LAST:event_clientPhoneFKeyReleased
+
+    private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN) {
+            ShowClientFields();
+        }
+    }//GEN-LAST:event_jTable2KeyReleased
 
     /**
      * @param args the command line arguments
@@ -709,15 +953,21 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane actorsF;
     private javax.swing.JLabel clientF;
+    private javax.swing.JTextField clientNameF;
+    private javax.swing.JTextField clientPhoneF;
+    private javax.swing.JTextField clientSurnameF;
     private javax.swing.JTextField countryF;
     private javax.swing.JTextPane descriptionF;
     private javax.swing.JTextField directorF;
     private javax.swing.JTextField durationF;
     private javax.swing.JTextField genreF;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -726,6 +976,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -738,7 +991,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField langF;
     private javax.swing.JTextField origTittleF;
@@ -763,7 +1018,7 @@ public class MainForm extends javax.swing.JFrame {
         clientF.setText("");
     }
     
-    private void ClearList()
+    private void ClearListDiscs()
     {
         DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
         while(dm.getRowCount() > 0) {
@@ -773,7 +1028,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void ShowDiscsList(ArrayList<Disc> discs) {
         int x = jTable1.getSelectedRow();
-        ClearList();
+        ClearListDiscs();
 
         DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
 
@@ -840,4 +1095,48 @@ public class MainForm extends javax.swing.JFrame {
        actorsF.setEnabled(flag);
        descriptionF.setEnabled(flag);
     }
+    
+     private void ClearListClients()
+    {
+        DefaultTableModel dm = (DefaultTableModel)jTable2.getModel();
+        while(dm.getRowCount() > 0)
+            dm.removeRow(0);
+    }
+    
+    private void ShowClientsList() {
+        ClearListClients();
+        ArrayList<Client> clients= daoClients.getClients();
+        
+        DefaultTableModel dtm=(DefaultTableModel)jTable2.getModel();
+        for (int j=0;j<clients.size();j++)
+        {
+             dtm.insertRow(j,new Vector(0));
+             jTable2.setValueAt(clients.get(j).getClientID(), j, 0);
+             jTable2.setValueAt(clients.get(j).getName(), j, 1);
+             jTable2.setValueAt(clients.get(j).getSurname(), j, 2);
+             jTable2.setValueAt(clients.get(j).getPhone(), j, 3);
+        }
+    }
+
+    private void ShowClientFields() {
+        int first=(int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+        if (first!=0)
+        {
+            Client client= daoClients.getClient(first);
+
+            clientNameF.setText(client.getName());
+            clientSurnameF.setText(client.getSurname());
+            clientPhoneF.setText(client.getPhone());
+        }
+        
+        if (daoClients.getClients().isEmpty())
+            setClientFieldsEnable(false);
+    }
+
+    private void setClientFieldsEnable(boolean flag) {
+        clientNameF.setEnabled(flag);
+        clientSurnameF.setEnabled(flag);
+        clientPhoneF.setEnabled(flag);
+    }
+
 }
