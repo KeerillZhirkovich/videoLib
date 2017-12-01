@@ -718,6 +718,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         if (evt.getKeyChar()==KeyEvent.VK_ENTER || evt.getKeyChar()==KeyEvent.VK_UP || evt.getKeyChar()==KeyEvent.VK_DOWN)
+            selectDisc=jTable1.getSelectedRow();
             ShowFields();
     }//GEN-LAST:event_jTable1KeyReleased
 
@@ -911,6 +912,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN) {
+            selectClient=jTable2.getSelectedRow();
             ShowClientFields();
         }
     }//GEN-LAST:event_jTable2KeyReleased
