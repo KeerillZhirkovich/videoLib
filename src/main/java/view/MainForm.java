@@ -149,6 +149,9 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable1KeyReleased(evt);
             }
@@ -487,6 +490,9 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable2KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable2KeyReleased(evt);
             }
@@ -914,6 +920,7 @@ public class MainForm extends javax.swing.JFrame {
         }
         ShowClientsList();
         jTable2.setRowSelectionInterval(selectClient, selectClient);
+        jTable2.requestFocus();
     }//GEN-LAST:event_jTable2MousePressed
 
     private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
@@ -942,7 +949,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_clientPhoneFKeyReleased
 
     private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN) {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             selectClient = jTable2.getSelectedRow();
             ShowClientFields();
         }
@@ -989,6 +996,20 @@ public class MainForm extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_descriptionFMousePressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
+            selectDisc = jTable1.getSelectedRow();
+        }
+        ShowDiscFields();
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
+            selectClient = jTable2.getSelectedRow();
+            ShowClientFields();
+        }
+    }//GEN-LAST:event_jTable2KeyPressed
 
     /**
      * @param args the command line arguments
