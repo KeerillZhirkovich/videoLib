@@ -13,6 +13,8 @@ import static jdk.nashorn.internal.objects.NativeString.trim;
 import model.Client;
 import model.Disc;
 
+import static controller.Controller.*;
+
 
 public class MainForm extends javax.swing.JFrame {
 
@@ -27,7 +29,7 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         initComponents();
         clientF.setText("");
-//        try 
+//        try
 //        {
             daoDiscs =new IODAODisc();
             discs=daoDiscs.getDiscs();
@@ -35,7 +37,7 @@ public class MainForm extends javax.swing.JFrame {
             if (daoDiscs.getDiscs().isEmpty())
                 setEnableFields(false);
             else
-            {   
+            {
                 ShowDiscsList(discs);
 
                 jTable1.setRowSelectionInterval(0, 0);
@@ -55,7 +57,7 @@ public class MainForm extends javax.swing.JFrame {
             }
 //        } catch (IOException ex) {
 //            blockForms();
-//        }  
+//        }
             jDesktopPane1.setVisible(false);       
     }
 
@@ -1031,34 +1033,22 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void ShowDiscsList(ArrayList<Disc> discs) {
+
         int x = jTable1.getSelectedRow();
         ClearListDiscs();
 
-        DefaultTableModel dtm=(DefaultTableModel)jTable1.getModel();
+        jTable1 = ShowDiscs(jTable1);
 
-        for (int j=0;j<discs.size();j++)
-        {
-            dtm.insertRow(j,new Vector(0));
-            jTable1.setValueAt(discs.get(j).getDiskID(), j, 0);
-            jTable1.setValueAt(discs.get(j).getRussianTitle(), j, 1);
-        }
-        
-        if (x>=0)
+        if (x >= 0)
             jTable1.setRowSelectionInterval(x, x);
     }
 
-
-    public static void setClient(int discID, int clientID) throws IOException, ClassNotFoundException
-    {
-        daoDiscs.setClient(discID, clientID);       
-    }
     
-    public void ShowFields()
-    {
-        int first=(int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-        if (first!=0)
-        {
-            Disc disc= daoDiscs.getDisc(first);
+    
+    public void ShowFields() {
+        int first = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        if (first != 0) {
+            Disc disc = getDiscByNumber(first);
 
             origTittleF.setText(disc.getOriginalTitle());
             russTittleF.setText(disc.getRussianTitle());
@@ -1073,8 +1063,7 @@ public class MainForm extends javax.swing.JFrame {
             descriptionF.setText(disc.getDescription());
                 try {
                     clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
-                }
-                catch (Exception e) { 
+                } catch (Exception e) {
                     disc.setClientID(0);
                     clientF.setText("Диск не на руках");
                 }
@@ -1109,17 +1098,7 @@ public class MainForm extends javax.swing.JFrame {
     
     private void ShowClientsList() {
         ClearListClients();
-        ArrayList<Client> clients= daoClients.getClients();
-        
-        DefaultTableModel dtm=(DefaultTableModel)jTable2.getModel();
-        for (int j=0;j<clients.size();j++)
-        {
-             dtm.insertRow(j,new Vector(0));
-             jTable2.setValueAt(clients.get(j).getClientID(), j, 0);
-             jTable2.setValueAt(clients.get(j).getName(), j, 1);
-             jTable2.setValueAt(clients.get(j).getSurname(), j, 2);
-             jTable2.setValueAt(clients.get(j).getPhone(), j, 3);
-        }
+        jTable2 = ShowClients(jTable2);
     }
 
     private void ShowClientFields() {
