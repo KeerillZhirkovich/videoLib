@@ -8,11 +8,8 @@ import static jdk.nashorn.internal.objects.NativeString.trim;
 import model.Client;
 import model.Disc;
 import static controller.Controller.*;
-import java.awt.Desktop;
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
-import sun.awt.shell.ShellFolder;
 
 public class MainForm extends javax.swing.JFrame {
 
@@ -124,6 +121,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -158,7 +156,9 @@ public class MainForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(10);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(60);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(60);
         }
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -466,16 +466,9 @@ public class MainForm extends javax.swing.JFrame {
                 "ID клиента", "Имя", "Фамилия", "Телефон"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -498,6 +491,13 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMinWidth(10);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(75);
+            jTable2.getColumnModel().getColumn(1).setMinWidth(40);
+            jTable2.getColumnModel().getColumn(2).setMinWidth(80);
+        }
 
         jButton2.setText("Добавить клиента");
 
@@ -746,6 +746,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_searchFMouseClicked
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        jTable1.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN) {
             selectDisc = jTable1.getSelectedRow();
         }
@@ -846,14 +847,19 @@ public class MainForm extends javax.swing.JFrame {
         if ("".equals(searchF.getText())) {
             searchF.setText("Введите ключевые слова");
         }
+        jTable1.getRowSorter().setSortKeys(null);
+        jTable2.getRowSorter().setSortKeys(null);
         ShowDiscsList();
+        ShowClientsList();
     }//GEN-LAST:event_formMouseClicked
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        jTable1.getRowSorter().setSortKeys(null);
         jTable1.setRowSelectionInterval(selectDisc, selectDisc);
     }//GEN-LAST:event_jTable1MouseReleased
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        jTable1.getRowSorter().setSortKeys(null);
         selectDisc = jTable1.getSelectedRow();
         if (!isNull(jTable1.getValueAt(selectDisc, 0))) {
             ShowDiscFields();
@@ -914,6 +920,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        jTable2.getRowSorter().setSortKeys(null);
         selectClient = jTable2.getSelectedRow();
         if (!isNull(jTable2.getValueAt(selectClient, 0))) {
             ShowClientFields();
@@ -924,6 +931,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2MousePressed
 
     private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        jTable2.getRowSorter().setSortKeys(null);
         jTable2.setRowSelectionInterval(selectClient, selectClient);
     }//GEN-LAST:event_jTable2MouseReleased
 
@@ -949,6 +957,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_clientPhoneFKeyReleased
 
     private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
+        jTable2.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             selectClient = jTable2.getSelectedRow();
             ShowClientFields();
@@ -998,6 +1007,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_descriptionFMousePressed
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        jTable1.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             selectDisc = jTable1.getSelectedRow();
         }
@@ -1005,6 +1015,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+        jTable2.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             selectClient = jTable2.getSelectedRow();
             ShowClientFields();
@@ -1189,8 +1200,12 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void ShowClientsList() {
+        int x = jTable2.getSelectedRow();
         ClearClientsList();
         jTable2 = ShowClients(jTable2);
+        if (x >= 0) {
+            jTable2.setRowSelectionInterval(x, x);
+        }
     }
 
     private void ShowClientFields() {
