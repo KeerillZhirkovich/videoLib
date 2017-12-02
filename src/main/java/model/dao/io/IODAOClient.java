@@ -8,7 +8,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import static model.dao.tools.FileChecker.fileIsEmpty;
 import static model.dao.tools.Search.relevance;
 import static model.dao.tools.WorkWithStrings.splitData;
 
@@ -124,5 +123,10 @@ public class IODAOClient implements DAOClient {
 
     public void deleteByIndex(int index) {
         clients.remove(index);
+    }
+    
+    public void saveClients() throws IOException
+    {
+        DataLoad.writeClients(clients);
     }
 }

@@ -1,19 +1,18 @@
 package view;
 
-import model.dao.io.IODAOClient;
-import model.dao.io.IODAODisc;
 import java.awt.event.KeyEvent;
-import java.io.*;
-import java.util.ArrayList;
 import static java.util.Objects.isNull;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
 import model.Client;
 import model.Disc;
-
 import static controller.Controller.*;
+import java.awt.Desktop;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+import sun.awt.shell.ShellFolder;
 
 
 public class MainForm extends javax.swing.JFrame {
@@ -21,9 +20,6 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
-    private ArrayList<Disc> discs;
-    private static IODAODisc daoDiscs;
-    private static IODAOClient daoClients;
     private int selectDisc;
     private int selectClient;
     public MainForm() {
@@ -31,23 +27,17 @@ public class MainForm extends javax.swing.JFrame {
         clientF.setText("");
 //        try
 //        {
-            daoDiscs =new IODAODisc();
-            discs=daoDiscs.getDiscs();
-            daoClients = new IODAOClient();
-            if (daoDiscs.getDiscs().isEmpty())
-                setEnableFields(false);
+            if (getDiscs().isEmpty())
+                setDiscFieldsEnable(false);
             else
             {
-                ShowDiscsList(discs);
-
+                ShowDiscsList();
                 jTable1.setRowSelectionInterval(0, 0);
-
-                ShowFields();
-
+                ShowDiscFields();
             }
             jTable1.requestFocus();
             
-            if (daoClients.getClients().isEmpty())
+            if (getClients().isEmpty())
                 setClientFieldsEnable(false);
             else
             {
@@ -120,6 +110,10 @@ public class MainForm extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         clientPhoneF = new javax.swing.JTextField();
         clientNameF = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        openBase = new javax.swing.JMenuItem();
+        openOfficeMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Видеотека");
@@ -289,7 +283,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        clientF.setText("jLabel14");
+        clientF.setText("client");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -535,6 +529,28 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Файл");
+
+        openBase.setText("Открыть базу");
+        openBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openBaseActionPerformed(evt);
+            }
+        });
+        jMenu1.add(openBase);
+
+        openOfficeMenuItem.setText("Слияние баз");
+        openOfficeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openOfficeMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(openOfficeMenuItem);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -656,41 +672,38 @@ public class MainForm extends javax.swing.JFrame {
         int x=jTable1.getSelectedRow();
         if (x!=-1)
         {
-            daoDiscs.deleteDisc((int) jTable1.getValueAt(x, 0));
-            ClearFields();
-            ClearListDiscs();
-            discs=daoDiscs.getDiscs();
-            ShowDiscsList(discs);
+            deleteDisc((int) jTable1.getValueAt(x, 0));
+            ClearDiscFields();
+            ClearDiscsList();
+            ShowDiscsList();
         }
-        if (daoDiscs.getDiscs().isEmpty())
-            setEnableFields(false);
+        if (getDiscs().isEmpty())
+            setDiscFieldsEnable(false);
         else
             if (x!=0)
             {
                 jTable1.setRowSelectionInterval(x-1, x-1);
-                ShowFields();
+                ShowDiscFields();
                 jTable1.setRowSelectionInterval(x-1, x-1);
             }
             else
             {
                 jTable1.setRowSelectionInterval(0, 0);
-                ShowFields();
+                ShowDiscFields();
                 jTable1.setRowSelectionInterval(0, 0);     
             }
-
     }//GEN-LAST:event_jButton3ActionPerformed
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ClearFields();
+        ClearDiscFields();
         Disc disc =new Disc();
         disc.setRussianTitle("");
-        daoDiscs.setDisc(disc);
-        discs=daoDiscs.getDiscs();
-        ShowDiscsList(discs);
+        setDisc(disc);
+        ShowDiscsList();
         jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
         selectDisc=jTable1.getSelectedRow();
-        ShowFields();
-        setEnableFields(true);
+        ShowDiscFields();
+        setDiscFieldsEnable(true);
         //jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -698,21 +711,20 @@ public class MainForm extends javax.swing.JFrame {
         int x=jTable1.getSelectedRow();
         if (x!=-1)
         {
-            daoDiscs.setClient(daoDiscs.getDisc((int) jTable1.getValueAt(x, 0)).getDiskID(),0);
+            setClient(getDisc((int) jTable1.getValueAt(x, 0)).getDiskID(),0);
             clientF.setText("Диск не на руках");
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String searchString = searchF.getText();
-        ClearFields();
-        ClearListDiscs();
-        discs=daoDiscs.getDiscsOnTheDataSet(searchString);
-        ShowDiscsList(discs);
+        ClearDiscFields();
+        ClearDiscsList();
+        Search(searchF.getText());
+        ShowDiscsList();
         jTable1.setRowSelectionInterval(0, 0);
         if ("".equals(searchF.getText()))
             searchF.setText("Введите ключевые слова");
-        ShowFields();
+        ShowDiscFields();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void searchFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFMouseClicked
@@ -723,85 +735,85 @@ public class MainForm extends javax.swing.JFrame {
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         if (evt.getKeyChar()==KeyEvent.VK_ENTER || evt.getKeyChar()==KeyEvent.VK_UP || evt.getKeyChar()==KeyEvent.VK_DOWN)
             selectDisc=jTable1.getSelectedRow();
-            ShowFields();
+        ShowDiscFields();
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void origTittleFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_origTittleFKeyReleased
         try {    
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setOriginalTitle(trim(origTittleF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setOriginalTitle(trim(origTittleF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_origTittleFKeyReleased
 
     private void russTittleFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_russTittleFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRussianTitle(trim(russTittleF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRussianTitle(trim(russTittleF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_russTittleFKeyReleased
 
     private void directorFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_directorFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDirector(trim(directorF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDirector(trim(directorF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_directorFKeyReleased
 
     private void genreFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genreFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setGenre(trim(genreF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setGenre(trim(genreF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_genreFKeyReleased
 
     private void durationFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_durationFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(Integer.parseInt(trim(durationF.getText())));
-        } catch (Exception e) { 
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(0);
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(Integer.parseInt(trim(durationF.getText())));
+        } catch (NumberFormatException e) { 
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(0);
         }
     }//GEN-LAST:event_durationFKeyReleased
 
     private void releaseyearFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_releaseyearFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
-        } catch (Exception e) {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear((short)0);
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
+        } catch (NumberFormatException e) {
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear((short)0);
         }
     }//GEN-LAST:event_releaseyearFKeyReleased
 
     private void ratingFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ratingFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(Double.parseDouble(trim(ratingF.getText())));
-        } catch (Exception e) { 
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(0);
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(Double.parseDouble(trim(ratingF.getText())));
+        } catch (NumberFormatException e) { 
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(0);
         }
     }//GEN-LAST:event_ratingFKeyReleased
 
     private void langFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_langFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setLanguages(trim(langF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setLanguages(trim(langF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_langFKeyReleased
 
     private void countryFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_countryFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setCountry(trim(countryF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setCountry(trim(countryF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_countryFKeyReleased
 
     private void actorsFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actorsFKeyReleased
         try {
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setActors(trim(actorsF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setActors(trim(actorsF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_actorsFKeyReleased
 
     private void descriptionFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionFKeyReleased
         try {    
-            daoDiscs.getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDescription(trim(descriptionF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDescription(trim(descriptionF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_descriptionFKeyReleased
@@ -809,7 +821,7 @@ public class MainForm extends javax.swing.JFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if ("".equals(searchF.getText()))
             searchF.setText("Введите ключевые слова");
-        ShowDiscsList(discs);
+        ShowDiscsList();
     }//GEN-LAST:event_formMouseClicked
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
@@ -819,9 +831,9 @@ public class MainForm extends javax.swing.JFrame {
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         selectDisc = jTable1.getSelectedRow();
         if (!isNull(jTable1.getValueAt(selectDisc, 0))) {
-            ShowFields();
+            ShowDiscFields();
         }
-        ShowDiscsList(discs);
+        ShowDiscsList();
         jTable1.setRowSelectionInterval(selectDisc, selectDisc);
     }//GEN-LAST:event_jTable1MousePressed
 
@@ -829,9 +841,19 @@ public class MainForm extends javax.swing.JFrame {
         int x=jTable2.getSelectedRow();
         if (x!=-1)
         {
-            daoClients.deleteClient((int) jTable2.getValueAt(x, 0));
-            ClearListClients();
-            ShowClientsList();
+            deleteClient((int) jTable2.getValueAt(x, 0));
+            clientNameF.setText("");
+            clientSurnameF.setText("");
+            clientPhoneF.setText("");
+            ClearClientsList();
+            ShowClientsList();           
+            ShowDiscFields();
+        }
+        if (getClients().isEmpty())
+        {
+            setClientFieldsEnable(false);
+        }
+        else
             if (x!=0)
             {
                 jTable2.setRowSelectionInterval(x-1, x-1);
@@ -844,7 +866,7 @@ public class MainForm extends javax.swing.JFrame {
                 ShowClientFields();
                 jTable2.setRowSelectionInterval(0, 0);     
             }
-        }
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -855,13 +877,7 @@ public class MainForm extends javax.swing.JFrame {
         client.setName("");
         client.setSurname("");
         client.setPhone("");
-        //try {
-            //        disc.setRussianTitle("");
-            daoClients.setClient(client);
-//        } catch (IOException ex) {
-//
-//        }
-//        discs=daoDiscs.getDiscs();
+        setClient(client);
         ShowClientsList();
         setClientFieldsEnable(true);
         jTable2.setRowSelectionInterval(jTable2.getRowCount()-1, jTable2.getRowCount()-1);
@@ -873,8 +889,8 @@ public class MainForm extends javax.swing.JFrame {
         int y=jTable2.getSelectedRow();
         if (x!=-1 && y!=-1)
         {
-            daoDiscs.getDisc((int)jTable1.getValueAt(x, 0)).setClientID((int)jTable2.getValueAt(y, 0));
-            ShowFields();
+            setClient((int)jTable1.getValueAt(x, 0), (int)jTable2.getValueAt(y, 0));
+            ShowDiscFields();
         }
         else
         JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
@@ -895,21 +911,21 @@ public class MainForm extends javax.swing.JFrame {
 
     private void clientNameFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientNameFKeyReleased
         try {    
-            daoClients.getClient((int) jTable2.getValueAt(selectClient, 0)).setName(trim(clientNameF.getText()));
+            getClient((int) jTable2.getValueAt(selectClient, 0)).setName(trim(clientNameF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_clientNameFKeyReleased
 
     private void clientSurnameFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientSurnameFKeyReleased
         try {    
-            daoClients.getClient((int) jTable2.getValueAt(selectClient, 0)).setSurname(trim(clientSurnameF.getText()));
+            getClient((int) jTable2.getValueAt(selectClient, 0)).setSurname(trim(clientSurnameF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_clientSurnameFKeyReleased
 
     private void clientPhoneFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientPhoneFKeyReleased
         try {    
-            daoClients.getClient((int) jTable2.getValueAt(selectClient, 0)).setPhone(trim(clientPhoneF.getText()));
+            getClient((int) jTable2.getValueAt(selectClient, 0)).setPhone(trim(clientPhoneF.getText()));
         } catch (Exception e) { 
         }
     }//GEN-LAST:event_clientPhoneFKeyReleased
@@ -920,6 +936,24 @@ public class MainForm extends javax.swing.JFrame {
             ShowClientFields();
         }
     }//GEN-LAST:event_jTable2KeyReleased
+
+    private void openBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openBaseActionPerformed
+        JFileChooser dialog = new JFileChooser();
+        if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+        {
+            File file = dialog.getSelectedFile();
+            openBase();
+        }
+    }//GEN-LAST:event_openBaseActionPerformed
+
+    private void openOfficeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openOfficeMenuItemActionPerformed
+        JFileChooser dialog = new JFileChooser();
+        if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+        {
+            File file = dialog.getSelectedFile();
+            mergeBase();
+        }
+    }//GEN-LAST:event_openOfficeMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -937,15 +971,11 @@ public class MainForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -993,6 +1023,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1002,6 +1034,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField langF;
+    private javax.swing.JMenuItem openBase;
+    private javax.swing.JMenuItem openOfficeMenuItem;
     private javax.swing.JTextField origTittleF;
     private javax.swing.JTextField ratingF;
     private javax.swing.JTextField releaseyearF;
@@ -1009,7 +1043,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField searchF;
     // End of variables declaration//GEN-END:variables
 
-    private void ClearFields() {
+    private void ClearDiscFields() {
         origTittleF.setText("");
         russTittleF.setText("");
         directorF.setText("");
@@ -1024,28 +1058,29 @@ public class MainForm extends javax.swing.JFrame {
         clientF.setText("");
     }
     
-    private void ClearListDiscs()
+    public void ClearClientFields()
+    {
+        clientNameF.setText("");
+        clientSurnameF.setText("");
+        clientPhoneF.setText("");
+    }
+    
+    private void ClearDiscsList()
     {
         DefaultTableModel dm = (DefaultTableModel)jTable1.getModel();
-        while(dm.getRowCount() > 0) {
+        while(dm.getRowCount() > 0)
             dm.removeRow(0);
-        }
     }
 
-    private void ShowDiscsList(ArrayList<Disc> discs) {
-
+    private void ShowDiscsList() {
         int x = jTable1.getSelectedRow();
-        ClearListDiscs();
-
+        ClearDiscsList();
         jTable1 = ShowDiscs(jTable1);
-
         if (x >= 0)
             jTable1.setRowSelectionInterval(x, x);
     }
 
-    
-    
-    public void ShowFields() {
+    public void ShowDiscFields() {
         int first = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
         if (first != 0) {
             Disc disc = getDiscByNumber(first);
@@ -1062,20 +1097,20 @@ public class MainForm extends javax.swing.JFrame {
             actorsF.setText(disc.getActors());
             descriptionF.setText(disc.getDescription());
                 try {
-                    clientF.setText(daoClients.getClient(disc.getClientID()).getName()+" "+daoClients.getClient(disc.getClientID()).getSurname());
+                    clientF.setText(getClient(disc.getClientID()).getName()+" "+getClient(disc.getClientID()).getSurname());
                 } catch (Exception e) {
                     disc.setClientID(0);
                     clientF.setText("Диск не на руках");
                 }
 
-            if (daoDiscs.getDiscs().isEmpty())
-                    setEnableFields(false);
+            if (getDiscs().isEmpty())
+                    setDiscFieldsEnable(false);
     //            else
     //                jTable1.setRowSelectionInterval(0, 0);
         }
     }
 
-    private void setEnableFields(boolean flag) {
+    private void setDiscFieldsEnable(boolean flag) {
        origTittleF.setEnabled(flag);
        russTittleF.setEnabled(flag);
        directorF.setEnabled(flag);
@@ -1089,7 +1124,7 @@ public class MainForm extends javax.swing.JFrame {
        descriptionF.setEnabled(flag);
     }
     
-     private void ClearListClients()
+     private void ClearClientsList()
     {
         DefaultTableModel dm = (DefaultTableModel)jTable2.getModel();
         while(dm.getRowCount() > 0)
@@ -1097,7 +1132,7 @@ public class MainForm extends javax.swing.JFrame {
     }
     
     private void ShowClientsList() {
-        ClearListClients();
+        ClearClientsList();
         jTable2 = ShowClients(jTable2);
     }
 
@@ -1105,14 +1140,13 @@ public class MainForm extends javax.swing.JFrame {
         int first=(int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
         if (first!=0)
         {
-            Client client= daoClients.getClient(first);
-
+            Client client= getClient(first);
             clientNameF.setText(client.getName());
             clientSurnameF.setText(client.getSurname());
             clientPhoneF.setText(client.getPhone());
         }
         
-        if (daoClients.getClients().isEmpty())
+        if (getClients().isEmpty())
             setClientFieldsEnable(false);
     }
 

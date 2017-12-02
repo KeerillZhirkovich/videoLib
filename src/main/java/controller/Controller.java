@@ -18,12 +18,13 @@ import java.util.Vector;
 import static model.dao.tools.FileChecker.fileIsEmpty;
 
 public class Controller {
-    private static IODAOClient daoClient = new IODAOClient();
+    private static IODAOClient daoClients = new IODAOClient();
     private static IODAODisc daoDiscs = new IODAODisc();
+    private static ArrayList<Disc> discs=daoDiscs.getDiscs();
 
     public static JTable ShowClients(JTable jTable) {
 
-        ArrayList<Client> clients = daoClient.getClients();
+        ArrayList<Client> clients = daoClients.getClients();
 
         DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
         for (int j = 0; j<clients.size();j++) {
@@ -40,7 +41,6 @@ public class Controller {
 
     public static JTable ShowDiscs(JTable jTable) {
 
-        ArrayList<Disc> discs = daoDiscs.getDiscs();
         DefaultTableModel dtm =(DefaultTableModel)jTable.getModel();
 
         for (int j = 0; j < discs.size(); j++) {
@@ -56,5 +56,64 @@ public class Controller {
         return daoDiscs.getDisc(number);
     }
 
-
+    public static void Search(String searchString)
+    {
+        discs=daoDiscs.getDiscsOnTheDataSet(searchString);
+    }
+    
+    public static ArrayList<Disc> getDiscs()
+    {
+        return discs;
+    }
+    
+    public static ArrayList<Client> getClients()
+    {
+        return daoClients.getClients();
+    }
+    
+    public static Client getClient(int id)
+    {
+        return daoClients.getClient(id);
+    }
+    
+    public static void setClient(Client client)
+    {
+        daoClients.setClient(client);
+    }
+    
+    public static void setClient(int discID, int clientID)
+    {
+        daoDiscs.getDisc(discID).setClientID(clientID);
+        discs=daoDiscs.getDiscs();
+    }
+    
+    public static void deleteDisc(int id)
+    {
+        daoDiscs.deleteDisc(id);
+    }
+    
+    public static void setDisc(Disc disc)
+    {
+        daoDiscs.setDisc(disc);
+    }
+    
+    public static Disc getDisc(int id)
+    {
+        return daoDiscs.getDisc(id);
+    }
+    
+    public static void deleteClient(int id)
+    {
+        daoClients.deleteClient(id);
+    }
+    
+    public static void openBase()
+    {
+        
+    }
+    
+    public static void mergeBase()
+    {
+        
+    }
 }

@@ -1,5 +1,6 @@
 package model.dao.io;
 
+import controller.Controller;
 import model.dao.interfaces.DAODisc;
 import model.dao.tools.ObjectAndRelevance;
 import model.Disc;
@@ -7,7 +8,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import static model.dao.tools.FileChecker.fileIsEmpty;
 import static model.dao.tools.Search.relevance;
 import static model.dao.tools.WorkWithStrings.splitData;
 
@@ -106,29 +106,25 @@ public class IODAODisc implements DAODisc {
         }
     }
 
-
     public void loadFromFile(String url) {
-
         LinkedHashSet<Disc> updatedDiscs = new LinkedHashSet<>(discs);
         ArrayList<Disc> newDiscs = new ArrayList<>();
 
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(url))){
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(url))) {
             newDiscs = (ArrayList<Disc>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        for (Disc disc : newDiscs){
-            disc.setDiskID(disc.getDiskID()+discs.size());
+        for (Disc disc : newDiscs) {
+            disc.setDiskID(disc.getDiskID() + discs.size());
             updatedDiscs.add(disc);
         }
 
         discs = new ArrayList<>(updatedDiscs);
-
     }
 
-    private void sortDiscsByID()
-    {
+    private void sortDiscsByID() {
         for (int i=0;i<discs.size();i++)
             for (int j=i+1;j<discs.size();j++)
                    if (discs.get(i).getDiskID()>discs.get(j).getDiskID())
@@ -147,13 +143,16 @@ public class IODAODisc implements DAODisc {
         discs.remove(index);
     }
     
-    public void setClient(int discID, int clientID)
-    {
+    public void setClient(int discID, int clientID) {
         for (int i=0;i<discs.size();i++)
             if (discs.get(i).getDiskID()==discID)
             {
                 discs.get(i).setClientID(clientID);
                 break;
             }
+    }
+    
+    public void saveDisc() throws IOException {
+        DataLoad.writeDiscs(discs);
     }
 }
