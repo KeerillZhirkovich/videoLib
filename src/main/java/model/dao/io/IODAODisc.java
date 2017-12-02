@@ -1,50 +1,24 @@
-package dao.io;
+package model.dao.io;
 
-import dao.interfaces.DAODisc;
-import dao.tools.ObjectAndRelevance;
+import model.dao.interfaces.DAODisc;
+import model.dao.tools.ObjectAndRelevance;
 import model.Disc;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import static dao.tools.FileChecker.fileIsEmpty;
-import static dao.tools.Search.relevance;
-import static dao.tools.WorkWithStrings.splitData;
+import static model.dao.tools.FileChecker.fileIsEmpty;
+import static model.dao.tools.Search.relevance;
+import static model.dao.tools.WorkWithStrings.splitData;
 
 public class IODAODisc implements DAODisc {
 
     private ArrayList<Disc> discs = new ArrayList<>();
-    private static final String FILE_PATH = "src\\data\\discs";
 
     public IODAODisc() {
-        try {
-            discs = readDiscs();
-        }
-        catch (ClassNotFoundException| IOException e) {
-            //discs= new ArrayList<>();
-            //throw new IOException();
-        } 
+        discs = DataLoad.getDiscs();
     }
 
-    public void saveChanges() throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
-        oos.writeObject(discs);
-    }
-
-    private ArrayList<Disc> readDiscs() throws IOException, ClassNotFoundException {
-
-        ArrayList<Disc> discs = new ArrayList<>();
-
-        if(fileIsEmpty(FILE_PATH)){
-            return discs;
-        } else {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH));
-                discs.addAll((ArrayList<Disc>) ois.readObject());
-                //sortDiscs();
-                return discs;          
-        }
-              
-    }
 
     @Override
     public void setDisc(Disc disc) {

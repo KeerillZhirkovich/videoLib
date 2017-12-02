@@ -1,4 +1,4 @@
-package dao.tools;
+package model.dao.tools;
 
 public class ObjectAndRelevance<T> implements Comparable<ObjectAndRelevance> {
 

@@ -1,51 +1,25 @@
-package dao.io;
+package model.dao.io;
 
 
-import dao.interfaces.DAOClient;
-import dao.tools.ObjectAndRelevance;
+import model.dao.interfaces.DAOClient;
+import model.dao.tools.ObjectAndRelevance;
 import model.Client;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import static dao.tools.FileChecker.fileIsEmpty;
-import static dao.tools.Search.relevance;
-import static dao.tools.WorkWithStrings.splitData;
+import static model.dao.tools.FileChecker.fileIsEmpty;
+import static model.dao.tools.Search.relevance;
+import static model.dao.tools.WorkWithStrings.splitData;
 
 
 
 public class IODAOClient implements DAOClient {
 
-    private ArrayList<Client> clients = new ArrayList<Client>();
-    private static final String FILE_PATH = "src\\data\\clients";
+    private ArrayList<Client> clients = new ArrayList<>();
 
     public IODAOClient() {
-        try {
-            clients = readClients();
-        }
-        catch (IOException e) {
-        }
-    }
-
-    public void saveChanges () throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
-        oos.writeObject(clients);
-    }
-
-    private ArrayList<Client> readClients() throws IOException   {
-
-        ArrayList<Client> clients = new ArrayList<>();
-        try {
-            if (fileIsEmpty(FILE_PATH)) {
-                return clients;
-            } else {          
-                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH));
-                    clients.addAll((ArrayList<Client>) ois.readObject());
-                    return clients;           
-            }
-        } catch (IOException | ClassNotFoundException ex) {     
-                throw new IOException(ex);            
-        }
+        clients = DataLoad.getClients();
     }
 
 

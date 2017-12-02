@@ -1,4 +1,4 @@
-package dao.interfaces;
+package model.dao.interfaces;
 
 
 import java.io.IOException;
@@ -14,5 +14,4 @@ public interface DAODisc {
     Disc getDisc (int id);
     ArrayList<Disc> getDiscsOnTheDataSet (String keywords);
     void loadFromFile(String url);
-    void saveChanges() throws IOException;
 }

@@ -1,4 +1,4 @@
-package dao.tools;
+package model.dao.tools;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package dao.interfaces;
+package model.dao.interfaces;
 
 
 import java.io.IOException;
@@ -15,6 +15,5 @@ public interface DAOClient {
     Client getClient (int id);
     ArrayList<Client> getClientsOnTheDataSet (String data);
     void loadFromFile(String url);
-    void saveChanges() throws IOException;
 
 }

@@ -1,9 +1,9 @@
-package dao.factories;
+package model.dao.factories;
 
 
-import dao.DAOFactory;
-import dao.interfaces.*;
-import dao.rdb.*;
+import model.dao.DAOFactory;
+import model.dao.interfaces.*;
+import model.dao.rdb.*;
 
 public class RDBDAOFactory implements DAOFactory {
 

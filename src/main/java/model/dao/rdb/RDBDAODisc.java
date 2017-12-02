@@ -1,34 +1,34 @@
-package dao.rdb;
+package model.dao.rdb;
 
 
-import dao.interfaces.DAOClient;
+import model.dao.interfaces.DAODisc;
 import java.util.ArrayList;
-import model.Client;
+import model.Disc;
 
-public class RDBDAOClient implements DAOClient {
+public class RDBDAODisc implements DAODisc {
 
     @Override
-    public void setClient(Client client) {
+    public void setDisc(Disc disc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteClient(int id) {
+    public void deleteDisc(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Client> getClients() {
+    public ArrayList<Disc> getDiscs() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Client getClient(int id) {
+    public Disc getDisc(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Client> getClientsOnTheDataSet(String data) {
+    public ArrayList<Disc> getDiscsOnTheDataSet(String data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -37,8 +37,4 @@ public class RDBDAOClient implements DAOClient {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void saveChanges() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
