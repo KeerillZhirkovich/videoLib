@@ -33,7 +33,7 @@ public class RDBDAODisc implements DAODisc {
     }
 
     @Override
-    public void loadFromFile(String url) {
+    public void updateDiscs(ArrayList<Disc> newDiscs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

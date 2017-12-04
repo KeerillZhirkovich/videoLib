@@ -12,21 +12,42 @@ import static model.dao.tools.FileChecker.fileIsEmpty;
 
 public class DataLoad {
 
-    private static final String filePath = "src\\database\\data";
-    private static String loadPath;
+    private static String filePath;
     private static EssenceForSave data;
+    public static final String file = "lastdirectory";
 
     static {
         try {
+            readLastDirectory();
             data = readData(filePath);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static void setLoadPath(String filePath) {
-        DataLoad.loadPath = filePath;
+    private static void readLastDirectory() {
+        try (FileInputStream in = new FileInputStream(file)) {
+            DataInputStream dataInputStream = new DataInputStream(in);
+            filePath = dataInputStream.readUTF();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } ;
     }
+
+    private static void writeLastDirectory(String filePath) {
+        DataLoad.filePath = filePath;
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            DataOutputStream dataOutputStream = new DataOutputStream(out);
+            dataOutputStream.writeChars(filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static EssenceForSave readData(String filePath) throws IOException, ClassNotFoundException {
 
@@ -45,21 +66,21 @@ public class DataLoad {
 
     public static void writeDiscs(ArrayList<Disc> discs) throws IOException {
         data.setDiscs(discs);
-        writeData();
+        writeData(DataLoad.filePath);
     }
 
     public static void writeClients(ArrayList<Client> clients) throws IOException {
         data.setClients(clients);
-        writeData();
+        writeData(DataLoad.filePath);
     }
 
     public static void writeData(ArrayList<Disc> discs, ArrayList<Client> clients) throws IOException {
         data.setClients(clients);
         data.setDiscs(discs);
-        writeData();
+        writeData(DataLoad.filePath);
     }
 
-    private static void writeData() throws IOException {
+    private static void writeData(String filePath) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
         oos.writeObject(data);
     }
@@ -71,4 +92,17 @@ public class DataLoad {
     public static ArrayList<Client> getClients() {
         return data.getClients();
     }
+
+    public static void loadNewBase(String filePath) throws IOException, ClassNotFoundException {
+        writeLastDirectory(filePath);
+        data = readData(DataLoad.filePath);
+    }
+
+    public static EssenceForSave mergeBases(String filePath) throws IOException, ClassNotFoundException {
+
+        writeData("src\\database\\backup\\dataBackup");
+
+        return readData(filePath);
+    }
+
 }

@@ -14,6 +14,6 @@ public interface DAOClient {
     ArrayList<Client> getClients();
     Client getClient (int id);
     ArrayList<Client> getClientsOnTheDataSet (String data);
-    void loadFromFile(String url);
+    void updateClients (ArrayList<Client> newClients);
 
 }

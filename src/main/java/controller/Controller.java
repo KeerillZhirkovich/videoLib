@@ -15,6 +15,9 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import static model.dao.io.DataLoad.loadNewBase;
+import static model.dao.io.DataLoad.mergeBases;
+import static model.dao.io.DataLoad.writeData;
 import static model.dao.tools.FileChecker.fileIsEmpty;
 
 public class Controller {
@@ -56,49 +59,40 @@ public class Controller {
         return daoDiscs.getDisc(number);
     }
 
-    public static void Search(String searchString)
-    {
-        discs=daoDiscs.getDiscsOnTheDataSet(searchString);
+    public static void Search(String searchString) {
+        discs = daoDiscs.getDiscsOnTheDataSet(searchString);
     }
     
-    public static ArrayList<Disc> getDiscs()
-    {
+    public static ArrayList<Disc> getDiscs() {
         return discs;
     }
     
-    public static ArrayList<Client> getClients()
-    {
+    public static ArrayList<Client> getClients() {
         return daoClients.getClients();
     }
     
-    public static Client getClient(int id)
-    {
+    public static Client getClient(int id) {
         return daoClients.getClient(id);
     }
     
-    public static void setClient(Client client)
-    {
+    public static void setClient(Client client) {
         daoClients.setClient(client);
     }
     
-    public static void setClient(int discID, int clientID)
-    {
+    public static void setClient(int discID, int clientID) {
         daoDiscs.getDisc(discID).setClientID(clientID);
-        discs=daoDiscs.getDiscs();
+        discs = daoDiscs.getDiscs();
     }
     
-    public static void deleteDisc(int id)
-    {
+    public static void deleteDisc(int id) {
         daoDiscs.deleteDisc(id);
     }
     
-    public static void setDisc(Disc disc)
-    {
+    public static void setDisc(Disc disc) {
         daoDiscs.setDisc(disc);
     }
     
-    public static Disc getDisc(int id)
-    {
+    public static Disc getDisc(int id) {
         return daoDiscs.getDisc(id);
     }
     
@@ -107,13 +101,32 @@ public class Controller {
         daoClients.deleteClient(id);
     }
     
-    public static void openBase()
-    {
-        
+    public static void openBase(String filePath) {
+        try {
+            loadNewBase(filePath);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     
-    public static void mergeBase()
-    {
-        
+    public static void mergeBase(String filePath) {
+
+        EssenceForSave newData = null;
+        try {
+            newData = mergeBases(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        daoDiscs.updateDiscs(newData.getDiscs());
+        daoClients.updateClients(newData.getClients());
+
+        try {
+            writeData(daoDiscs.getDiscs(), daoClients.getClients());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,5 +13,5 @@ public interface DAODisc {
     ArrayList<Disc> getDiscs();
     Disc getDisc (int id);
     ArrayList<Disc> getDiscsOnTheDataSet (String keywords);
-    void loadFromFile(String url);
+    void updateDiscs (ArrayList<Disc> newDiscs);
 }

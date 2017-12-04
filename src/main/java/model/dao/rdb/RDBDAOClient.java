@@ -33,7 +33,7 @@ public class RDBDAOClient implements DAOClient {
     }
 
     @Override
-    public void loadFromFile(String url) {
+    public void updateClients(ArrayList<Client> newClients) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

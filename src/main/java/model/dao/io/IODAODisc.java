@@ -106,15 +106,9 @@ public class IODAODisc implements DAODisc {
         }
     }
 
-    public void loadFromFile(String url) {
-        LinkedHashSet<Disc> updatedDiscs = new LinkedHashSet<>(discs);
-        ArrayList<Disc> newDiscs = new ArrayList<>();
+    public void updateDiscs(ArrayList<Disc> newDiscs) {
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(url))) {
-            newDiscs = (ArrayList<Disc>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        LinkedHashSet<Disc> updatedDiscs = new LinkedHashSet<>(discs);
 
         for (Disc disc : newDiscs) {
             disc.setDiskID(disc.getDiskID() + discs.size());

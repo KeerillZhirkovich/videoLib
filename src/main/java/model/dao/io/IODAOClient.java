@@ -98,16 +98,9 @@ public class IODAOClient implements DAOClient {
     }
 
 
-    public void loadFromFile(String url) {
+    public void updateClients(ArrayList<Client> newClients) {
 
         LinkedHashSet<Client> updatedClients = new LinkedHashSet<>(clients);
-        ArrayList<Client> newClients = new ArrayList<>();
-
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(url))){
-            newClients = (ArrayList<Client>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         for (Client client : newClients){
             client.setClientID(client.getClientID()+clients.size());
