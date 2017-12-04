@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import static model.dao.tools.FileChecker.fileIsEmpty;
 
-
 public class DataLoad {
 
     private static String filePath;
@@ -17,8 +16,8 @@ public class DataLoad {
     public static final String file = "src\\main\\java\\model\\dao\\io\\lastdirectory";
 
     static {
-            readLastDirectory();
-            data = readData(filePath);
+        readLastDirectory();
+        data = readData(filePath);
     }
 
     private static void readLastDirectory() {
@@ -32,7 +31,7 @@ public class DataLoad {
 
     public static void writeLastDirectory(String filePath) {
         DataLoad.filePath = filePath;
-        try (FileOutputStream fileOutputStream = new FileOutputStream(file)){
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
             ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
             oos.writeObject(filePath);
         } catch (IOException e) {
@@ -40,12 +39,11 @@ public class DataLoad {
         }
     }
 
-
     public static EssenceForSave readData(String filePath) {
 
         EssenceForSave data = new EssenceForSave();
 
-        if(fileIsEmpty(filePath)){
+        if (fileIsEmpty(filePath)) {
             return data;
         } else {
             try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
@@ -53,17 +51,12 @@ public class DataLoad {
                 data = (EssenceForSave) ois.readObject();
                 ois.close();
                 return data;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return data;
         }
     }
-
 
     public static void writeDiscs(ArrayList<Disc> discs) {
         data.setDiscs(discs);
@@ -82,12 +75,10 @@ public class DataLoad {
     }
 
     private static void writeData(String filePath) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)){
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
             ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
             oos.writeObject(data);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -111,5 +102,4 @@ public class DataLoad {
 
         return readData(filePath);
     }
-
 }

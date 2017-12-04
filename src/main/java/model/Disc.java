@@ -18,14 +18,13 @@ public class Disc implements Serializable, Comparable<Disc> {
     private short releaseYear;
     private String comment;
 
-    public Disc ()
-    {
-        
+    public Disc() {
+
     }
-    
+
     public Disc(String russianTitle, String originalTitle, String director, String genre, int duration,
-                String languages, String country, String description, double rating, String actors,
-                short releaseYear, String comment, int clientID, String imgUrl) {
+            String languages, String country, String description, double rating, String actors,
+            short releaseYear, String comment, int clientID, String imgUrl) {
         this.russianTitle = russianTitle;
         this.originalTitle = originalTitle;
         this.director = director;
@@ -167,22 +166,45 @@ public class Disc implements Serializable, Comparable<Disc> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Disc disc = (Disc) o;
 
-        if (duration != disc.duration) return false;
-        if (Double.compare(disc.rating, rating) != 0) return false;
-        if (releaseYear != disc.releaseYear) return false;
-        if (russianTitle != null ? !russianTitle.equals(disc.russianTitle) : disc.russianTitle != null) return false;
-        if (originalTitle != null ? !originalTitle.equals(disc.originalTitle) : disc.originalTitle != null)
+        if (duration != disc.duration) {
             return false;
-        if (director != null ? !director.equals(disc.director) : disc.director != null) return false;
-        if (genre != null ? !genre.equals(disc.genre) : disc.genre != null) return false;
-        if (languages != null ? !languages.equals(disc.languages) : disc.languages != null) return false;
-        if (country != null ? !country.equals(disc.country) : disc.country != null) return false;
-        if (actors != null ? !actors.equals(disc.actors) : disc.actors != null) return false;
+        }
+        if (Double.compare(disc.rating, rating) != 0) {
+            return false;
+        }
+        if (releaseYear != disc.releaseYear) {
+            return false;
+        }
+        if (russianTitle != null ? !russianTitle.equals(disc.russianTitle) : disc.russianTitle != null) {
+            return false;
+        }
+        if (originalTitle != null ? !originalTitle.equals(disc.originalTitle) : disc.originalTitle != null) {
+            return false;
+        }
+        if (director != null ? !director.equals(disc.director) : disc.director != null) {
+            return false;
+        }
+        if (genre != null ? !genre.equals(disc.genre) : disc.genre != null) {
+            return false;
+        }
+        if (languages != null ? !languages.equals(disc.languages) : disc.languages != null) {
+            return false;
+        }
+        if (country != null ? !country.equals(disc.country) : disc.country != null) {
+            return false;
+        }
+        if (actors != null ? !actors.equals(disc.actors) : disc.actors != null) {
+            return false;
+        }
         return comment != null ? comment.equals(disc.comment) : disc.comment == null;
     }
 
@@ -212,8 +234,8 @@ public class Disc implements Serializable, Comparable<Disc> {
 
     @Override
     public String toString() {
-        return  russianTitle + ' ' + originalTitle + ' ' +
-                director + ' ' + genre + ' ' + languages + ' ' +
-                country + ' ' + actors + ' ' + releaseYear;
+        return russianTitle + ' ' + originalTitle + ' '
+                + director + ' ' + genre + ' ' + languages + ' '
+                + country + ' ' + actors + ' ' + releaseYear;
     }
 }

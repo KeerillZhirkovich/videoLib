@@ -1,6 +1,5 @@
 package model.dao.rdb;
 
-
 import model.dao.interfaces.DAOClient;
 import java.util.ArrayList;
 import model.Client;
@@ -36,5 +35,4 @@ public class RDBDAOClient implements DAOClient {
     public void updateClients(ArrayList<Client> newClients) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

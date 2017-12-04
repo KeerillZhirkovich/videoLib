@@ -21,7 +21,6 @@ public class EssenceForSave implements Serializable {
         clients = new ArrayList<>();
     }
 
-
     public ArrayList<Disc> getDiscs() {
         return discs;
     }

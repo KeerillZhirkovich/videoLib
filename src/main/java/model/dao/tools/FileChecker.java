@@ -11,9 +11,7 @@ public class FileChecker {
             BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream, "UTF-8"));
             result = br.readLine() == null;
             return result;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

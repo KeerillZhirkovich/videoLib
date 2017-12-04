@@ -1,6 +1,5 @@
 package model.dao.rdb;
 
-
 import model.dao.interfaces.DAODisc;
 import java.util.ArrayList;
 import model.Disc;
@@ -36,5 +35,4 @@ public class RDBDAODisc implements DAODisc {
     public void updateDiscs(ArrayList<Disc> newDiscs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

@@ -110,7 +110,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         openBase = new javax.swing.JMenuItem();
-        openOfficeMenuItem = new javax.swing.JMenuItem();
+        mergeBase = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Видеотека");
@@ -556,13 +556,13 @@ public class MainForm extends javax.swing.JFrame {
         });
         jMenu1.add(openBase);
 
-        openOfficeMenuItem.setText("Слияние баз");
-        openOfficeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        mergeBase.setText("Слияние баз");
+        mergeBase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openOfficeMenuItemActionPerformed(evt);
+                mergeBaseActionPerformed(evt);
             }
         });
-        jMenu1.add(openOfficeMenuItem);
+        jMenu1.add(mergeBase);
 
         jMenuBar1.add(jMenu1);
 
@@ -680,6 +680,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTable1.getRowSorter().setSortKeys(null);
         int x = jTable1.getSelectedRow();
         if (x != -1) {
             deleteDisc((int) jTable1.getValueAt(x, 0));
@@ -701,6 +702,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTable1.getRowSorter().setSortKeys(null);
         ClearDiscFields();
         Disc disc = new Disc();
         disc.setRussianTitle("");
@@ -863,6 +865,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        jTable2.getRowSorter().setSortKeys(null);
         int x = jTable2.getSelectedRow();
         if (x != -1) {
             deleteClient((int) jTable2.getValueAt(x, 0));
@@ -888,6 +891,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        jTable2.getRowSorter().setSortKeys(null);
         clientNameF.setText("");
         clientSurnameF.setText("");
         clientPhoneF.setText("");
@@ -964,15 +968,25 @@ public class MainForm extends javax.swing.JFrame {
             File file = dialog.getSelectedFile();
             openBase(file.getPath());
         }
+        if (getDiscs().isEmpty()) {
+            setDiscFieldsEnable(false);
+        } else {
+            ClearDiscsList();
+            ShowDiscsList();
+            jTable1.setRowSelectionInterval(0, 0);
+            ShowDiscFields();
+        }
     }//GEN-LAST:event_openBaseActionPerformed
 
-    private void openOfficeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openOfficeMenuItemActionPerformed
+    private void mergeBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mergeBaseActionPerformed
         JFileChooser dialog = new JFileChooser();
         if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = dialog.getSelectedFile();
             mergeBase(file.getPath());
         }
-    }//GEN-LAST:event_openOfficeMenuItemActionPerformed
+
+        jTable1 = ShowDiscs(jTable1);
+    }//GEN-LAST:event_mergeBaseActionPerformed
 
     private void actorsFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actorsFKeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
@@ -1095,8 +1109,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField langF;
+    private javax.swing.JMenuItem mergeBase;
     private javax.swing.JMenuItem openBase;
-    private javax.swing.JMenuItem openOfficeMenuItem;
     private javax.swing.JTextField origTittleF;
     private javax.swing.JTextField ratingF;
     private javax.swing.JTextField releaseyearF;

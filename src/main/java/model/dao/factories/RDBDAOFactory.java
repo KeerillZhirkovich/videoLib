@@ -1,6 +1,5 @@
 package model.dao.factories;
 
-
 import model.dao.DAOFactory;
 import model.dao.interfaces.*;
 import model.dao.rdb.*;

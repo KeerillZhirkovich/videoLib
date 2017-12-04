@@ -6,7 +6,7 @@ import static java.lang.String.valueOf;
 
 public class WorkWithStrings {
 
-    public static ArrayList<String> splitData (String data) {
+    public static ArrayList<String> splitData(String data) {
 
         String dataChanged = ",,,";
         ArrayList<String> result = new ArrayList<>();
@@ -35,7 +35,7 @@ public class WorkWithStrings {
 
     static String replaceCharAt(String s, int pos) {
 
-        return s.substring(0,pos) + ',' + s.substring(pos+1);
+        return s.substring(0, pos) + ',' + s.substring(pos + 1);
 
     }
 }

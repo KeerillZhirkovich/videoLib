@@ -1,6 +1,5 @@
 package model.dao.io;
 
-
 import model.dao.interfaces.DAOClient;
 import model.dao.tools.ObjectAndRelevance;
 import model.Client;
@@ -11,8 +10,6 @@ import java.util.LinkedHashSet;
 import static model.dao.tools.Search.relevance;
 import static model.dao.tools.WorkWithStrings.splitData;
 
-
-
 public class IODAOClient implements DAOClient {
 
     private ArrayList<Client> clients = new ArrayList<>();
@@ -21,19 +18,19 @@ public class IODAOClient implements DAOClient {
         clients = DataLoad.getClients();
     }
 
-
     @Override
     public void setClient(Client client) {
 
         int id;
 
-        if(clients.isEmpty()){
+        if (clients.isEmpty()) {
             id = 1;
         } else {
-            if (client.getClientID()==0)
-                id = clients.get(clients.size()-1).getClientID()+1;
-            else
-                id=client.getClientID();
+            if (client.getClientID() == 0) {
+                id = clients.get(clients.size() - 1).getClientID() + 1;
+            } else {
+                id = client.getClientID();
+            }
         }
         client.setClientID(id);
         clients.add(client);
@@ -56,14 +53,14 @@ public class IODAOClient implements DAOClient {
     @Override
     public Client getClient(int id) {
 
-            Client client = null;
+        Client client = null;
 
-            for (Client c : clients) {
-                if (c.getClientID() == id) {
-                    client = c;
-                }
+        for (Client c : clients) {
+            if (c.getClientID() == id) {
+                client = c;
             }
-            return client;
+        }
+        return client;
     }
 
     @Override
@@ -97,13 +94,12 @@ public class IODAOClient implements DAOClient {
         }
     }
 
-
     public void updateClients(ArrayList<Client> newClients) {
 
         LinkedHashSet<Client> updatedClients = new LinkedHashSet<>(clients);
 
-        for (Client client : newClients){
-            client.setClientID(client.getClientID()+clients.size());
+        for (Client client : newClients) {
+            client.setClientID(client.getClientID() + clients.size());
             updatedClients.add(client);
         }
 
@@ -117,9 +113,8 @@ public class IODAOClient implements DAOClient {
     public void deleteByIndex(int index) {
         clients.remove(index);
     }
-    
-    public void saveClients() throws IOException
-    {
+
+    public void saveClients() throws IOException {
         DataLoad.writeClients(clients);
     }
 }
