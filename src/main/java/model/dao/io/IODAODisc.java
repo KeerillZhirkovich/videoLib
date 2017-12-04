@@ -113,10 +113,14 @@ public class IODAODisc implements DAODisc {
     public void updateDiscs(ArrayList<Disc> newDiscs) {
 
         LinkedHashSet<Disc> updatedDiscs = new LinkedHashSet<>(discs);
-
+        int last = discs.get(discs.size() - 1).getDiskID();
+        ArrayList<Disc> temp;
         for (Disc disc : newDiscs) {
-            disc.setDiskID(disc.getDiskID() + discs.size());
-            updatedDiscs.add(disc);
+            if (updatedDiscs.add(disc)) {
+                temp = new ArrayList<>(updatedDiscs);
+                temp.get(temp.size()-1).setDiskID(++last);
+                updatedDiscs = new LinkedHashSet<>(temp);
+            }
         }
 
         discs = new ArrayList<>(updatedDiscs);

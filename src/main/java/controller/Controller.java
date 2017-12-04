@@ -101,6 +101,8 @@ public class Controller {
 
     public static void openBase(String filePath) {
         loadNewBase(filePath);
+        daoDiscs=new IODAODisc();
+        daoClients=new IODAOClient();
         discs = daoDiscs.getDiscs();
     }
 
@@ -109,9 +111,8 @@ public class Controller {
         EssenceForSave newData = mergeBases(filePath);
 
         daoDiscs.updateDiscs(newData.getDiscs());
-        daoClients.updateClients(newData.getClients());
-
-        writeData(daoDiscs.getDiscs(), daoClients.getClients());
+        daoClients.updateClients(newData.getClients());    
+        
         discs = daoDiscs.getDiscs();
     }
 }

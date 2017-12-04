@@ -968,14 +968,8 @@ public class MainForm extends javax.swing.JFrame {
             File file = dialog.getSelectedFile();
             openBase(file.getPath());
         }
-        if (getDiscs().isEmpty()) {
-            setDiscFieldsEnable(false);
-        } else {
-            ClearDiscsList();
-            ShowDiscsList();
-            jTable1.setRowSelectionInterval(0, 0);
-            ShowDiscFields();
-        }
+              
+        reloadTables();
     }//GEN-LAST:event_openBaseActionPerformed
 
     private void mergeBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mergeBaseActionPerformed
@@ -985,7 +979,7 @@ public class MainForm extends javax.swing.JFrame {
             mergeBase(file.getPath());
         }
 
-        jTable1 = ShowDiscs(jTable1);
+        reloadTables();
     }//GEN-LAST:event_mergeBaseActionPerformed
 
     private void actorsFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actorsFKeyPressed
@@ -1234,5 +1228,26 @@ public class MainForm extends javax.swing.JFrame {
         clientNameF.setEnabled(flag);
         clientSurnameF.setEnabled(flag);
         clientPhoneF.setEnabled(flag);
+    }
+
+    private void reloadTables() {
+        if (getDiscs().isEmpty()) {
+            setDiscFieldsEnable(false);
+        } else {
+            setDiscFieldsEnable(true);
+            ClearDiscsList();
+            ShowDiscsList();
+            jTable1.setRowSelectionInterval(0, 0);
+            ShowDiscFields();
+        }
+        
+        if (getClients().isEmpty()) {
+            setClientFieldsEnable(false);
+        } else {
+            setClientFieldsEnable(true);
+            ShowClientsList();
+            jTable2.setRowSelectionInterval(0, 0);
+            ShowClientFields();
+        }
     }
 }

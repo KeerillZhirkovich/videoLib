@@ -12,7 +12,10 @@ public class FileChecker {
             result = br.readLine() == null;
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+            }
         }
 
         return result;

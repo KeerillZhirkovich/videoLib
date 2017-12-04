@@ -49,6 +49,5 @@ public class Client implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
+    }    
 }
