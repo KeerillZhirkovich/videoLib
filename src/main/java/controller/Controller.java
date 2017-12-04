@@ -55,6 +55,10 @@ public class Controller {
         return jTable;
     }
 
+    public static void saveChanges() {
+        writeData(daoDiscs.getDiscs(), daoClients.getClients());
+    }
+
     public static Disc getDiscByNumber(int number) {
         return daoDiscs.getDisc(number);
     }
@@ -102,31 +106,17 @@ public class Controller {
     }
     
     public static void openBase(String filePath) {
-        try {
-            loadNewBase(filePath);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        loadNewBase(filePath);
     }
     
     public static void mergeBase(String filePath) {
 
-        EssenceForSave newData = null;
-        try {
-            newData = mergeBases(filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        EssenceForSave newData = mergeBases(filePath);
+
 
         daoDiscs.updateDiscs(newData.getDiscs());
         daoClients.updateClients(newData.getClients());
 
-        try {
-            writeData(daoDiscs.getDiscs(), daoClients.getClients());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeData(daoDiscs.getDiscs(), daoClients.getClients());
     }
 }

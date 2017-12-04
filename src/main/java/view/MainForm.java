@@ -676,13 +676,7 @@ public class MainForm extends javax.swing.JFrame {
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        /*try {
-            daoDiscs.saveChanges();
-            daoClients.saveChanges();
-            JOptionPane.showMessageDialog(this, "Успешно сохранено.");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Сохранение не удалось.");
-        }*/
+        saveChanges();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -968,7 +962,7 @@ public class MainForm extends javax.swing.JFrame {
         JFileChooser dialog = new JFileChooser();
         if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = dialog.getSelectedFile();
-            openBase();
+            openBase(file.getPath());
         }
     }//GEN-LAST:event_openBaseActionPerformed
 
@@ -976,7 +970,7 @@ public class MainForm extends javax.swing.JFrame {
         JFileChooser dialog = new JFileChooser();
         if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = dialog.getSelectedFile();
-            mergeBase();
+            mergeBase(file.getPath());
         }
     }//GEN-LAST:event_openOfficeMenuItemActionPerformed
 

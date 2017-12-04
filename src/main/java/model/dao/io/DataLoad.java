@@ -14,75 +14,82 @@ public class DataLoad {
 
     private static String filePath;
     private static EssenceForSave data;
-    public static final String file = "lastdirectory";
+    public static final String file = "src\\main\\java\\model\\dao\\io\\lastdirectory";
 
     static {
-        try {
             readLastDirectory();
             data = readData(filePath);
+    }
+
+    private static void readLastDirectory() {
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
+            filePath = (String) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private static void readLastDirectory() {
-        try (FileInputStream in = new FileInputStream(file)) {
-            DataInputStream dataInputStream = new DataInputStream(in);
-            filePath = dataInputStream.readUTF();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } ;
-    }
-
-    private static void writeLastDirectory(String filePath) {
+    public static void writeLastDirectory(String filePath) {
         DataLoad.filePath = filePath;
-        try (FileOutputStream out = new FileOutputStream(file)) {
-            DataOutputStream dataOutputStream = new DataOutputStream(out);
-            dataOutputStream.writeChars(filePath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file)){
+            ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
+            oos.writeObject(filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static EssenceForSave readData(String filePath) throws IOException, ClassNotFoundException {
+    public static EssenceForSave readData(String filePath) {
 
         EssenceForSave data = new EssenceForSave();
 
         if(fileIsEmpty(filePath)){
             return data;
         } else {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
-            data = (EssenceForSave) ois.readObject();
+            try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
+                ObjectInputStream ois = new ObjectInputStream(fileInputStream);
+                data = (EssenceForSave) ois.readObject();
+                ois.close();
+                return data;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             return data;
         }
-
     }
 
 
-    public static void writeDiscs(ArrayList<Disc> discs) throws IOException {
+    public static void writeDiscs(ArrayList<Disc> discs) {
         data.setDiscs(discs);
         writeData(DataLoad.filePath);
     }
 
-    public static void writeClients(ArrayList<Client> clients) throws IOException {
+    public static void writeClients(ArrayList<Client> clients) {
         data.setClients(clients);
         writeData(DataLoad.filePath);
     }
 
-    public static void writeData(ArrayList<Disc> discs, ArrayList<Client> clients) throws IOException {
+    public static void writeData(ArrayList<Disc> discs, ArrayList<Client> clients) {
         data.setClients(clients);
         data.setDiscs(discs);
         writeData(DataLoad.filePath);
     }
 
-    private static void writeData(String filePath) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
-        oos.writeObject(data);
+    private static void writeData(String filePath) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)){
+            ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
+            oos.writeObject(data);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ArrayList<Disc> getDiscs() {
@@ -93,12 +100,12 @@ public class DataLoad {
         return data.getClients();
     }
 
-    public static void loadNewBase(String filePath) throws IOException, ClassNotFoundException {
+    public static void loadNewBase(String filePath) {
         writeLastDirectory(filePath);
         data = readData(DataLoad.filePath);
     }
 
-    public static EssenceForSave mergeBases(String filePath) throws IOException, ClassNotFoundException {
+    public static EssenceForSave mergeBases(String filePath) {
 
         writeData("src\\database\\backup\\dataBackup");
 
