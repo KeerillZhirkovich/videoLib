@@ -19,6 +19,11 @@ public class Controller {
     private static IODAODisc daoDiscs = new IODAODisc();
     private static ArrayList<Disc> discs = daoDiscs.getDiscs();
 
+    private static final int firstColumn = 0;
+    private static final int secondColumn = 1;
+    private static final int thirdColumn = 2;
+    private static final int fourthColumn = 3;
+
     public static JTable ShowClients(JTable jTable) {
 
         ArrayList<Client> clients = daoClients.getClients();
@@ -26,10 +31,10 @@ public class Controller {
         DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         for (int j = 0; j < clients.size(); j++) {
             dtm.insertRow(j, new Vector(0));
-            jTable.setValueAt(clients.get(j).getClientID(), j, 0);
-            jTable.setValueAt(clients.get(j).getName(), j, 1);
-            jTable.setValueAt(clients.get(j).getSurname(), j, 2);
-            jTable.setValueAt(clients.get(j).getPhone(), j, 3);
+            jTable.setValueAt(clients.get(j).getClientID(), j, firstColumn);
+            jTable.setValueAt(clients.get(j).getName(), j, secondColumn);
+            jTable.setValueAt(clients.get(j).getSurname(), j, thirdColumn);
+            jTable.setValueAt(clients.get(j).getPhone(), j, fourthColumn);
         }
 
         return jTable;
@@ -38,11 +43,10 @@ public class Controller {
     public static JTable ShowDiscs(JTable jTable) {
 
         DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
-
         for (int j = 0; j < discs.size(); j++) {
             dtm.insertRow(j, new Vector(0));
-            jTable.setValueAt(discs.get(j).getDiskID(), j, 0);
-            jTable.setValueAt(discs.get(j).getRussianTitle(), j, 1);
+            jTable.setValueAt(discs.get(j).getDiskID(), j, firstColumn);
+            jTable.setValueAt(discs.get(j).getRussianTitle(), j, secondColumn);
         }
 
         return jTable;
@@ -101,8 +105,8 @@ public class Controller {
 
     public static void openBase(String filePath) {
         loadNewBase(filePath);
-        daoDiscs=new IODAODisc();
-        daoClients=new IODAOClient();
+        daoDiscs = new IODAODisc();
+        daoClients = new IODAOClient();
         discs = daoDiscs.getDiscs();
     }
 
@@ -111,8 +115,16 @@ public class Controller {
         EssenceForSave newData = mergeBases(filePath);
 
         daoDiscs.updateDiscs(newData.getDiscs());
-        daoClients.updateClients(newData.getClients());    
-        
+        daoClients.updateClients(newData.getClients());
+
         discs = daoDiscs.getDiscs();
     }
+    
+//    private static boolean checkNotEmpty(Disc disc) {
+//        boolean check = true;
+//        if ("".equals(disc.getOriginalTitle()) && "".equals(disc.getCountry()) && "".equals(disc.getDescription()) && "".equals(disc.getDirector()) && disc.getClientID() == 0 && disc.getDuration() == 0 && "".equals(disc.getGenre()) && "".equals(disc.getLanguages()) && "".equals(disc.getOriginalTitle()) && disc.getRating() == 0 && disc.getReleaseYear() == 0 && "".equals(disc.getRussianTitle())) {
+//            check = false;
+//        }
+//        return check;
+//    }
 }

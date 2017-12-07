@@ -19,7 +19,20 @@ public class Disc implements Serializable, Comparable<Disc> {
     private String comment;
 
     public Disc() {
-
+        this.russianTitle = "";
+        this.originalTitle = "";
+        this.director = "";
+        this.genre = "";
+        this.duration = 0;
+        this.languages = "";
+        this.country = "";
+        this.description = "";
+        this.rating = 0;
+        this.actors = "";
+        this.releaseYear = 0;
+        this.comment = "";
+        this.clientID = 0;
+        this.imgUrl = "";
     }
 
     public Disc(String russianTitle, String originalTitle, String director, String genre, int duration,

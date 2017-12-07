@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.event.KeyEvent;
-import static java.util.Objects.isNull;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
@@ -16,35 +15,30 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
-    private int selectDisc;
-    private int selectClient;
+    private static final int firstColumn = 0;
+    private static final int firstRow = 0;
 
     public MainForm() {
         initComponents();
         clientF.setText("");
 
-//        try
-//        {
-        if (getDiscs().isEmpty()) {
-            setDiscFieldsEnable(false);
-        } else {
-            ShowDiscsList();
-            jTable1.setRowSelectionInterval(0, 0);
-            ShowDiscFields();
-        }
-
         if (getClients().isEmpty()) {
             setClientFieldsEnable(false);
         } else {
             ShowClientsList();
-            jTable2.setRowSelectionInterval(0, 0);
+            jTable2.setRowSelectionInterval(firstRow, firstRow);
             ShowClientFields();
         }
 
+        if (getDiscs().isEmpty()) {
+            setDiscFieldsEnable(false);
+        } else {
+            ShowDiscsList();
+            jTable1.setRowSelectionInterval(firstRow, firstRow);
+            ShowDiscFields();
+        }
+
         jTable1.requestFocus();
-//        } catch (IOException ex) {
-//            blockForms();
-//        }
         jDesktopPane1.setVisible(false);
     }
 
@@ -115,27 +109,35 @@ public class MainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Видеотека");
         setResizable(false);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
 
-        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID диска", "Название фильма"
+                "#", "Русское название фильма"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false
             };
 
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.setNextFocusableComponent(origTittleF);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jTable1MouseDragged(evt);
             }
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,8 +159,8 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setMinWidth(10);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(60);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(60);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(30);
         }
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -182,6 +184,11 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        russTittleF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                russTittleFFocusLost(evt);
+            }
+        });
         russTittleF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 russTittleFKeyReleased(evt);
@@ -436,6 +443,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton4.setText("Сохранить в файл");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,21 +465,33 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID клиента", "Имя", "Фамилия", "Телефон"
+                "#", "Имя", "Фамилия", "Телефон"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
 
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jTable2MouseDragged(evt);
             }
         });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -493,8 +513,8 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setMinWidth(10);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(75);
-            jTable2.getColumnModel().getColumn(0).setMaxWidth(75);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(30);
             jTable2.getColumnModel().getColumn(1).setMinWidth(40);
             jTable2.getColumnModel().getColumn(2).setMinWidth(80);
         }
@@ -526,6 +546,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel15.setText("Фамилия:");
 
+        clientSurnameF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                clientSurnameFFocusLost(evt);
+            }
+        });
         clientSurnameF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 clientSurnameFKeyReleased(evt);
@@ -534,12 +559,22 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel16.setText("Телефон:");
 
+        clientPhoneF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                clientPhoneFFocusLost(evt);
+            }
+        });
         clientPhoneF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 clientPhoneFKeyReleased(evt);
             }
         });
 
+        clientNameF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                clientNameFFocusLost(evt);
+            }
+        });
         clientNameF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 clientNameFKeyReleased(evt);
@@ -575,11 +610,10 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(589, 589, 589))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -588,7 +622,9 @@ public class MainForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -609,7 +645,6 @@ public class MainForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel14)
@@ -645,10 +680,7 @@ public class MainForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5)
                             .addComponent(jButton6)
-                            .addComponent(jButton10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addContainerGap())
+                            .addComponent(jButton10)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -658,16 +690,18 @@ public class MainForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton3))
-                        .addGap(27, 27, 27))))
+                            .addComponent(jButton3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 270, Short.MAX_VALUE)
                     .addComponent(jButton2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 271, Short.MAX_VALUE)))
         );
 
         pack();
@@ -680,10 +714,9 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTable1.getRowSorter().setSortKeys(null);
         int x = jTable1.getSelectedRow();
         if (x != -1) {
-            deleteDisc((int) jTable1.getValueAt(x, 0));
+            deleteDisc((int) jTable1.getValueAt(x, firstColumn));
             ClearDiscFields();
             ClearDiscsList();
             ShowDiscsList();
@@ -693,32 +726,28 @@ public class MainForm extends javax.swing.JFrame {
         } else if (x != 0) {
             jTable1.setRowSelectionInterval(x - 1, x - 1);
             ShowDiscFields();
-            jTable1.setRowSelectionInterval(x - 1, x - 1);
+            //jTable1.setRowSelectionInterval(x - 1, x - 1);
         } else {
-            jTable1.setRowSelectionInterval(0, 0);
+            jTable1.setRowSelectionInterval(firstRow, firstColumn);
             ShowDiscFields();
-            jTable1.setRowSelectionInterval(0, 0);
+            //jTable1.setRowSelectionInterval(0, 0);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTable1.getRowSorter().setSortKeys(null);
         ClearDiscFields();
         Disc disc = new Disc();
-        disc.setRussianTitle("");
         setDisc(disc);
         ShowDiscsList();
         jTable1.setRowSelectionInterval(jTable1.getRowCount() - 1, jTable1.getRowCount() - 1);
-        selectDisc = jTable1.getSelectedRow();
         ShowDiscFields();
         setDiscFieldsEnable(true);
-        //jTable1.setRowSelectionInterval(jTable1.getRowCount()-1, jTable1.getRowCount()-1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         int x = jTable1.getSelectedRow();
         if (x != -1) {
-            setClient(getDisc((int) jTable1.getValueAt(x, 0)).getDiskID(), 0);
+            setClient(getDisc((int) jTable1.getValueAt(x, firstColumn)).getDiskID(), firstColumn);
             clientF.setText("Диск не на руках");
         }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -728,7 +757,7 @@ public class MainForm extends javax.swing.JFrame {
         ClearDiscsList();
         Search(searchF.getText());
         ShowDiscsList();
-        jTable1.setRowSelectionInterval(0, 0);
+        jTable1.setRowSelectionInterval(firstRow, firstRow);
         if ("".equals(searchF.getText())) {
             searchF.setText("Введите ключевые слова");
         }
@@ -742,11 +771,9 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_searchFMouseClicked
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        jTable1.getRowSorter().setSortKeys(null);
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN) {
-            selectDisc = jTable1.getSelectedRow();
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
+            ShowDiscFields();
         }
-        ShowDiscFields();
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void origTittleFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_origTittleFKeyReleased
@@ -754,7 +781,7 @@ public class MainForm extends javax.swing.JFrame {
             descriptionF.setText(trim(descriptionF.getText()));
         } else {
             try {
-                getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setOriginalTitle(trim(origTittleF.getText()));
+                getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setOriginalTitle(trim(origTittleF.getText()));
             } catch (Exception e) {
             }
         }
@@ -762,66 +789,66 @@ public class MainForm extends javax.swing.JFrame {
 
     private void russTittleFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_russTittleFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRussianTitle(trim(russTittleF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setRussianTitle(trim(russTittleF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_russTittleFKeyReleased
 
     private void directorFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_directorFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDirector(trim(directorF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setDirector(trim(directorF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_directorFKeyReleased
 
     private void genreFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genreFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setGenre(trim(genreF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setGenre(trim(genreF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_genreFKeyReleased
 
     private void durationFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_durationFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(Integer.parseInt(trim(durationF.getText())));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setDuration(Integer.parseInt(trim(durationF.getText())));
         } catch (NumberFormatException e) {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDuration(0);
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setDuration(0);
         }
     }//GEN-LAST:event_durationFKeyReleased
 
     private void releaseyearFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_releaseyearFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setReleaseYear(Short.parseShort(trim(releaseyearF.getText())));
         } catch (NumberFormatException e) {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setReleaseYear((short) 0);
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setReleaseYear((short) 0);
         }
     }//GEN-LAST:event_releaseyearFKeyReleased
 
     private void ratingFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ratingFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(Double.parseDouble(trim(ratingF.getText())));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setRating(Double.parseDouble(trim(ratingF.getText())));
         } catch (NumberFormatException e) {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setRating(0);
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setRating(0);
         }
     }//GEN-LAST:event_ratingFKeyReleased
 
     private void langFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_langFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setLanguages(trim(langF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setLanguages(trim(langF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_langFKeyReleased
 
     private void countryFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_countryFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setCountry(trim(countryF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setCountry(trim(countryF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_countryFKeyReleased
 
     private void actorsFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actorsFKeyReleased
         try {
-            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setActors(trim(actorsF.getText()));
+            getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setActors(trim(actorsF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_actorsFKeyReleased
@@ -829,46 +856,24 @@ public class MainForm extends javax.swing.JFrame {
     private void descriptionFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionFKeyReleased
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             actorsF.setText(trim(actorsF.getText()));
-            //origTittleF.requestFocus();
             descriptionF.setText(trim(descriptionF.getText()));
         } else {
             try {
-                getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0)).setDescription(trim(descriptionF.getText()));
+                getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setDescription(trim(descriptionF.getText()));
             } catch (Exception e) {
             }
         }
     }//GEN-LAST:event_descriptionFKeyReleased
 
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if ("".equals(searchF.getText())) {
-            searchF.setText("Введите ключевые слова");
-        }
-        jTable1.getRowSorter().setSortKeys(null);
-        jTable2.getRowSorter().setSortKeys(null);
-        ShowDiscsList();
-        ShowClientsList();
-    }//GEN-LAST:event_formMouseClicked
-
-    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
-        jTable1.getRowSorter().setSortKeys(null);
-        jTable1.setRowSelectionInterval(selectDisc, selectDisc);
-    }//GEN-LAST:event_jTable1MouseReleased
-
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        jTable1.getRowSorter().setSortKeys(null);
-        selectDisc = jTable1.getSelectedRow();
-        if (!isNull(jTable1.getValueAt(selectDisc, 0))) {
-            ShowDiscFields();
-        }
-        ShowDiscsList();
-        jTable1.setRowSelectionInterval(selectDisc, selectDisc);
+        jTable1.setRowSelectionInterval(jTable1.getSelectedRow(), jTable1.getSelectedRow());
+        ShowDiscFields();
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jTable2.getRowSorter().setSortKeys(null);
         int x = jTable2.getSelectedRow();
         if (x != -1) {
-            deleteClient((int) jTable2.getValueAt(x, 0));
+            deleteClient((int) jTable2.getValueAt(x, firstColumn));
             clientNameF.setText("");
             clientSurnameF.setText("");
             clientPhoneF.setText("");
@@ -881,20 +886,17 @@ public class MainForm extends javax.swing.JFrame {
         } else if (x != 0) {
             jTable2.setRowSelectionInterval(x - 1, x - 1);
             ShowClientFields();
-            jTable2.setRowSelectionInterval(x - 1, x - 1);
+            //jTable2.setRowSelectionInterval(x - 1, x - 1);
         } else {
-            jTable2.setRowSelectionInterval(0, 0);
+            jTable2.setRowSelectionInterval(firstRow, firstRow);
             ShowClientFields();
-            jTable2.setRowSelectionInterval(0, 0);
+            //jTable2.setRowSelectionInterval(0, 0);
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        jTable2.getRowSorter().setSortKeys(null);
-        clientNameF.setText("");
-        clientSurnameF.setText("");
-        clientPhoneF.setText("");
+        ClearClientFields();
         Client client = new Client();
         client.setName("");
         client.setSurname("");
@@ -903,14 +905,13 @@ public class MainForm extends javax.swing.JFrame {
         ShowClientsList();
         setClientFieldsEnable(true);
         jTable2.setRowSelectionInterval(jTable2.getRowCount() - 1, jTable2.getRowCount() - 1);
-        selectClient = jTable2.getSelectedRow();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         int x = jTable1.getSelectedRow();
         int y = jTable2.getSelectedRow();
         if (x != -1 && y != -1) {
-            setClient((int) jTable1.getValueAt(x, 0), (int) jTable2.getValueAt(y, 0));
+            setClient((int) jTable1.getValueAt(x, firstColumn), (int) jTable2.getValueAt(y, firstColumn));
             ShowDiscFields();
         } else {
             JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
@@ -918,46 +919,32 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        jTable2.getRowSorter().setSortKeys(null);
-        selectClient = jTable2.getSelectedRow();
-        if (!isNull(jTable2.getValueAt(selectClient, 0))) {
-            ShowClientFields();
-        }
-        ShowClientsList();
-        jTable2.setRowSelectionInterval(selectClient, selectClient);
-        jTable2.requestFocus();
+        ShowClientFields();
     }//GEN-LAST:event_jTable2MousePressed
-
-    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
-        jTable2.getRowSorter().setSortKeys(null);
-        jTable2.setRowSelectionInterval(selectClient, selectClient);
-    }//GEN-LAST:event_jTable2MouseReleased
 
     private void clientNameFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientNameFKeyReleased
         try {
-            getClient((int) jTable2.getValueAt(selectClient, 0)).setName(trim(clientNameF.getText()));
+            getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn)).setName(trim(clientNameF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_clientNameFKeyReleased
 
     private void clientSurnameFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientSurnameFKeyReleased
         try {
-            getClient((int) jTable2.getValueAt(selectClient, 0)).setSurname(trim(clientSurnameF.getText()));
+            getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn)).setSurname(trim(clientSurnameF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_clientSurnameFKeyReleased
 
     private void clientPhoneFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientPhoneFKeyReleased
         try {
-            getClient((int) jTable2.getValueAt(selectClient, 0)).setPhone(trim(clientPhoneF.getText()));
+            getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn)).setPhone(trim(clientPhoneF.getText()));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_clientPhoneFKeyReleased
 
     private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
-        jTable2.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
-            selectClient = jTable2.getSelectedRow();
             ShowClientFields();
         }
     }//GEN-LAST:event_jTable2KeyReleased
@@ -968,7 +955,7 @@ public class MainForm extends javax.swing.JFrame {
             File file = dialog.getSelectedFile();
             openBase(file.getPath());
         }
-              
+
         reloadTables();
     }//GEN-LAST:event_openBaseActionPerformed
 
@@ -1009,20 +996,51 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_descriptionFMousePressed
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-        jTable1.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
-            selectDisc = jTable1.getSelectedRow();
+            ShowDiscFields();
         }
-        ShowDiscFields();
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
-        jTable2.getRowSorter().setSortKeys(null);
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
-            selectClient = jTable2.getSelectedRow();
             ShowClientFields();
         }
     }//GEN-LAST:event_jTable2KeyPressed
+
+    private void russTittleFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_russTittleFFocusLost
+        ShowDiscsList();
+    }//GEN-LAST:event_russTittleFFocusLost
+
+    private void clientNameFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_clientNameFFocusLost
+        ShowDiscFields();
+        ShowClientsList();
+    }//GEN-LAST:event_clientNameFFocusLost
+
+    private void clientSurnameFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_clientSurnameFFocusLost
+        ShowDiscFields();
+        ShowClientsList();
+    }//GEN-LAST:event_clientSurnameFFocusLost
+
+    private void clientPhoneFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_clientPhoneFFocusLost
+        ShowDiscFields();
+        ShowClientsList();
+    }//GEN-LAST:event_clientPhoneFFocusLost
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        ShowDiscFields();
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        ShowClientFields();
+    }//GEN-LAST:event_jTable2MouseReleased
+
+    private void jTable1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseDragged
+        ShowDiscFields();
+    }//GEN-LAST:event_jTable1MouseDragged
+
+    private void jTable2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseDragged
+        ShowClientFields();
+    }//GEN-LAST:event_jTable2MouseDragged
 
     /**
      * @param args the command line arguments
@@ -1149,8 +1167,8 @@ public class MainForm extends javax.swing.JFrame {
         }
     }
 
-    public void ShowDiscFields() {
-        int first = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+    private void ShowDiscFields() {
+        int first = (int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn);
         if (first != 0) {
             Disc disc = getDiscByNumber(first);
 
@@ -1167,6 +1185,13 @@ public class MainForm extends javax.swing.JFrame {
             descriptionF.setText(disc.getDescription());
             try {
                 clientF.setText(getClient(disc.getClientID()).getName() + " " + getClient(disc.getClientID()).getSurname());
+                for (int i = 0; i < jTable2.getRowCount(); i++) {
+                    if (disc.getClientID() == (int) jTable2.getValueAt(i, firstColumn)) {
+                        jTable2.setRowSelectionInterval(i, i);
+                        ShowClientFields();
+                        break;
+                    }
+                }
             } catch (Exception e) {
                 disc.setClientID(0);
                 clientF.setText("Диск не на руках");
@@ -1175,8 +1200,6 @@ public class MainForm extends javax.swing.JFrame {
             if (getDiscs().isEmpty()) {
                 setDiscFieldsEnable(false);
             }
-            //            else
-            //                jTable1.setRowSelectionInterval(0, 0);
         }
     }
 
@@ -1211,7 +1234,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void ShowClientFields() {
-        int first = (int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+        int first = (int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn);
         if (first != 0) {
             Client client = getClient(first);
             clientNameF.setText(client.getName());
@@ -1231,23 +1254,23 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     private void reloadTables() {
+        if (getClients().isEmpty()) {
+            setClientFieldsEnable(false);
+        } else {
+            setClientFieldsEnable(true);
+            ShowClientsList();
+            jTable2.setRowSelectionInterval(firstRow, firstRow);
+            ShowClientFields();
+        }
+
         if (getDiscs().isEmpty()) {
             setDiscFieldsEnable(false);
         } else {
             setDiscFieldsEnable(true);
             ClearDiscsList();
             ShowDiscsList();
-            jTable1.setRowSelectionInterval(0, 0);
+            jTable1.setRowSelectionInterval(firstRow, firstRow);
             ShowDiscFields();
-        }
-        
-        if (getClients().isEmpty()) {
-            setClientFieldsEnable(false);
-        } else {
-            setClientFieldsEnable(true);
-            ShowClientsList();
-            jTable2.setRowSelectionInterval(0, 0);
-            ShowClientFields();
         }
     }
 }
