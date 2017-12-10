@@ -3,13 +3,20 @@ package model.dao.io;
 import model.dao.interfaces.DAOClient;
 import model.dao.tools.ObjectAndRelevance;
 import model.Client;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+
+import static model.dao.tools.Search.dataToArray;
 import static model.dao.tools.Search.relevance;
 import static model.dao.tools.WorkWithStrings.splitData;
 
+
+/**
+ * Класс, реализующий интерфейс DAOClient. Работа @Override методов описана в интерфейсе.
+ */
 public class IODAOClient implements DAOClient {
 
     private ArrayList<Client> clients = new ArrayList<>();
@@ -20,8 +27,8 @@ public class IODAOClient implements DAOClient {
 
     @Override
     public void setClient(Client client) {
-
         int id;
+        LinkedHashSet<Client> temp = new LinkedHashSet<>(clients);
 
         if (clients.isEmpty()) {
             id = 1;
@@ -33,7 +40,9 @@ public class IODAOClient implements DAOClient {
             }
         }
         client.setClientID(id);
-        clients.add(client);
+        temp.add(client);
+
+        clients = new ArrayList<>(temp);
     }
 
     @Override
@@ -73,7 +82,7 @@ public class IODAOClient implements DAOClient {
 
         for (Client client : clients) {
             ObjectAndRelevance<Client> clientR = new ObjectAndRelevance<>(client);
-            clientR.setRelevance(relevance(keywords, client.toString().toLowerCase()));
+            clientR.setRelevance(relevance(dataToArray(client), keywords));
             clientAndRelevance.add(clientR);
         }
 
@@ -94,6 +103,7 @@ public class IODAOClient implements DAOClient {
         }
     }
 
+    @Override
     public void updateClients(ArrayList<Client> newClients) {
 
         LinkedHashSet<Client> updatedClients = new LinkedHashSet<>(clients);
@@ -106,15 +116,18 @@ public class IODAOClient implements DAOClient {
         clients = new ArrayList<>(updatedClients);
     }
 
+    /**
+     * Служебный метод, возвращающий экземпляр Client по его расположению в коллекции.
+     */
     public Client getClientByIndex(int index) {
         return clients.get(index);
     }
 
+    /**
+     * Служебный метод, удаляющий экземпляр Client по его расположению в коллекции.
+     */
     public void deleteByIndex(int index) {
         clients.remove(index);
     }
 
-    public void saveClients() throws IOException {
-        DataLoad.writeClients(clients);
-    }
 }

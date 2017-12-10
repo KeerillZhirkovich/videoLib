@@ -2,6 +2,10 @@ package model;
 
 import java.io.Serializable;
 
+/**
+ * Класс, являющийся абстракцией сущности Client. Содержит поля, описывающие Client,
+ * методы доступа к ним, а так же служебные методы.
+ */
 public class Client implements Serializable {
 
     private int clientID;
@@ -49,5 +53,27 @@ public class Client implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }    
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Client client = (Client) o;
+
+        if (name != null ? !name.equals(client.name) : client.name != null) return false;
+        if (surname != null ? !surname.equals(client.surname) : client.surname != null) return false;
+        if (phone != null ? !phone.equals(client.phone) : client.phone != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        return result;
+    }
 }

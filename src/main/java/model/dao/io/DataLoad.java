@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import static model.dao.tools.FileChecker.fileIsEmpty;
 
+/**
+ * Класс, реализующий работу с файлами.
+ */
 public class DataLoad {
 
     private static String filePath;
@@ -20,6 +23,9 @@ public class DataLoad {
         data = readData(filePath);
     }
 
+    /**
+     * Метод, считывающий из файл lastdirectory расположение последней используемой базы.
+     */
     private static void readLastDirectory() {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             ObjectInputStream ois = new ObjectInputStream(fileInputStream);
@@ -29,6 +35,10 @@ public class DataLoad {
         }
     }
 
+
+    /**
+     * Метод, записывающий в файл lastdirectory расположение последней используемой базы.
+     */
     public static void writeLastDirectory(String filePath) {
         DataLoad.filePath = filePath;
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
@@ -39,6 +49,10 @@ public class DataLoad {
         }
     }
 
+
+    /**
+     * Метод, считывающий базу из файла.
+     */
     public static EssenceForSave readData(String filePath) {
 
         EssenceForSave data = new EssenceForSave();
@@ -58,22 +72,34 @@ public class DataLoad {
         }
     }
 
+    /**
+     * Метод, записывающий изменения Discs в файл базы.
+     */
     public static void writeDiscs(ArrayList<Disc> discs) {
         data.setDiscs(discs);
         writeData(DataLoad.filePath);
     }
 
+    /**
+     * Метод, записывающий изменения Clients в файл базы.
+     */
     public static void writeClients(ArrayList<Client> clients) {
         data.setClients(clients);
         writeData(DataLoad.filePath);
     }
 
+    /**
+     * Метод, записывающий изменения Discs и Clients в файл базы.
+     */
     public static void writeData(ArrayList<Disc> discs, ArrayList<Client> clients) {
         data.setClients(clients);
         data.setDiscs(discs);
         writeData(DataLoad.filePath);
     }
 
+    /**
+     * Метод, осуществляющий непосредственное сохранение базы в файл.
+     */
     private static void writeData(String filePath) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
             ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
@@ -83,19 +109,32 @@ public class DataLoad {
         }
     }
 
+
+    /**
+     * Метод, возвращающий коллекцию Disc.
+     */
     public static ArrayList<Disc> getDiscs() {
         return data.getDiscs();
     }
 
+    /**
+     * Метод, возвращающий коллекцию Client.
+     */
     public static ArrayList<Client> getClients() {
         return data.getClients();
     }
 
+    /**
+     * Метод, загружающий новую базу из выбранной директории.
+     */
     public static void loadNewBase(String filePath) {
         writeLastDirectory(filePath);
         data = readData(DataLoad.filePath);
     }
 
+    /**
+     * Метод, осуществляющий слияние двух баз.
+     */
     public static EssenceForSave mergeBases(String filePath) {
 
         writeData("src\\database\\backup\\dataBackup");

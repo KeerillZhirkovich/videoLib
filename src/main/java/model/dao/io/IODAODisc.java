@@ -3,13 +3,20 @@ package model.dao.io;
 import model.dao.interfaces.DAODisc;
 import model.dao.tools.ObjectAndRelevance;
 import model.Disc;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+
+import static model.dao.tools.Search.dataToArray;
 import static model.dao.tools.Search.relevance;
 import static model.dao.tools.WorkWithStrings.splitData;
 
+
+/**
+ * Класс, реализующий интерфейс DAODisc. Работа @Override методов описана в интерфейсе.
+ */
 public class IODAODisc implements DAODisc {
 
     private ArrayList<Disc> discs = new ArrayList<>();
@@ -70,6 +77,7 @@ public class IODAODisc implements DAODisc {
 
         ArrayList<Disc> result = new ArrayList<>();
         ArrayList<String> keywords = splitData(searchString);
+
         int maxRelevance = keywords.size();
         ArrayList<ObjectAndRelevance<Disc>> discAndRelevance = new ArrayList<>();
 
@@ -79,8 +87,7 @@ public class IODAODisc implements DAODisc {
 
         for (Disc disc : discs) {
             ObjectAndRelevance<Disc> discR = new ObjectAndRelevance<>(disc);
-            String discString = disc.toString().toLowerCase();
-            discR.setRelevance(relevance(keywords, discString));
+            discR.setRelevance(relevance(dataToArray(disc), keywords));
             if (discR.getRelevance() != 0) {
                 discAndRelevance.add(discR);
             }
@@ -99,6 +106,7 @@ public class IODAODisc implements DAODisc {
 
         if (discAndRelevance.get(0).getRelevance() == maxRelevance) {
             for (ObjectAndRelevance<Disc> disc : discAndRelevance) {
+                if (disc.getRelevance() < maxRelevance) break;
                 result.add(disc.getData());
             }
             return result;
@@ -110,6 +118,7 @@ public class IODAODisc implements DAODisc {
         }
     }
 
+    @Override
     public void updateDiscs(ArrayList<Disc> newDiscs) {
 
         LinkedHashSet<Disc> updatedDiscs = new LinkedHashSet<>(discs);
@@ -126,6 +135,9 @@ public class IODAODisc implements DAODisc {
         discs = new ArrayList<>(updatedDiscs);
     }
 
+    /**
+     * Служебный метод, сортирующий коллекцию Discs по Id.
+     */
     private void sortDiscsByID() {
         for (int i = 0; i < discs.size(); i++) {
             for (int j = i + 1; j < discs.size(); j++) {
@@ -138,14 +150,21 @@ public class IODAODisc implements DAODisc {
         }
     }
 
+    /**
+     * Служебный метод, возвращающий экземпляр Disc по его расположению в коллекции.
+     */
     public Disc getDiscByIndex(int index) {
         return discs.get(index);
     }
 
+    /**
+     * Служебный метод, удаляющий экземпляр Disc по его расположению в коллекции.
+     */
     public void deleteDiscByIndex(int index) {
         discs.remove(index);
     }
 
+    @Override
     public void setClient(int discID, int clientID) {
         for (int i = 0; i < discs.size(); i++) {
             if (discs.get(i).getDiskID() == discID) {
@@ -155,7 +174,4 @@ public class IODAODisc implements DAODisc {
         }
     }
 
-    public void saveDisc() throws IOException {
-        DataLoad.writeDiscs(discs);
-    }
 }

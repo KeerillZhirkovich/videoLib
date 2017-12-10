@@ -4,3 +4,5 @@ information_system.iml
 /target/
 *.jar
 *.bat
+checkstyle.txt
+checkstyle.xml

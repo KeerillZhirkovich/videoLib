@@ -2,6 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+
+/**
+ * Класс, являющийся абстракцией сущности Disc. Содержит поля, описывающие Disc,
+ * методы доступа к ним, а так же служебные методы.
+ */
 public class Disc implements Serializable, Comparable<Disc> {
 
     private int diskID;
@@ -17,6 +22,8 @@ public class Disc implements Serializable, Comparable<Disc> {
     private String actors;
     private short releaseYear;
     private String comment;
+    private int clientID;
+    private String imgUrl;
 
     public Disc() {
         this.russianTitle = "";
@@ -36,8 +43,8 @@ public class Disc implements Serializable, Comparable<Disc> {
     }
 
     public Disc(String russianTitle, String originalTitle, String director, String genre, int duration,
-            String languages, String country, String description, double rating, String actors,
-            short releaseYear, String comment, int clientID, String imgUrl) {
+                String languages, String country, String description, double rating, String actors,
+                short releaseYear, String comment, int clientID, String imgUrl) {
         this.russianTitle = russianTitle;
         this.originalTitle = originalTitle;
         this.director = director;
@@ -101,9 +108,6 @@ public class Disc implements Serializable, Comparable<Disc> {
     public void setComment(String comment) {
         this.comment = comment;
     }
-
-    private int clientID;
-    private String imgUrl;
 
     public String getDescription() {
         return description;

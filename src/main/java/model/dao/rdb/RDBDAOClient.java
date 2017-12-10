@@ -1,9 +1,15 @@
 package model.dao.rdb;
 
 import model.dao.interfaces.DAOClient;
+
 import java.util.ArrayList;
+
 import model.Client;
 
+
+/**
+ * Интерфейс, не имеющий реализации в текущей версии программы.
+ */
 public class RDBDAOClient implements DAOClient {
 
     @Override

@@ -2,8 +2,15 @@ package model.dao.tools;
 
 import java.io.*;
 
+
+/**
+ * Класс, содержащий методы по проверке файла.
+ */
 public class FileChecker {
 
+    /**
+     * Метод, проверяющий является ли файл пустым.
+     */
     public static boolean fileIsEmpty(String url) {
         File file = new File(url);
         boolean result = true;
