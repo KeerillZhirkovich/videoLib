@@ -606,12 +606,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="searchF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x412;&#x432;&#x435;&#x434;&#x438;&#x442;&#x435; &#x43a;&#x43b;&#x44e;&#x447;&#x435;&#x432;&#x44b;&#x435; &#x441;&#x43b;&#x43e;&#x432;&#x430;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="searchFMouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton9">
       <Properties>

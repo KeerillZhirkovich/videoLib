@@ -31,6 +31,8 @@ public class Controller {
 
     /**
      * Метод, осуществляющий заполнение таблицы Client для вывода на MainForm.
+     * @param jTable Таблица типа JTable.
+     * @return Обновленную таблицу типа JTable.
      */
     public static JTable ShowClients(JTable jTable) {
 
@@ -50,6 +52,8 @@ public class Controller {
 
     /**
      * Метод, осуществляющий заполнение таблицы Discs для вывода на MainForm.
+     * @param jTable Таблица типа JTable.
+     * @return Обновленную таблицу типа JTable.
      */
     public static JTable ShowDiscs(JTable jTable) {
 
@@ -72,6 +76,8 @@ public class Controller {
 
     /**
      * Метод, возвращающий экземпляр Disc по номеру.
+     * @param number Номер диска.
+     * @return Диск типа Disc.
      */
     public static Disc getDiscByNumber(int number) {
         return daoDiscs.getDisc(number);
@@ -79,6 +85,7 @@ public class Controller {
 
     /**
      * Метод, запускающий поиск объектов Disc по данным из запроса пользователя.
+     * @param searchString Строка, по которой осуществляется поиск.
      */
     public static void Search(String searchString) {
         discs = daoDiscs.getDiscsOnTheDataSet(searchString);
@@ -86,6 +93,7 @@ public class Controller {
 
     /**
      * Метод, возвращающий коллекцию Discs.
+     * @return Список дисков.
      */
     public static ArrayList<Disc> getDiscs() {
         return discs;
@@ -93,6 +101,7 @@ public class Controller {
 
     /**
      * Метод, возвращающий коллекцию Clients.
+     * @return Список клиентов из daoClients.
      */
     public static ArrayList<Client> getClients() {
         return daoClients.getClients();
@@ -100,6 +109,8 @@ public class Controller {
 
     /**
      * Метод, возвращающий экземпляр Client по номеру.
+     * @param id ID клиента.
+     * @return Клиент типа Client.
      */
     public static Client getClient(int id) {
         return daoClients.getClient(id);
@@ -107,6 +118,7 @@ public class Controller {
 
     /**
      * Метод, записывающий в коллекцию передаваемый экземпляр Client.(новый)
+     * @param client Клиента типа Client.
      */
     public static void setClient(Client client) {
         daoClients.setClient(client);
@@ -114,6 +126,8 @@ public class Controller {
 
     /**
      * Метод, записывающий в коллекцию передаваемый экземпляр Client по номеру.
+     * @param discID ID диска.
+     * @param clientID ID клиента.
      */
     public static void setClient(int discID, int clientID) {
         daoDiscs.getDisc(discID).setClientID(clientID);
@@ -122,6 +136,7 @@ public class Controller {
 
     /**
      * Метод, удаляющий из коллекции экземпляр Disc по номеру.
+     * @param id ID диска.
      */
     public static void deleteDisc(int id) {
         daoDiscs.deleteDisc(id);
@@ -130,6 +145,7 @@ public class Controller {
 
     /**
      * Метод, записывающий в коллекцию передаваемый экземпляр Disc. (новый)
+     * @param disc Диск типа Disc.
      */
     public static void setDisc(Disc disc) {
         daoDiscs.setDisc(disc);
@@ -138,6 +154,8 @@ public class Controller {
 
     /**
      * Метод, возвращающий экземпляр Disc по номеру.
+     * @param id ID диска.
+     * @return Диск по заданному ID типа Disc.
      */
     public static Disc getDisc(int id) {
         return daoDiscs.getDisc(id);
@@ -145,6 +163,7 @@ public class Controller {
 
     /**
      * Метод, удаляющий экземпляр Client по номеру.
+     * @param id ID клиента.
      */
     public static void deleteClient(int id) {
         daoClients.deleteClient(id);
@@ -152,6 +171,7 @@ public class Controller {
 
     /**
      * Метод, загрущающий из файла коллекцию Disc и Client.
+     * @param filePath Путь к файлу.
      */
     public static void openBase(String filePath) {
         loadNewBase(filePath);
@@ -163,6 +183,7 @@ public class Controller {
 
     /**
      * Метод, осуществляющий слияние двух баз.
+     * @param filePath Путь к файлу.
      */
     public static void mergeBase(String filePath) {
 

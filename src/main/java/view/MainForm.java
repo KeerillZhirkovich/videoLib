@@ -15,21 +15,21 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
- * No description.
+ * Класс главной формы
  */
 public class MainForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainForm
+     * Поле, хранящее номер первого столбца таблицы
      */
     private static final int firstColumn = 0;
     /**
-     * No description.
+     * Поле, хранящее номер первой строки
      */
     private static final int firstRow = 0;
 
     /**
-     * No description.
+     * Конструктор формы
      */
     public MainForm() {
         initComponents();
@@ -62,228 +62,61 @@ public class MainForm extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-
-
-    /**
-     * No description.
-     */
     private void initComponents() {
 
-        /**
-         * No description.
-         */
         jTextField5 = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jScrollPane1 = new javax.swing.JScrollPane();
-        /**
-         * No description.
-         */
         jTable1 = new javax.swing.JTable();
-        /**
-         * No description.
-         */
         jPanel1 = new javax.swing.JPanel();
-        /**
-         * No description.
-         */
         jLabel1 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jLabel2 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jLabel3 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jLabel4 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jLabel5 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         origTittleF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         russTittleF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         directorF = new javax.swing.JTextField();
-        /**
-         * ---
-         */
         genreF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         durationF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jLabel6 = new javax.swing.JLabel();
-        /**
-         * ---
-         */
         releaseyearF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jLabel7 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         ratingF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jLabel8 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         langF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jLabel9 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         countryF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jLabel10 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jScrollPane2 = new javax.swing.JScrollPane();
-        /**
-         * No description.
-         */
         descriptionF = new javax.swing.JTextPane();
-        /**
-         * No description.
-         */
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        /**
-         * No description.
-         */
         jLabel12 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jScrollPane3 = new javax.swing.JScrollPane();
-        /**
-         * No description.
-         */
         actorsF = new javax.swing.JTextPane();
-        /**
-         * No description.
-         */
         jLabel11 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jLabel13 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jButton8 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         clientF = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jButton1 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jButton3 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jButton4 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         searchF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jButton9 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jScrollPane4 = new javax.swing.JScrollPane();
-        /**
-         * No description.
-         */
         jTable2 = new javax.swing.JTable();
-        /**
-         * No description.
-         */
         jButton2 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jButton5 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jButton6 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jButton10 = new javax.swing.JButton();
-        /**
-         * No description.
-         */
         jLabel14 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         jLabel15 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         clientSurnameF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jLabel16 = new javax.swing.JLabel();
-        /**
-         * No description.
-         */
         clientPhoneF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         clientNameF = new javax.swing.JTextField();
-        /**
-         * No description.
-         */
         jMenuBar1 = new javax.swing.JMenuBar();
-        /**
-         * No description.
-         */
         jMenu1 = new javax.swing.JMenu();
-        /**
-         * No description.
-         */
         openBase = new javax.swing.JMenuItem();
-        /**
-         * No description.
-         */
         mergeBase = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -291,37 +124,26 @@ public class MainForm extends javax.swing.JFrame {
         setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "#", "Русское название фильма"
-                }
+            },
+            new String [] {
+                "#", "Русское название фильма"
+            }
         ) {
-            Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.Object.class
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean[]{
-                    false, false
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
-
-            /**
-             * @param columnIndex
-             * @return
-             */
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
-
-            /**
-             * @param rowIndex
-             * @param columnIndex
-             * @return
-             */
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jTable1.setNextFocusableComponent(origTittleF);
@@ -332,31 +154,17 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            /**
-             * @param evt
-             */
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
             }
-
-            /**
-             * @param evt
-             */
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTable1MouseReleased(evt);
             }
         });
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable1KeyPressed(evt);
             }
-
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable1KeyReleased(evt);
             }
@@ -384,53 +192,35 @@ public class MainForm extends javax.swing.JFrame {
         jLabel5.setText("Длительность:");
 
         origTittleF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 origTittleFKeyReleased(evt);
             }
         });
 
         russTittleF.addFocusListener(new java.awt.event.FocusAdapter() {
-            /**
-             * @param evt
-             */
             public void focusLost(java.awt.event.FocusEvent evt) {
                 russTittleFFocusLost(evt);
             }
         });
         russTittleF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 russTittleFKeyReleased(evt);
             }
         });
 
         directorF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 directorFKeyReleased(evt);
             }
         });
 
         genreF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 genreFKeyReleased(evt);
             }
         });
 
         durationF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 durationFKeyReleased(evt);
             }
@@ -440,9 +230,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel6.setText("Год выхода:");
 
         releaseyearF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 releaseyearFKeyReleased(evt);
             }
@@ -452,9 +239,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel7.setText("Рейтинг IMDb:");
 
         ratingF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ratingFKeyReleased(evt);
             }
@@ -464,9 +248,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel8.setText("Языки:");
 
         langF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 langFKeyReleased(evt);
             }
@@ -476,9 +257,6 @@ public class MainForm extends javax.swing.JFrame {
         jLabel9.setText("Страна:");
 
         countryF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 countryFKeyReleased(evt);
             }
@@ -493,16 +271,9 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         descriptionF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 descriptionFKeyPressed(evt);
             }
-
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 descriptionFKeyReleased(evt);
             }
@@ -512,28 +283,21 @@ public class MainForm extends javax.swing.JFrame {
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
-                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 82, Short.MAX_VALUE)
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 82, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
-                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 110, Short.MAX_VALUE)
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
         );
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("мин");
 
         actorsF.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 actorsFKeyPressed(evt);
             }
-
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 actorsFKeyReleased(evt);
             }
@@ -548,9 +312,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton8.setText("Диск сдан");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
@@ -561,256 +322,128 @@ public class MainForm extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(
-                                        javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(
-                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGap(45, 45, 45)
-                                                                .addComponent(jLabel13))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(jDesktopPane1,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(jLabel11)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(clientF, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addGroup(jPanel1Layout.createParallelGroup(
-                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                jPanel1Layout.createSequentialGroup()
-                                                                        .addComponent(jLabel5)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle
-                                                                                        .ComponentPlacement.RELATED)
-                                                                        .addComponent(durationF,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                50,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle
-                                                                                        .ComponentPlacement.RELATED)
-                                                                        .addComponent(jLabel12)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(jLabel6)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle
-                                                                                        .ComponentPlacement.RELATED)
-                                                                        .addComponent(releaseyearF,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                50,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle
-                                                                                        .ComponentPlacement.UNRELATED)
-                                                                        .addComponent(jLabel7)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle
-                                                                                        .ComponentPlacement.RELATED)
-                                                                        .addComponent(ratingF,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                67,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout
-                                                                .Alignment.TRAILING, jPanel1Layout
-                                                                .createSequentialGroup()
-                                                                .addComponent(jLabel1,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                        100, javax.swing.GroupLayout
-                                                                                .PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.
-                                                                        swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(origTittleF,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                        452, javax.swing.GroupLayout
-                                                                                .PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                jPanel1Layout.createSequentialGroup()
-                                                                        .addGroup(jPanel1Layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment
-                                                                                        .TRAILING)
-                                                                                .addComponent(jLabel3,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .PREFERRED_SIZE,
-                                                                                        100,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .PREFERRED_SIZE)
-                                                                                .addComponent(jLabel2))
-                                                                        .addPreferredGap(javax.swing.LayoutStyle
-                                                                                .ComponentPlacement.RELATED)
-                                                                        .addGroup(jPanel1Layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment
-                                                                                        .LEADING)
-                                                                                .addComponent(russTittleF,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .PREFERRED_SIZE,
-                                                                                        452, javax.swing
-                                                                                                .GroupLayout
-                                                                                                .PREFERRED_SIZE)
-                                                                                .addGroup(jPanel1Layout
-                                                                                        .createSequentialGroup()
-                                                                                        .addComponent(directorF,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .PREFERRED_SIZE,
-                                                                                                206,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .PREFERRED_SIZE)
-                                                                                        .addPreferredGap(javax
-                                                                                                .swing.LayoutStyle
-                                                                                                .ComponentPlacement
-                                                                                                .UNRELATED)
-                                                                                        .addComponent(jLabel4)
-                                                                                        .addPreferredGap(
-                                                                                                javax.swing
-                                                                                                        .LayoutStyle
-                                                                                                        .ComponentPlacement
-                                                                                                        .RELATED)
-                                                                                        .addComponent(genreF,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .PREFERRED_SIZE,
-                                                                                                195,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .PREFERRED_SIZE))))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                jPanel1Layout.createSequentialGroup()
-                                                                        .addComponent(jLabel8)
-                                                                        .addGap(264, 264, 264)
-                                                                        .addComponent(countryF,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                196,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                jPanel1Layout.createSequentialGroup()
-                                                                        .addComponent(jLabel10)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle
-                                                                                        .ComponentPlacement.RELATED)
-                                                                        .addGroup(jPanel1Layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment
-                                                                                        .LEADING,
-                                                                                false)
-                                                                                .addComponent(jScrollPane2,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .DEFAULT_SIZE,
-                                                                                        454, Short.MAX_VALUE)
-                                                                                .addGroup(jPanel1Layout
-                                                                                        .createSequentialGroup()
-                                                                                        .addComponent(langF,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .PREFERRED_SIZE,
-                                                                                                186,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .PREFERRED_SIZE)
-                                                                                        .addPreferredGap(
-                                                                                                javax.swing
-                                                                                                        .LayoutStyle
-                                                                                                        .ComponentPlacement
-                                                                                                        .RELATED,
-                                                                                                javax.swing.GroupLayout
-                                                                                                        .DEFAULT_SIZE,
-                                                                                                Short.MAX_VALUE)
-                                                                                        .addComponent(jLabel9)
-                                                                                        .addGap(202,
-                                                                                                202,
-                                                                                                202))
-                                                                                .addComponent(jScrollPane3,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .DEFAULT_SIZE,
-                                                                                        454, Short.MAX_VALUE))))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel13))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel11)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clientF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(durationF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(releaseyearF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ratingF, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(origTittleF, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(russTittleF, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(directorF, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(genreF, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(264, 264, 264)
+                                .addComponent(countryF, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9)
+                                        .addGap(202, 202, 202))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(origTittleF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(russTittleF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(directorF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(genreF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(ratingF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(releaseyearF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(durationF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel12)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(countryF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel9)
-                                        .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addGap(69, 69, 69)
-                                                .addComponent(jDesktopPane1,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel13)
-                                        .addComponent(jButton8)
-                                        .addComponent(clientF))
-                                .addContainerGap())
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(origTittleF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(russTittleF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(directorF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(genreF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ratingF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(releaseyearF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(durationF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(countryF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(langF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(69, 69, 69)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jButton8)
+                    .addComponent(clientF))
+                .addContainerGap())
         );
 
         jButton1.setText("Добавить диск");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -818,9 +451,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton3.setText("Удалить диск");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
@@ -829,63 +459,39 @@ public class MainForm extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton4.setText("Сохранить в файл");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        searchF.setText("");
-        searchF.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchFMouseClicked(evt);
-            }
-        });
-
         jButton9.setText("Поиск");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "#", "Имя", "Фамилия", "Телефон"
-                }
+            },
+            new String [] {
+                "#", "Имя", "Фамилия", "Телефон"
+            }
         ) {
-            Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class,
-                    java.lang.Object.class
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
-            private boolean[] canEdit = new boolean[]{
-                    false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
-
-            /**
-             * @param columnIndex
-             * @return
-             */
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
-            /**
-             * @param rowIndex
-             * @param columnIndex
-             * @return
-             */
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jTable2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -895,31 +501,17 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            /**
-             * @param evt
-             */
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable2MousePressed(evt);
             }
-
-            /**
-             * @param evt
-             */
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTable2MouseReleased(evt);
             }
         });
         jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
-            /**
-             * @param evt
-             */
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable2KeyPressed(evt);
             }
-
-            /**
-             * @param evt
-             */
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable2KeyReleased(evt);
             }
@@ -937,9 +529,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton5.setText("Добавить клиента");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
@@ -947,9 +536,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton6.setText("Удалить клиента");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
@@ -957,9 +543,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton10.setText("Выдать диск");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
@@ -1008,9 +591,6 @@ public class MainForm extends javax.swing.JFrame {
 
         openBase.setText("Открыть базу");
         openBase.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openBaseActionPerformed(evt);
             }
@@ -1019,9 +599,6 @@ public class MainForm extends javax.swing.JFrame {
 
         mergeBase.setText("Слияние баз");
         mergeBase.addActionListener(new java.awt.event.ActionListener() {
-            /**
-             * @param evt
-             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mergeBaseActionPerformed(evt);
             }
@@ -1035,206 +612,129 @@ public class MainForm extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                layout.createSequentialGroup()
-                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(
-                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing
-                                                        .GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout
-                                                                .Alignment.LEADING, javax.swing.GroupLayout
-                                                                .PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                layout.createSequentialGroup()
-                                                                        .addComponent(searchF, javax.swing.GroupLayout
-                                                                                .PREFERRED_SIZE, 260, javax.swing
-                                                                                .GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle
-                                                                                .ComponentPlacement.RELATED)
-                                                                        .addComponent(jButton9, javax.swing.GroupLayout
-                                                                                .PREFERRED_SIZE, 78, javax.swing
-                                                                                .GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout
-                                                        .Alignment.LEADING, false)
-                                                        .addComponent(jButton4, javax.swing.GroupLayout
-                                                                        .Alignment.TRAILING, javax.swing.GroupLayout
-                                                                        .DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                Short.MAX_VALUE)
-                                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment
-                                                                        .TRAILING, javax.swing.GroupLayout
-                                                                        .DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                Short.MAX_VALUE))))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout
-                                                        .Alignment.TRAILING)
-                                                        .addComponent(jLabel16)
-                                                        .addComponent(jLabel15))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing
-                                                        .GroupLayout.Alignment.LEADING)
-                                                        .addComponent(clientSurnameF, javax.swing.GroupLayout
-                                                                        .PREFERRED_SIZE, 319,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(clientPhoneF,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                layout.createSequentialGroup()
-                                                        .addGap(0, 0, Short.MAX_VALUE)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.
-                                                                GroupLayout.Alignment.LEADING)
-                                                                .addComponent(jScrollPane4,
-                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                        380,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                        layout.createSequentialGroup()
-                                                                                .addComponent(jLabel14)
-                                                                                .addPreferredGap(
-                                                                                        javax.swing.LayoutStyle
-                                                                                                .ComponentPlacement
-                                                                                                .RELATED)
-                                                                                .addComponent(clientNameF,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .PREFERRED_SIZE,
-                                                                                        319,
-                                                                                        javax.swing
-                                                                                                .GroupLayout
-                                                                                                .PREFERRED_SIZE)))))
-                                .addContainerGap())
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 601, Short.MAX_VALUE)
-                                        .addComponent(jButton2)
-                                        .addGap(0, 601, Short.MAX_VALUE)))
+                            .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 601, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addGap(0, 601, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(
-                                                        javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel14)
-                                                        .addComponent(clientNameF,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(
-                                                        javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel15)
-                                                        .addComponent(clientSurnameF,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(
-                                                        javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel16)
-                                                        .addComponent(clientPhoneF,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(
-                                                        javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jButton5)
-                                                        .addComponent(jButton6)
-                                                        .addComponent(jButton10)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing
-                                                        .GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                layout.createSequentialGroup()
-                                                                        .addGroup(layout.createParallelGroup(
-                                                                                javax.swing
-                                                                                        .GroupLayout.Alignment.BASELINE)
-                                                                                .addComponent(searchF,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .PREFERRED_SIZE,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .DEFAULT_SIZE,
-                                                                                        javax.swing.GroupLayout
-                                                                                                .PREFERRED_SIZE)
-                                                                                .addComponent(jButton9))
-                                                                        .addPreferredGap(javax.swing.LayoutStyle
-                                                                                .ComponentPlacement.UNRELATED)
-                                                                        .addComponent(jScrollPane1,
-                                                                                javax.swing.GroupLayout
-                                                                                        .PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout
-                                                                                        .DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment
-                                                                        .TRAILING,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment
-                                                        .BASELINE)
-                                                        .addComponent(jButton1)
-                                                        .addComponent(jButton3))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6)
+                            .addComponent(jButton10)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 270, Short.MAX_VALUE)
-                                        .addComponent(jButton2)
-                                        .addGap(0, 271, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 270, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addGap(0, 271, Short.MAX_VALUE)))
         );
 
         pack();
         setLocationRelativeTo(null);
-    }
-    // </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Сохранить".
+     * Вызывается метод сохранения базы в файл.
+     * @param evt 
      */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // /GEN-FIRST:event_jButton4ActionPerformed
         saveChanges();
     }
-    //GEN-LAST:event_jButton4ActionPerformed
+                                            
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Удалить диск".
+     * Удаляется диск, выбранный в таблице jTable1.
+     * Если таблица становится полностью пустой, текстовые поля диска
+     * становятся недоступными.
+     * @param evt 
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton3ActionPerformed
+//GEN-FIRST:event_jButton3ActionPerformed
         int x = jTable1.getSelectedRow();
         if (x != -1) {
             deleteDisc((int) jTable1.getValueAt(x, firstColumn));
@@ -1254,13 +754,16 @@ public class MainForm extends javax.swing.JFrame {
             //jTable1.setRowSelectionInterval(0, 0);
         }
     }
-    //GEN-LAST:event_jButton3ActionPerformed
+//GEN-LAST:event_jButton3ActionPerformed
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Добавить диск".
+     * В конец таблицы jTable1 добавляется пустая строка диска. 
+     * Текстовые поля диска очищаются.
+     * @param evt 
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton1ActionPerformed
+//GEN-FIRST:event_jButton1ActionPerformed
         clearDiscFields();
         Disc disc = new Disc();
         setDisc(disc);
@@ -1269,26 +772,32 @@ public class MainForm extends javax.swing.JFrame {
         showDiscFields();
         setDiscFieldsEnable(true);
     }
-    //GEN-LAST:event_jButton1ActionPerformed
+//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Диск сдан".
+     * Вызывается метод установки clientID (ID клиента) = 0
+     * у диска, выбранного в таблице jTable1.
+     * @param evt 
      */
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton8ActionPerformed
+//GEN-FIRST:event_jButton8ActionPerformed
         int x = jTable1.getSelectedRow();
         if (x != -1) {
             setClient(getDisc((int) jTable1.getValueAt(x, firstColumn)).getDiskID(), firstColumn);
             clientF.setText("Диск не на руках");
         }
     }
-    //GEN-LAST:event_jButton8ActionPerformed
+//GEN-LAST:event_jButton8ActionPerformed
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Поиск".
+     * Вызыается метод поиска по введенным в текстовое поле searchF словам.
+     * Результат выводит в таблицу jTable1.
+     * @param evt 
      */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton9ActionPerformed
+//GEN-FIRST:event_jButton9ActionPerformed
         clearDiscFields();
         clearDiscsList();
         Search(searchF.getText());
@@ -1299,36 +808,29 @@ public class MainForm extends javax.swing.JFrame {
        // }
         showDiscFields();
     }
-    //GEN-LAST:event_jButton9ActionPerformed
+//GEN-LAST:event_jButton9ActionPerformed
 
     /**
-     * @param evt
-     */
-    private void searchFMouseClicked(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_searchFMouseClicked
-       // if ("Введите ключевые слова".equals(searchF.getText())) {
-          //  searchF.setText("");
-        //}
-    }
-    //GEN-LAST:event_searchFMouseClicked
-
-    /**
-     * @param evt
+     * Метод отпускания клавиши на таблице jTable1.
+     * @param evt 
      */
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_jTable1KeyReleased
+//GEN-FIRST:event_jTable1KeyReleased
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP
                 || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             showDiscFields();
         }
     }
-    //GEN-LAST:event_jTable1KeyReleased
+//GEN-LAST:event_jTable1KeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * origTittleF. Обновляет информацию в поле диска originalTitle на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void origTittleFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_origTittleFKeyReleased
+//GEN-FIRST:event_origTittleFKeyReleased
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             descriptionF.setText(trim(descriptionF.getText()));
         } else {
@@ -1339,49 +841,61 @@ public class MainForm extends javax.swing.JFrame {
             }
         }
     }
-    //GEN-LAST:event_origTittleFKeyReleased
+//GEN-LAST:event_origTittleFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * russTittleF. Обновляет информацию в поле диска russianTitle на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void russTittleFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_russTittleFKeyReleased
+//GEN-FIRST:event_russTittleFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
                     .setRussianTitle(trim(russTittleF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_russTittleFKeyReleased
+//GEN-LAST:event_russTittleFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * directorF. Обновляет информацию в поле диска director на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void directorFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_directorFKeyReleased
+//GEN-FIRST:event_directorFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
                     .setDirector(trim(directorF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_directorFKeyReleased
+//GEN-LAST:event_directorFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * genreF. Обновляет информацию в поле диска genre на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void genreFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_genreFKeyReleased
+//GEN-FIRST:event_genreFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
                     .setGenre(trim(genreF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_genreFKeyReleased
+//GEN-LAST:event_genreFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * durationF. Обновляет информацию в поле диска duration на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void durationFKeyReleased(java.awt.event.KeyEvent evt) {
         // /GEN-FIRST:event_durationFKeyReleased
@@ -1392,9 +906,12 @@ public class MainForm extends javax.swing.JFrame {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setDuration(0);
         }
     }
-    //GEN-LAST:event_durationFKeyReleased
+                                         
 
     /**
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * releaseyearF. Обновляет информацию в поле диска releaseyear на то, что введено
+     * в данном поле.
      * @param evt
      */
     private void releaseyearFKeyReleased(java.awt.event.KeyEvent evt) {
@@ -1406,13 +923,16 @@ public class MainForm extends javax.swing.JFrame {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setReleaseYear((short) 0);
         }
     }
-    //GEN-LAST:event_releaseyearFKeyReleased
+                                            
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * ratingF. Обновляет информацию в поле диска rating на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void ratingFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_ratingFKeyReleased
+//GEN-FIRST:event_ratingFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
                     .setRating(Double.parseDouble(trim(ratingF.getText())));
@@ -1420,52 +940,63 @@ public class MainForm extends javax.swing.JFrame {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)).setRating(0);
         }
     }
-    //GEN-LAST:event_ratingFKeyReleased
+//GEN-LAST:event_ratingFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * langF. Обновляет информацию в поле диска languages на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void langFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_langFKeyReleased
+//GEN-FIRST:event_langFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)
             ).setLanguages(trim(langF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_langFKeyReleased
+//GEN-LAST:event_langFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * countryF. Обновляет информацию в поле диска country на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void countryFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_countryFKeyReleased
+//GEN-FIRST:event_countryFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
                     .setCountry(trim(countryF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_countryFKeyReleased
+//GEN-LAST:event_countryFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * actorsF. Обновляет информацию в поле диска actors на то, что введено
+     * в данном поле.
+     * @param evt 
      */
     private void actorsFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_actorsFKeyReleased
+//GEN-FIRST:event_actorsFKeyReleased
         try {
             getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
                     .setActors(trim(actorsF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_actorsFKeyReleased
+//GEN-LAST:event_actorsFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающие отпускание клавиши в текстовом поле
+     * descriptionF.
+     * @param evt 
      */
     private void descriptionFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_descriptionFKeyReleased
+//GEN-FIRST:event_descriptionFKeyReleased
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             actorsF.setText(trim(actorsF.getText()));
             descriptionF.setText(trim(descriptionF.getText()));
@@ -1477,23 +1008,29 @@ public class MainForm extends javax.swing.JFrame {
             }
         }
     }
-    //GEN-LAST:event_descriptionFKeyReleased
+//GEN-LAST:event_descriptionFKeyReleased
 
     /**
-     * @param evt
+     * Метод, отлавливающий нажатие клавиши мышки.
+     * Отображает информацию о диске, выбранном в таблице jTable.
+     * @param evt 
      */
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_jTable1MousePressed
+//GEN-FIRST:event_jTable1MousePressed
         jTable1.setRowSelectionInterval(jTable1.getSelectedRow(), jTable1.getSelectedRow());
         showDiscFields();
     }
-    //GEN-LAST:event_jTable1MousePressed
+//GEN-LAST:event_jTable1MousePressed
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Удалить клиента".
+     * Выбранный клиент в таблицы jTable2 удаляется.
+     * Если таблица становится полностью пустой, текстовые поля клиента
+     * становятся недоступными.
+     * @param evt 
      */
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton6ActionPerformed
+//GEN-FIRST:event_jButton6ActionPerformed
         int x = jTable2.getSelectedRow();
         if (x != -1) {
             deleteClient((int) jTable2.getValueAt(x, firstColumn));
@@ -1517,13 +1054,16 @@ public class MainForm extends javax.swing.JFrame {
         }
 
     }
-    //GEN-LAST:event_jButton6ActionPerformed
+//GEN-LAST:event_jButton6ActionPerformed
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Добавить клиента".
+     * В конец таблицы jTable2 добавляется пустая строка.
+     * Текстовые поля клиента очищаются.
+     * @param evt 
      */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton5ActionPerformed
+//GEN-FIRST:event_jButton5ActionPerformed
         clearClientFields();
         Client client = new Client();
         client.setName("");
@@ -1534,13 +1074,16 @@ public class MainForm extends javax.swing.JFrame {
         setClientFieldsEnable(true);
         jTable2.setRowSelectionInterval(jTable2.getRowCount() - 1, jTable2.getRowCount() - 1);
     }
-    //GEN-LAST:event_jButton5ActionPerformed
+//GEN-LAST:event_jButton5ActionPerformed
 
     /**
-     * @param evt
+     * Метод нажатия кнопки "Выдать диск".
+     * Выбранному клиенту в таблицы jTable2 выдается диск, выбранный
+     * в таблице jTable1.
+     * @param evt 
      */
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_jButton10ActionPerformed
+//GEN-FIRST:event_jButton10ActionPerformed
         int x = jTable1.getSelectedRow();
         int y = jTable2.getSelectedRow();
         if (x != -1 && y != -1) {
@@ -1550,73 +1093,89 @@ public class MainForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
         }
     }
-    //GEN-LAST:event_jButton10ActionPerformed
+//GEN-LAST:event_jButton10ActionPerformed
 
     /**
-     * @param evt
+     * Метод клика по таблице jTable2.
+     * Вызывается метод, отображающий поля выбранного клиента.
+     * @param evt 
      */
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_jTable2MousePressed
+//GEN-FIRST:event_jTable2MousePressed
         showClientFields();
     }
-    //GEN-LAST:event_jTable2MousePressed
+//GEN-LAST:event_jTable2MousePressed
 
     /**
-     * @param evt
+     * Метод отпускания клавиши в текстовом поле clientNameF.
+     * Вызывается метод, обновляющий информацию клиента в его поле name
+     * на то, что введено в данном текстовом поле.
+     * @param evt 
      */
     private void clientNameFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_clientNameFKeyReleased
+//GEN-FIRST:event_clientNameFKeyReleased
         try {
             getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn))
                     .setName(trim(clientNameF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_clientNameFKeyReleased
+//GEN-LAST:event_clientNameFKeyReleased
 
     /**
-     * @param evt
+     * Метод отпускания клавиши в текстовом поле clientSurnameF.
+     * Вызывается метод, обновляющий информацию клиента в его поле surname
+     * на то, что введено в данном текстовом поле.
+     * @param evt 
      */
     private void clientSurnameFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_clientSurnameFKeyReleased
+//GEN-FIRST:event_clientSurnameFKeyReleased
         try {
             getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn))
                     .setSurname(trim(clientSurnameF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_clientSurnameFKeyReleased
+//GEN-LAST:event_clientSurnameFKeyReleased
 
     /**
-     * @param evt
+     * Метод отпускания клавиши в текстовом поле clientPhoneF.
+     * Вызывается метод, обновляющий информацию клиента в его поле phone
+     * на то, что введено в данном текстовом поле.
+     * @param evt 
      */
     private void clientPhoneFKeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_clientPhoneFKeyReleased
+//GEN-FIRST:event_clientPhoneFKeyReleased
         try {
             getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn))
                     .setPhone(trim(clientPhoneF.getText()));
         } catch (Exception e) {
         }
     }
-    //GEN-LAST:event_clientPhoneFKeyReleased
+//GEN-LAST:event_clientPhoneFKeyReleased
 
     /**
-     * @param evt
+     * Метод отпускания клавиши на таблице jTable2.
+     * Отлавливает нажатие стрелок и клавиш Tab, Enter.
+     * Вызывает метод отображения полей клиента.
+     * @param evt 
      */
     private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_jTable2KeyReleased
+//GEN-FIRST:event_jTable2KeyReleased
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP
                 || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             showClientFields();
         }
     }
-    //GEN-LAST:event_jTable2KeyReleased
+//GEN-LAST:event_jTable2KeyReleased
 
     /**
-     * @param evt
+     * Метод отлавливающий нажатие кнопки "Открыть базу".
+     * Вызывает метод, открывающий базу из выбранного файла.
+     * @param evt 
      */
     private void openBaseActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_openBaseActionPerformed
+//GEN-FIRST:event_openBaseActionPerformed
         JFileChooser dialog = new JFileChooser();
         if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = dialog.getSelectedFile();
@@ -1625,13 +1184,15 @@ public class MainForm extends javax.swing.JFrame {
 
         reloadTables();
     }
-    //GEN-LAST:event_openBaseActionPerformed
+//GEN-LAST:event_openBaseActionPerformed
 
     /**
-     * @param evt
+     * Метод отлавливающий нажатие кнопки "Слияние баз".
+     * Вызывает метод, сливающий открытую базу и базу из выбранного файла.
+     * @param evt 
      */
     private void mergeBaseActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_mergeBaseActionPerformed
+//GEN-FIRST:event_mergeBaseActionPerformed
         JFileChooser dialog = new JFileChooser();
         if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = dialog.getSelectedFile();
@@ -1640,39 +1201,42 @@ public class MainForm extends javax.swing.JFrame {
 
         reloadTables();
     }
-    //GEN-LAST:event_mergeBaseActionPerformed
+//GEN-LAST:event_mergeBaseActionPerformed
 
     /**
-     * @param evt
+     * Метод, отлавливающий нажатие клавиши в текстовом поле actorsF.
+     * @param evt 
      */
     private void actorsFKeyPressed(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_actorsFKeyPressed
+//GEN-FIRST:event_actorsFKeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             actorsF.setText(trim(actorsF.getText()));
             descriptionF.setText(trim(descriptionF.getText()));
             descriptionF.requestFocus();
         }
     }
-    //GEN-LAST:event_actorsFKeyPressed
+//GEN-LAST:event_actorsFKeyPressed
 
     /**
-     * @param evt
+     * Метод, отлавливающий нажатие клавиши в текстовом поле decriptionF.
+     * @param evt 
      */
     private void descriptionFKeyPressed(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_descriptionFKeyPressed
+//GEN-FIRST:event_descriptionFKeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             actorsF.setText(trim(actorsF.getText()));
             descriptionF.setText(trim(descriptionF.getText()));
             origTittleF.requestFocus();
         }
     }
-    //GEN-LAST:event_descriptionFKeyPressed
+//GEN-LAST:event_descriptionFKeyPressed
 
     /**
-     * @param evt
+     * Метод, отлавливающий нажатие мышкой в текстовом поле descriptionF.
+     * @param evt 
      */
     private void descriptionFMousePressed(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_descriptionFMousePressed
+                                                  
         int x = descriptionF.getCaretPosition();
         descriptionF.setText(trim(descriptionF.getText()));
         try {
@@ -1684,104 +1248,128 @@ public class MainForm extends javax.swing.JFrame {
     // /GEN-LAST:event_descriptionFMousePressed
 
     /**
-     * @param evt
+     * Метод нажатия (зажатия) клавиши на таблице jTable1.
+     * @param evt 
      */
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_jTable1KeyPressed
+//GEN-FIRST:event_jTable1KeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP
                 || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             showDiscFields();
         }
     }
-    //GEN-LAST:event_jTable1KeyPressed
+//GEN-LAST:event_jTable1KeyPressed
 
     /**
-     * @param evt
+     * Метод нажатия (зажатия) клавиши на таблице jTable2.
+     * @param evt 
      */
     private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {
-        //GEN-FIRST:event_jTable2KeyPressed
+//GEN-FIRST:event_jTable2KeyPressed
         if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_UP
                 || evt.getKeyChar() == KeyEvent.VK_DOWN || evt.getKeyChar() == KeyEvent.VK_TAB) {
             showClientFields();
         }
     }
-    //GEN-LAST:event_jTable2KeyPressed
+//GEN-LAST:event_jTable2KeyPressed
 
     /**
-     * @param evt
+     * Метод, отлавливающий потерю фокуса в текстовом поле russTittleF. 
+     * Вызывает методы отображения полей диска и обновленного списка
+     * дисков.
+     * @param evt 
      */
     private void russTittleFFocusLost(java.awt.event.FocusEvent evt) {
-        //GEN-FIRST:event_russTittleFFocusLost
+//GEN-FIRST:event_russTittleFFocusLost
         showDiscsList();
     }
-    //GEN-LAST:event_russTittleFFocusLost
+//GEN-LAST:event_russTittleFFocusLost
 
     /**
-     * @param evt
+     * Метод, отлавливающий потерю фокуса в текстовом поле
+     * clientNameF. 
+     * Вызывает методы отображения полей клиента и обновленного списка
+     * клиентов.
+     * @param evt 
      */
     private void clientNameFFocusLost(java.awt.event.FocusEvent evt) {
-        //GEN-FIRST:event_clientNameFFocusLost
+//GEN-FIRST:event_clientNameFFocusLost
         showDiscFields();
         showClientsList();
     }
-    //GEN-LAST:event_clientNameFFocusLost
+//GEN-LAST:event_clientNameFFocusLost
 
     /**
-     * @param evt
+     * Метод, отлавливающий потерю фокуса в текстовом поле
+     * clientSurnameF. 
+     * Вызывает методы отображения полей клиента и обновленного списка
+     * клиентов.
+     * @param evt 
      */
     private void clientSurnameFFocusLost(java.awt.event.FocusEvent evt) {
-        //GEN-FIRST:event_clientSurnameFFocusLost
+//GEN-FIRST:event_clientSurnameFFocusLost
         showDiscFields();
         showClientsList();
     }
-    //GEN-LAST:event_clientSurnameFFocusLost
+//GEN-LAST:event_clientSurnameFFocusLost
 
     /**
-     * @param evt
+     * Метод, отлавливающий потерю фокуса в текстовом поле
+     * clientPhoneF. 
+     * Вызывает методы отображения полей клиента и обновленного списка
+     * клиентов.
+     * @param evt 
      */
     private void clientPhoneFFocusLost(java.awt.event.FocusEvent evt) {
         // /GEN-FIRST:event_clientPhoneFFocusLost
         showDiscFields();
         showClientsList();
     }
-    //GEN-LAST:event_clientPhoneFFocusLost
+                                          
 
     /**
-     * @param evt
+     * Метод, отлавливающий отпускание клавиши мышки.
+     * Отображает информацию о выбранном в таблице jTable1 диске.
+     * @param evt 
      */
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_jTable1MouseReleased
+//GEN-FIRST:event_jTable1MouseReleased
         showDiscFields();
     }
-    //GEN-LAST:event_jTable1MouseReleased
+//GEN-LAST:event_jTable1MouseReleased
 
     /**
-     * @param evt
+     * Метод, отслеживающий отпускание клавиши мышки в таблице jTable2.
+     * @param evt 
      */
     private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_jTable2MouseReleased
+//GEN-FIRST:event_jTable2MouseReleased
         showClientFields();
     }
-    //GEN-LAST:event_jTable2MouseReleased
+//GEN-LAST:event_jTable2MouseReleased
 
     /**
-     * @param evt
+     * Метод отлавливающий перемещение мыши с зажатой клавишей по таблице jTable1. 
+     * Отображаются поля диска.
+     * @param evt 
      */
     private void jTable1MouseDragged(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_jTable1MouseDragged
+//GEN-FIRST:event_jTable1MouseDragged
         showDiscFields();
     }
-    //GEN-LAST:event_jTable1MouseDragged
+//GEN-LAST:event_jTable1MouseDragged
 
 
     /**
-     * @param evt
+     * Метод отлавливающий перемещение мыши с зажатой клавишей по таблице jTable2. 
+     * Отображаются поля клиента.
+     * @param evt 
      */
     private void jTable2MouseDragged(java.awt.event.MouseEvent evt) {
-        //GEN-FIRST:event_jTable2MouseDragged
+//GEN-FIRST:event_jTable2MouseDragged
         showClientFields();
     }
-    //GEN-LAST:event_jTable2MouseDragged
+//GEN-LAST:event_jTable2MouseDragged
 
     /**
      * @param args the command line arguments
@@ -1819,226 +1407,64 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    /**
-     * No description.
-     */
     private javax.swing.JTextPane actorsF;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel clientF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField clientNameF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField clientPhoneF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField clientSurnameF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField countryF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextPane descriptionF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField directorF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField durationF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField genreF;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton1;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton10;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton2;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton3;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton4;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton5;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton6;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton8;
-    /**
-     * No description.
-     */
     private javax.swing.JButton jButton9;
-    /**
-     * No description.
-     */
     private javax.swing.JDesktopPane jDesktopPane1;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel1;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel10;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel11;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel12;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel13;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel14;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel15;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel16;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel2;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel3;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel4;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel5;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel6;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel7;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel8;
-    /**
-     * No description.
-     */
     private javax.swing.JLabel jLabel9;
-    /**
-     * No description.
-     */
     private javax.swing.JMenu jMenu1;
-    /**
-     * No description.
-     */
     private javax.swing.JMenuBar jMenuBar1;
-    /**
-     * No description.
-     */
     private javax.swing.JPanel jPanel1;
-    /**
-     * No description.
-     */
     private javax.swing.JScrollPane jScrollPane1;
-    /**
-     * No description.
-     */
     private javax.swing.JScrollPane jScrollPane2;
-    /**
-     * No description.
-     */
     private javax.swing.JScrollPane jScrollPane3;
-    /**
-     * No description.
-     */
     private javax.swing.JScrollPane jScrollPane4;
-    /**
-     * No description.
-     */
     private javax.swing.JTable jTable1;
-    /**
-     * No description.
-     */
     private javax.swing.JTable jTable2;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField jTextField5;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField langF;
-    /**
-     * No description.
-     */
     private javax.swing.JMenuItem mergeBase;
-    /**
-     * No description.
-     */
     private javax.swing.JMenuItem openBase;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField origTittleF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField ratingF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField releaseyearF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField russTittleF;
-    /**
-     * No description.
-     */
     private javax.swing.JTextField searchF;
     // End of variables declaration//GEN-END:variables
 
     /**
-     * No description.
+     * Метод очистки текстовых полей диска.
      */
     private void clearDiscFields() {
         origTittleF.setText("");
@@ -2056,7 +1482,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * No description.
+     * Метод очистки текстовых полей клиента.
      */
     public void clearClientFields() {
         clientNameF.setText("");
@@ -2065,7 +1491,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * No description.
+     * Метод очистки таблицы дисков.
      */
     private void clearDiscsList() {
         DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
@@ -2075,7 +1501,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * No description.
+     * Метод отображения списка дисков в таблице jTable1.
      */
     private void showDiscsList() {
         int x = jTable1.getSelectedRow();
@@ -2087,7 +1513,8 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * No description.
+     * Метод, отображающий информацию о диске, выбранном в таблице jTable1
+     * в текстовые поля диска.
      */
     private void showDiscFields() {
         int first = (int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn);
@@ -2127,7 +1554,9 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * @param flag
+     * Метод устанавливающий доступность полей диска
+     * в соответствии спереданным булевским параметром flag.
+     * @param flag Параметр определяющий доступность полей.
      */
     private void setDiscFieldsEnable(boolean flag) {
         origTittleF.setEnabled(flag);
@@ -2144,7 +1573,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * No description.
+     * Метод очистки таблицы клиентов.
      */
     private void clearClientsList() {
         DefaultTableModel dm = (DefaultTableModel) jTable2.getModel();
@@ -2154,7 +1583,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     /**
-     * No description.
+     * Метод отображения списка клиентов в таблице jTable2.
      */
     private void showClientsList() {
         int x = jTable2.getSelectedRow();
@@ -2167,7 +1596,8 @@ public class MainForm extends javax.swing.JFrame {
 
 
     /**
-     * No description.
+     * Метод, отображающий информацию о клиенте, выбранном в таблице jTable2
+     * в текстовые поля клиента.
      */
     private void showClientFields() {
         int first = (int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn);
@@ -2185,7 +1615,9 @@ public class MainForm extends javax.swing.JFrame {
 
 
     /**
-     * @param flag
+     * Метод устанавливающий доступность полей клиента
+     * в соответствии спереданным булевским параметром flag.
+     * @param flag Параметр определяющий доступность полей.
      */
     private void setClientFieldsEnable(boolean flag) {
         clientNameF.setEnabled(flag);
@@ -2195,7 +1627,7 @@ public class MainForm extends javax.swing.JFrame {
 
 
     /**
-     * No description.
+     * Метод обновления списка в обоих таблицах.
      */
     private void reloadTables() {
         if (getClients().isEmpty()) {
