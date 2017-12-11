@@ -23,6 +23,7 @@ public class DataLoad {
         data = readData(filePath);
     }
 
+
     /**
      * Метод, считывающий из файл lastdirectory расположение последней используемой базы.
      */
@@ -38,6 +39,7 @@ public class DataLoad {
 
     /**
      * Метод, записывающий в файл lastdirectory расположение последней используемой базы.
+     * @param filePath
      */
     public static void writeLastDirectory(String filePath) {
         DataLoad.filePath = filePath;
@@ -52,6 +54,8 @@ public class DataLoad {
 
     /**
      * Метод, считывающий базу из файла.
+     * @param filePath
+     * @return
      */
     public static EssenceForSave readData(String filePath) {
 
@@ -72,24 +76,31 @@ public class DataLoad {
         }
     }
 
+
     /**
      * Метод, записывающий изменения Discs в файл базы.
+     * @param discs
      */
     public static void writeDiscs(ArrayList<Disc> discs) {
         data.setDiscs(discs);
         writeData(DataLoad.filePath);
     }
 
+
     /**
      * Метод, записывающий изменения Clients в файл базы.
+     * @param clients
      */
     public static void writeClients(ArrayList<Client> clients) {
         data.setClients(clients);
         writeData(DataLoad.filePath);
     }
 
+
     /**
      * Метод, записывающий изменения Discs и Clients в файл базы.
+     * @param discs
+     * @param clients
      */
     public static void writeData(ArrayList<Disc> discs, ArrayList<Client> clients) {
         data.setClients(clients);
@@ -97,8 +108,10 @@ public class DataLoad {
         writeData(DataLoad.filePath);
     }
 
+
     /**
      * Метод, осуществляющий непосредственное сохранение базы в файл.
+     * @param filePath
      */
     private static void writeData(String filePath) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
@@ -112,6 +125,7 @@ public class DataLoad {
 
     /**
      * Метод, возвращающий коллекцию Disc.
+     * @return
      */
     public static ArrayList<Disc> getDiscs() {
         return data.getDiscs();
@@ -119,6 +133,7 @@ public class DataLoad {
 
     /**
      * Метод, возвращающий коллекцию Client.
+     * @return
      */
     public static ArrayList<Client> getClients() {
         return data.getClients();
@@ -126,6 +141,7 @@ public class DataLoad {
 
     /**
      * Метод, загружающий новую базу из выбранной директории.
+     * @param filePath
      */
     public static void loadNewBase(String filePath) {
         writeLastDirectory(filePath);
@@ -134,6 +150,8 @@ public class DataLoad {
 
     /**
      * Метод, осуществляющий слияние двух баз.
+     * @param filePath
+     * @return
      */
     public static EssenceForSave mergeBases(String filePath) {
 

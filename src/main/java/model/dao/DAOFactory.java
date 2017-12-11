@@ -8,8 +8,14 @@ import model.dao.interfaces.DAODisc;
  */
 public interface DAOFactory {
 
+    /**
+     * @return
+     */
     DAODisc getDAODisc();
 
+    /**
+     * @return
+     */
     DAOClient getDAOClient();
 
 }

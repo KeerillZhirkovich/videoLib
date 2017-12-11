@@ -25,6 +25,9 @@ public class Disc implements Serializable, Comparable<Disc> {
     private int clientID;
     private String imgUrl;
 
+    /**
+     * Конструктор по умолчанию.
+     */
     public Disc() {
         this.russianTitle = "";
         this.originalTitle = "";
@@ -42,6 +45,22 @@ public class Disc implements Serializable, Comparable<Disc> {
         this.imgUrl = "";
     }
 
+    /**
+     * @param russianTitle
+     * @param originalTitle
+     * @param director
+     * @param genre
+     * @param duration
+     * @param languages
+     * @param country
+     * @param description
+     * @param rating
+     * @param actors
+     * @param releaseYear
+     * @param comment
+     * @param clientID
+     * @param imgUrl
+     */
     public Disc(String russianTitle, String originalTitle, String director, String genre, int duration,
                 String languages, String country, String description, double rating, String actors,
                 short releaseYear, String comment, int clientID, String imgUrl) {
@@ -61,126 +80,220 @@ public class Disc implements Serializable, Comparable<Disc> {
         this.imgUrl = imgUrl;
     }
 
+    /**
+     * @return
+     */
     public String getDirector() {
         return director;
     }
 
+    /**
+     * @param director
+     */
     public void setDirector(String director) {
         this.director = director;
     }
 
+    /**
+     * @return
+     */
     public String getGenre() {
         return genre;
     }
 
+    /**
+     * @param genre
+     */
     public void setGenre(String genre) {
         this.genre = genre;
     }
 
+    /**
+     * @return
+     */
     public int getDuration() {
         return duration;
     }
 
+    /**
+     * @param duration
+     */
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
+    /**
+     * @return
+     */
     public String getLanguages() {
         return languages;
     }
 
+    /**
+     * @param languages
+     */
     public void setLanguages(String languages) {
         this.languages = languages;
     }
 
+    /**
+     * @return
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * @param country
+     */
     public void setCountry(String country) {
         this.country = country;
     }
 
+    /**
+     * @return
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * @param comment
+     */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
+    /**
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return
+     */
     public double getRating() {
         return rating;
     }
 
+    /**
+     * @param rating
+     */
     public void setRating(double rating) {
         this.rating = rating;
     }
 
+    /**
+     * @return
+     */
     public String getActors() {
         return actors;
     }
 
+    /**
+     * @param actors
+     */
     public void setActors(String actors) {
         this.actors = actors;
     }
 
+    /**
+     * @return
+     */
     public int getDiskID() {
         return diskID;
     }
 
+    /**
+     * @param diskID
+     */
     public void setDiskID(int diskID) {
         this.diskID = diskID;
     }
 
+    /**
+     * @return
+     */
     public String getRussianTitle() {
         return russianTitle;
     }
 
+    /**
+     * @param russianTitle
+     */
     public void setRussianTitle(String russianTitle) {
         this.russianTitle = russianTitle;
     }
 
+    /**
+     * @return
+     */
     public String getOriginalTitle() {
         return originalTitle;
     }
 
+    /**
+     * @param originalTitle
+     */
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
+    /**
+     * @return
+     */
     public short getReleaseYear() {
         return releaseYear;
     }
 
+    /**
+     * @param releaseYear
+     */
     public void setReleaseYear(short releaseYear) {
         this.releaseYear = releaseYear;
     }
 
+    /**
+     * @return
+     */
     public int getClientID() {
         return clientID;
     }
 
+    /**
+     * @param clientID
+     */
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
 
+    /**
+     * @return
+     */
     public String getImgUrl() {
         return imgUrl;
     }
 
+    /**
+     * @param imgUrl
+     */
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -225,6 +338,9 @@ public class Disc implements Serializable, Comparable<Disc> {
         return comment != null ? comment.equals(disc.comment) : disc.comment == null;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int hashCode() {
         int result;
@@ -244,11 +360,18 @@ public class Disc implements Serializable, Comparable<Disc> {
         return result;
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(Disc o) {
         return originalTitle.compareTo(o.getOriginalTitle());
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return russianTitle + ' ' + originalTitle + ' '

@@ -25,6 +25,9 @@ public class IODAOClient implements DAOClient {
         clients = DataLoad.getClients();
     }
 
+    /**
+     * @param client
+     */
     @Override
     public void setClient(Client client) {
         int id;
@@ -45,6 +48,9 @@ public class IODAOClient implements DAOClient {
         clients = new ArrayList<>(temp);
     }
 
+    /**
+     * @param id
+     */
     @Override
     public void deleteClient(int id) {
         for (int i = 0; i < clients.size(); i++) {
@@ -54,11 +60,18 @@ public class IODAOClient implements DAOClient {
         }
     }
 
+    /**
+     * @return
+     */
     @Override
     public ArrayList<Client> getClients() {
         return clients;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     @Override
     public Client getClient(int id) {
 
@@ -72,6 +85,10 @@ public class IODAOClient implements DAOClient {
         return client;
     }
 
+    /**
+     * @param searchString
+     * @return
+     */
     @Override
     public ArrayList<Client> getClientsOnTheDataSet(String searchString) {
 
@@ -103,6 +120,9 @@ public class IODAOClient implements DAOClient {
         }
     }
 
+    /**
+     * @param newClients
+     */
     @Override
     public void updateClients(ArrayList<Client> newClients) {
 
@@ -118,6 +138,8 @@ public class IODAOClient implements DAOClient {
 
     /**
      * Служебный метод, возвращающий экземпляр Client по его расположению в коллекции.
+     * @param index
+     * @return
      */
     public Client getClientByIndex(int index) {
         return clients.get(index);
@@ -125,6 +147,7 @@ public class IODAOClient implements DAOClient {
 
     /**
      * Служебный метод, удаляющий экземпляр Client по его расположению в коллекции.
+     * @param index
      */
     public void deleteByIndex(int index) {
         clients.remove(index);

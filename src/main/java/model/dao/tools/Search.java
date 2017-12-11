@@ -15,8 +15,11 @@ import static model.dao.tools.WorkWithStrings.splitData;
  */
 public class Search {
 
+
     /**
      * Метод, преобразующий в массив переданное поле с данными.
+     * @param field
+     * @return
      */
     public static ArrayList<String> fieldToArray(String field) {
 
@@ -25,8 +28,11 @@ public class Search {
         return splitData(field);
     }
 
+
     /**
      * Метод, возвращающий коллекцию разбитых на слова полей Disc.
+     * @param disc
+     * @return
      */
     public static ArrayList<ArrayList<String>> dataToArray(Disc disc) {
 
@@ -45,8 +51,11 @@ public class Search {
         return array;
     }
 
+
     /**
      * Метод, возвращающий коллекцию разбитых на слова полей Client.
+     * @param client
+     * @return
      */
     public static ArrayList<ArrayList<String>> dataToArray(Client client) {
 
@@ -62,6 +71,9 @@ public class Search {
 
     /**
      * Метод, возвращающий релевантность данных запросу.
+     * @param arrays
+     * @param keywords
+     * @return
      */
     public static int relevance(ArrayList<ArrayList<String>> arrays, ArrayList<String> keywords) {
 
@@ -73,6 +85,7 @@ public class Search {
         for (String keyword : keywords) {
             b = false;
             keyword = keyword.replaceAll("\\?", ".");
+            keyword = keyword.replaceAll("\\*", ".*");
             pattern = Pattern.compile(keyword);
             for (ArrayList<String> array : arrays) {
                 for (String word : array) {

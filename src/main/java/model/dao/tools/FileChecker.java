@@ -8,8 +8,11 @@ import java.io.*;
  */
 public class FileChecker {
 
+
     /**
      * Метод, проверяющий является ли файл пустым.
+     * @param url
+     * @return
      */
     public static boolean fileIsEmpty(String url) {
         File file = new File(url);

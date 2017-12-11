@@ -9,8 +9,11 @@ import static java.lang.String.valueOf;
  */
 public class WorkWithStrings {
 
+
     /**
      * Метод, разбивающий переданную строку на слова и возвращающий массив этих слов.
+     * @param data
+     * @return
      */
     public static ArrayList<String> splitData(String data) {
 
@@ -39,9 +42,13 @@ public class WorkWithStrings {
         return result;
     }
 
+
     /**
      * Служебный метод, меняющий символы, не входящие в слова на ",".
      * Необходим для корректной работы метода splitData.
+     * @param s
+     * @param pos
+     * @return
      */
     private static String replaceCharAt(String s, int pos) {
 

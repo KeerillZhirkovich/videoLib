@@ -10,10 +10,16 @@ import model.dao.io.*;
  */
 public class IODAOFactory implements DAOFactory {
 
+    /**
+     * @return
+     */
     public DAODisc getDAODisc() {
         return new IODAODisc();
     }
 
+    /**
+     * @return
+     */
     public DAOClient getDAOClient() {
         return new IODAOClient();
     }

@@ -11,10 +11,16 @@ import model.dao.rdb.*;
  */
 public class RDBDAOFactory implements DAOFactory {
 
+    /**
+     * @return
+     */
     public DAODisc getDAODisc() {
         return new RDBDAODisc();
     }
 
+    /**
+     * @return
+     */
     public DAOClient getDAOClient() {
         return new RDBDAOClient();
     }

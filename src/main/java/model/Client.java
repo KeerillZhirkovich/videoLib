@@ -17,44 +17,77 @@ public class Client implements Serializable {
 
     }
 
+    /**
+     * @param name
+     * @param surname
+     * @param phone
+     */
     public Client(String name, String surname, String phone) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
     }
 
+    /**
+     * @return
+     */
     public int getClientID() {
         return clientID;
     }
 
+    /**
+     * @param clientID
+     */
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
 
+    /**
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     * @param surname
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     * @return
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +102,9 @@ public class Client implements Serializable {
         return true;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;

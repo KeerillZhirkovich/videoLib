@@ -25,6 +25,9 @@ public class IODAODisc implements DAODisc {
         discs = DataLoad.getDiscs();
     }
 
+    /**
+     * @param disc
+     */
     @Override
     public void setDisc(Disc disc) {
         int id;
@@ -45,6 +48,9 @@ public class IODAODisc implements DAODisc {
         discs = new ArrayList<>(temp);
     }
 
+    /**
+     * @param id
+     */
     @Override
     public void deleteDisc(int id) {
         for (int i = 0; i < discs.size(); i++) {
@@ -55,11 +61,18 @@ public class IODAODisc implements DAODisc {
         }
     }
 
+    /**
+     * @return
+     */
     @Override
     public ArrayList<Disc> getDiscs() {
         return discs;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     @Override
     public Disc getDisc(int id) {
         Disc d = null;
@@ -72,6 +85,10 @@ public class IODAODisc implements DAODisc {
         return d;
     }
 
+    /**
+     * @param searchString
+     * @return
+     */
     @Override
     public ArrayList<Disc> getDiscsOnTheDataSet(String searchString) {
 
@@ -118,6 +135,9 @@ public class IODAODisc implements DAODisc {
         }
     }
 
+    /**
+     * @param newDiscs
+     */
     @Override
     public void updateDiscs(ArrayList<Disc> newDiscs) {
 
@@ -150,8 +170,11 @@ public class IODAODisc implements DAODisc {
         }
     }
 
+
     /**
      * Служебный метод, возвращающий экземпляр Disc по его расположению в коллекции.
+     * @param index
+     * @return
      */
     public Disc getDiscByIndex(int index) {
         return discs.get(index);
@@ -159,11 +182,16 @@ public class IODAODisc implements DAODisc {
 
     /**
      * Служебный метод, удаляющий экземпляр Disc по его расположению в коллекции.
+     * @param index
      */
     public void deleteDiscByIndex(int index) {
         discs.remove(index);
     }
 
+    /**
+     * @param discID
+     * @param clientID
+     */
     @Override
     public void setClient(int discID, int clientID) {
         for (int i = 0; i < discs.size(); i++) {
