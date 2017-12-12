@@ -24,10 +24,10 @@ public class Controller {
     private static IODAODisc daoDiscs = new IODAODisc();
     private static ArrayList<Disc> discs = daoDiscs.getDiscs();
 
-    private static final int firstColumn = 0;
-    private static final int secondColumn = 1;
-    private static final int thirdColumn = 2;
-    private static final int fourthColumn = 3;
+    private static final int FIRST_COLUMN = 0;
+    private static final int SECOND_COLUMN = 1;
+    private static final int THIRD_COLUMN = 2;
+    private static final int FOURTH_COLUMN = 3;
 
     /**
      * Метод, осуществляющий заполнение таблицы Client для вывода на MainForm.
@@ -41,10 +41,10 @@ public class Controller {
         DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         for (int j = 0; j < clients.size(); j++) {
             dtm.insertRow(j, new Vector(0));
-            jTable.setValueAt(clients.get(j).getClientID(), j, firstColumn);
-            jTable.setValueAt(clients.get(j).getName(), j, secondColumn);
-            jTable.setValueAt(clients.get(j).getSurname(), j, thirdColumn);
-            jTable.setValueAt(clients.get(j).getPhone(), j, fourthColumn);
+            jTable.setValueAt(clients.get(j).getClientID(), j, FIRST_COLUMN);
+            jTable.setValueAt(clients.get(j).getName(), j, SECOND_COLUMN);
+            jTable.setValueAt(clients.get(j).getSurname(), j, THIRD_COLUMN);
+            jTable.setValueAt(clients.get(j).getPhone(), j, FOURTH_COLUMN);
         }
 
         return jTable;
@@ -60,8 +60,8 @@ public class Controller {
         DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         for (int j = 0; j < discs.size(); j++) {
             dtm.insertRow(j, new Vector(0));
-            jTable.setValueAt(discs.get(j).getDiskID(), j, firstColumn);
-            jTable.setValueAt(discs.get(j).getRussianTitle(), j, secondColumn);
+            jTable.setValueAt(discs.get(j).getDiskID(), j, FIRST_COLUMN);
+            jTable.setValueAt(discs.get(j).getRussianTitle(), j, SECOND_COLUMN);
         }
 
         return jTable;

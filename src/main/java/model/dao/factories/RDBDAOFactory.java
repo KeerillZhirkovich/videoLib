@@ -1,27 +1,27 @@
 package model.dao.factories;
 
-import model.dao.DAOFactory;
+import model.dao.DaoFactory;
 import model.dao.interfaces.*;
 import model.dao.rdb.*;
 
 /**
- * Фабрика, возвращающая объекты DAODisc и DAOClient с реализацей,
+ * Фабрика, возвращающая объекты DaoDisc и DaoClient с реализацей,
  * осуществляющей ввод-вывод данных из реляционных баз данных.
  * Не реализована в данной версии программы.
  */
-public class RDBDAOFactory implements DAOFactory {
+public class RDBDAOFactory implements DaoFactory {
 
     /**
      * @return
      */
-    public DAODisc getDAODisc() {
+    public DaoDisc getDaoDisc() {
         return new RDBDAODisc();
     }
 
     /**
      * @return
      */
-    public DAOClient getDAOClient() {
+    public DaoClient getDaoClient() {
         return new RDBDAOClient();
     }
 

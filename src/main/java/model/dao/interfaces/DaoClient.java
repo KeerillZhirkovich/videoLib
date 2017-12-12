@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Интерфейс, описывающий методы работы с коллекцией Client.
  */
-public interface DAOClient {
+public interface DaoClient {
 
 
     /**

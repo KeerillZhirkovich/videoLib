@@ -1,26 +1,26 @@
 package model.dao.factories;
 
-import model.dao.DAOFactory;
+import model.dao.DaoFactory;
 import model.dao.interfaces.*;
 import model.dao.io.*;
 
 /**
- * Фабрика, возвращающая объекты DAODisc и DAOClient с реализацей,
+ * Фабрика, возвращающая объекты DaoDisc и DaoClient с реализацей,
  * осуществляющей ввод-вывод данных из локальных файлов.
  */
-public class IODAOFactory implements DAOFactory {
+public class IODAOFactory implements DaoFactory {
 
     /**
      * @return
      */
-    public DAODisc getDAODisc() {
+    public DaoDisc getDaoDisc() {
         return new IODAODisc();
     }
 
     /**
      * @return
      */
-    public DAOClient getDAOClient() {
+    public DaoClient getDaoClient() {
         return new IODAOClient();
     }
 

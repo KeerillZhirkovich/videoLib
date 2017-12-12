@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Интерфейс, описывающий методы работы с коллекцией Discs.
  */
-public interface DAODisc {
+public interface DaoDisc {
 
     /**
      * Метод, добавляющий Disc в коллекцию.

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 
 /**
- * Служебный класс, объединяющий коллекции Disc и Client в единое целое для сохранения в один файл - базу.
+ * Служебный класс, объединяющий коллекции Disc и Client
+ * в единое целое для сохранения в один файл - базу.
  */
 public class EssenceForSave implements Serializable {
 

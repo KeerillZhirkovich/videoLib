@@ -1,6 +1,6 @@
 package model.dao.rdb;
 
-import model.dao.interfaces.DAODisc;
+import model.dao.interfaces.DaoDisc;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import model.Disc;
 /**
  * Интерфейс, не имеющий реализации в текущей версии программы.
  */
-public class RDBDAODisc implements DAODisc {
+public class RDBDAODisc implements DaoDisc {
 
     /**
      * @param disc
