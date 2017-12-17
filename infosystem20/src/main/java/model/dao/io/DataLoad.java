@@ -12,7 +12,7 @@ import static model.dao.tools.FileChecker.fileIsEmpty;
 /**
  * Класс, реализующий работу с файлами.
  */
-public class DataLoad {
+public class DataLoad implements Serializable {
 
     private static String filePath;
     private static EssenceForSave data;

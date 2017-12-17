@@ -4,6 +4,7 @@ import model.dao.interfaces.DaoClient;
 import model.dao.tools.ObjectAndRelevance;
 import model.Client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -16,7 +17,7 @@ import static model.dao.tools.WorkWithStrings.splitData;
 /**
  * Класс, реализующий интерфейс DaoClient. Работа @Override методов описана в интерфейсе.
  */
-public class IODAOClient implements DaoClient {
+public class IODAOClient implements DaoClient, Serializable {
 
     private ArrayList<Client> clients = new ArrayList<>();
 

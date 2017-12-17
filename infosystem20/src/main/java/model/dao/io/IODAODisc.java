@@ -4,6 +4,7 @@ import model.dao.interfaces.DaoDisc;
 import model.dao.tools.ObjectAndRelevance;
 import model.Disc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -16,7 +17,7 @@ import static model.dao.tools.WorkWithStrings.splitData;
 /**
  * Класс, реализующий интерфейс DaoDisc. Работа @Override методов описана в интерфейсе.
  */
-public class IODAODisc implements DaoDisc {
+public class IODAODisc implements DaoDisc, Serializable {
 
     private ArrayList<Disc> discs = new ArrayList<>();
 

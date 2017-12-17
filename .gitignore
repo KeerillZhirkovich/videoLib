@@ -1,8 +1,9 @@
-/.idea
-informationsystem.iml
-information_system.iml
-/target/
+/infosystem20/.idea
+/infosystemclient/.idea
+/infosystemclient/infosystemclient.iml
+/infosystem20/infosystem20.iml
+/infosystem20/target/
+/infosystemclient/target/
 *.jar
 *.bat
-checkstyle.txt
-checkstyle.xml
+/infosystem20/.editorconfig
