@@ -464,6 +464,12 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        searchF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchFKeyPressed(evt);
+            }
+        });
+
         jButton9.setText("Поиск");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1370,6 +1376,11 @@ public class MainForm extends javax.swing.JFrame {
         showClientFields();
     }
 //GEN-LAST:event_jTable2MouseDragged
+
+    private void searchFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFKeyPressed
+        if (evt.getKeyChar()==KeyEvent.VK_ENTER)
+            jButton9.doClick();
+    }//GEN-LAST:event_searchFKeyPressed
 
     /**
      * @param args the command line arguments
