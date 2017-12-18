@@ -1,6 +1,6 @@
 package server;
 
-import model.EssenceForSend;
+import model.Packet;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,7 +13,6 @@ import static controller.Controller.*;
 public class ClientHandler extends Thread {
 
     private final Socket client;
-//    private Socket socket;
     private String method;
     private String check;
     private static final String showClients = "showClients";
@@ -34,7 +33,7 @@ public class ClientHandler extends Thread {
     private static final String mergeBase = "mergeBase";
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
-    private EssenceForSend essenceForSend;
+    private Packet packet;
 
     public ClientHandler(Socket client) {
         this.client = client;
@@ -52,83 +51,87 @@ public class ClientHandler extends Thread {
         try {
             objectOutputStream.writeObject(data);
             objectOutputStream.flush();
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private EssenceForSend handler(EssenceForSend essenceForSend) {
-        if (essenceForSend.getMethod().contains(showClients)) {
-            essenceForSend.setClients(showClients());
-            return essenceForSend;
+    private Packet handler(Packet packet) {
+        if (packet.getMethod().contains(showClients)) {
+            packet.setClients(getClients());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(showDiscs)) {
-            essenceForSend.setDiscs(showDiscs());
-            return essenceForSend;
+        if (packet.getMethod().contains(showDiscs)) {
+            packet.setDiscs(getDiscs());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(getDiscs)) {
-            essenceForSend.setDiscs(getDiscs());
-            return essenceForSend;
+        if (packet.getMethod().contains(getDiscs)) {
+            packet.setDiscs(getDiscs());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(getClients)) {
-            essenceForSend.setClients(getClients());
-            return essenceForSend;
+        if (packet.getMethod().contains(getClients)) {
+            packet.setClients(getClients());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(saveChanges)) {
+        if (packet.getMethod().contains(saveChanges)) {
             saveChanges();
-            return essenceForSend;
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(getDiscByNumber)) {
-            essenceForSend.setDisc(getDiscByNumber(essenceForSend.getNumber()));
-            return essenceForSend;
+        if (packet.getMethod().contains(getDiscByNumber)) {
+            packet.setDisc(getDiscByNumber(packet.getNumber()));
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(search)) {
-            search(essenceForSend.getInfo());
-            return essenceForSend;
+        if (packet.getMethod().contains(search)) {
+            search(packet.getInfo());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(getClient)) {
-            essenceForSend.setClient(getClient(essenceForSend.getNumber()));
-            return essenceForSend;
+        if (packet.getMethod().contains(getClient)) {
+            packet.setClient(getClient(packet.getNumber()));
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(setClient)) {
-            setClient(essenceForSend.getClient());
-            return essenceForSend;
+        if (packet.getMethod().contains(setClient)) {
+            setClient(packet.getClient());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(setClientByID)) {
-            setClient(essenceForSend.getNumber(), essenceForSend.getOneMoreNumber());
-            return essenceForSend;
+        if (packet.getMethod().contains(setClientByID)) {
+            setClient(packet.getNumber(), packet.getOneMoreNumber());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(deleteDisc)) {
-            deleteDisc(essenceForSend.getNumber());
-            return essenceForSend;
+        if (packet.getMethod().contains(deleteDisc)) {
+            deleteDisc(packet.getNumber());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(setDisc)) {
-            deleteDisc(essenceForSend.getNumber());
-            return essenceForSend;
+        if (packet.getMethod().contains(setDisc)) {
+            deleteDisc(packet.getNumber());
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(getDisc)) {
-            essenceForSend.setDisc(getDisc(essenceForSend.getNumber()));
-            return essenceForSend;
+        if (packet.getMethod().contains(getDisc)) {
+            packet.setDisc(getDisc(packet.getNumber()));
+            return packet;
         }
 
-        if (essenceForSend.getMethod().contains(deleteClient)) {
-            deleteClient(essenceForSend.getNumber());
-            return essenceForSend;
+        if (packet.getMethod().contains(deleteClient)) {
+            deleteClient(packet.getNumber());
+            return packet;
         }
 
-        return essenceForSend;
+        if (packet.isCloseConnection()) {
+            stop();
+        }
+
+        return packet;
     }
 
 
@@ -138,13 +141,12 @@ public class ClientHandler extends Thread {
             try {
                 check = (String) ois.readObject();
                 if (check.contains("ready")) {
-                   essenceForSend = (EssenceForSend) ois.readObject();
-                   essenceForSend = handler(essenceForSend);
-                   oos.writeObject("ready");
-                   oos.flush();
-                    System.out.println("ready");
-                   oos.writeObject(essenceForSend);
-                   oos.flush();
+                    packet = (Packet) ois.readObject();
+                    //System.out.println("get");
+                    packet = handler(packet);
+                    oos.writeObject(packet);
+                    oos.flush();
+                    //System.out.println("send");
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

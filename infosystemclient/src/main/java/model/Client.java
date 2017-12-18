@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * Класс, являющийся абстракцией сущности RunClient. Содержит поля, описывающие RunClient,
+ * Класс, являющийся абстракцией сущности NetClient. Содержит поля, описывающие NetClient,
  * методы доступа к ним, а так же служебные методы.
  */
 public class Client implements Serializable {

@@ -33,15 +33,6 @@ public class Controller {
 
         ArrayList<Client> clients = daoClients.getClients();
 
-//        DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
-//        for (int j = 0; j < clients.size(); j++) {
-//            dtm.insertRow(j, new Vector(0));
-//            jTable.setValueAt(clients.get(j).getClientID(), j, FIRST_COLUMN);
-//            jTable.setValueAt(clients.get(j).getName(), j, SECOND_COLUMN);
-//            jTable.setValueAt(clients.get(j).getSurname(), j, THIRD_COLUMN);
-//            jTable.setValueAt(clients.get(j).getPhone(), j, FOURTH_COLUMN);
-//        }
-
         return clients;
     }
 
@@ -51,14 +42,6 @@ public class Controller {
      * @return Обновленную таблицу типа JTable.
      */
     public static synchronized ArrayList<Disc> showDiscs() {
-
-//        DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
-//        for (int j = 0; j < discs.size(); j++) {
-//            dtm.insertRow(j, new Vector(0));
-//            jTable.setValueAt(discs.get(j).getDiskID(), j, FIRST_COLUMN);
-//            jTable.setValueAt(discs.get(j).getRussianTitle(), j, SECOND_COLUMN);
-//        }
-
         return discs;
     }
 

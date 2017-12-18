@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import java.awt.event.KeyEvent;
@@ -11,17 +6,16 @@ import javax.swing.table.DefaultTableModel;
 
 import static jdk.nashorn.internal.objects.NativeString.trim;
 
-import controller.RunClient;
 import model.Client;
 import model.Disc;
 
-import static controller.ControllerClient.*;
+import static controller.Controller.*;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+
 /**
- *
- * @author Keerill
+ * Класс главной формы
  */
 public class MainForm extends javax.swing.JFrame {
 
@@ -35,11 +29,6 @@ public class MainForm extends javax.swing.JFrame {
     private static final int firstRow = 0;
 
     /**
-     * Thread to connect.
-     */
-    private static Thread thread;
-
-    /**
      * Конструктор формы
      */
     public MainForm() {
@@ -49,9 +38,9 @@ public class MainForm extends javax.swing.JFrame {
         if (getClients().isEmpty()) {
             setClientFieldsEnable(false);
         } else {
-          showClientsList();
-          jTable2.setRowSelectionInterval(firstRow, firstRow);
-          showClientFields();
+            showClientsList();
+            jTable2.setRowSelectionInterval(firstRow, firstRow);
+            showClientFields();
         }
 
         if (getDiscs().isEmpty()) {
@@ -731,8 +720,8 @@ public class MainForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-       /**
+
+    /**
      * Метод нажатия кнопки "Сохранить".
      * Вызывается метод сохранения базы в файл.
      * @param evt 
@@ -1400,7 +1389,7 @@ public class MainForm extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1409,27 +1398,81 @@ public class MainForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        thread = new Thread(new RunClient());
-        thread.start();
+        //</editor-fold>
 
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
+            /**
+             * No description.
+             */
             public void run() {
                 new MainForm().setVisible(true);
             }
         });
-    }                 
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane actorsF;
+    private javax.swing.JLabel clientF;
+    private javax.swing.JTextField clientNameF;
+    private javax.swing.JTextField clientPhoneF;
+    private javax.swing.JTextField clientSurnameF;
+    private javax.swing.JTextField countryF;
+    private javax.swing.JTextPane descriptionF;
+    private javax.swing.JTextField directorF;
+    private javax.swing.JTextField durationF;
+    private javax.swing.JTextField genreF;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField langF;
+    private javax.swing.JMenuItem mergeBase;
+    private javax.swing.JMenuItem openBase;
+    private javax.swing.JTextField origTittleF;
+    private javax.swing.JTextField ratingF;
+    private javax.swing.JTextField releaseyearF;
+    private javax.swing.JTextField russTittleF;
+    private javax.swing.JTextField searchF;
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Метод очистки текстовых полей диска.
@@ -1617,61 +1660,4 @@ public class MainForm extends javax.swing.JFrame {
             showDiscFields();
         }
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane actorsF;
-    private javax.swing.JLabel clientF;
-    private javax.swing.JTextField clientNameF;
-    private javax.swing.JTextField clientPhoneF;
-    private javax.swing.JTextField clientSurnameF;
-    private javax.swing.JTextField countryF;
-    private javax.swing.JTextPane descriptionF;
-    private javax.swing.JTextField directorF;
-    private javax.swing.JTextField durationF;
-    private javax.swing.JTextField genreF;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField langF;
-    private javax.swing.JMenuItem mergeBase;
-    private javax.swing.JMenuItem openBase;
-    private javax.swing.JTextField origTittleF;
-    private javax.swing.JTextField ratingF;
-    private javax.swing.JTextField releaseyearF;
-    private javax.swing.JTextField russTittleF;
-    private javax.swing.JTextField searchF;
-    // End of variables declaration//GEN-END:variables
 }
