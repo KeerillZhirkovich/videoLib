@@ -804,14 +804,16 @@ public class MainForm extends javax.swing.JFrame {
      */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
 //GEN-FIRST:event_jButton9ActionPerformed
-        clearDiscFields();
-        clearDiscsList();
-        search(searchF.getText());
+//        clearDiscFields();
+//        clearDiscsList();
+//        search(searchF.getText());
+//        showDiscsList();
+//        jTable1.setRowSelectionInterval(firstRow, firstRow);
+//       // if ("".equals(searchF.getText())) {
+//        //    searchF.setText("Введите ключевые слова");
+//       // }
+//        showDiscFields();
         showDiscsList();
-        jTable1.setRowSelectionInterval(firstRow, firstRow);
-       // if ("".equals(searchF.getText())) {
-        //    searchF.setText("Введите ключевые слова");
-       // }
         showDiscFields();
     }
 //GEN-LAST:event_jButton9ActionPerformed
@@ -1517,7 +1519,7 @@ public class MainForm extends javax.swing.JFrame {
     private void showDiscsList() {
         int x = jTable1.getSelectedRow();
         clearDiscsList();
-        jTable1 = showDiscs(jTable1);
+        jTable1 = showDiscs(jTable1, searchF.getText());
         if (x >= 0) {
             jTable1.setRowSelectionInterval(x, x);
         }

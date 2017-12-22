@@ -22,7 +22,7 @@ public class Controller {
 
     private static IODAOClient daoClients = new IODAOClient();
     private static IODAODisc daoDiscs = new IODAODisc();
-    private static ArrayList<Disc> discs = daoDiscs.getDiscs();
+    //private static ArrayList<Disc> discs = daoDiscs.getDiscs();
 
     /**
      * Метод, осуществляющий заполнение таблицы Client для вывода на MainForm.
@@ -41,8 +41,9 @@ public class Controller {
      * @param jTable Таблица типа JTable.
      * @return Обновленную таблицу типа JTable.
      */
-    public static synchronized ArrayList<Disc> showDiscs() {
-        return discs;
+    public static synchronized ArrayList<Disc> showDiscs(String searchString) {
+        daoDiscs.getDiscsOnTheDataSet(searchString);
+        return daoDiscs.getDiscs();
     }
 
     /**
@@ -64,10 +65,11 @@ public class Controller {
     /**
      * Метод, запускающий поиск объектов Disc по данным из запроса пользователя.
      * @param searchString Строка, по которой осуществляется поиск.
+     * @return 
      */
     public static synchronized ArrayList<Disc> search(String searchString) {
-        discs = daoDiscs.getDiscsOnTheDataSet(searchString);
-        return discs;
+        //discs = daoDiscs.getDiscsOnTheDataSet(searchString);
+        return daoDiscs.getDiscsOnTheDataSet(searchString);
     }
 
     /**
@@ -75,7 +77,7 @@ public class Controller {
      * @return Список дисков.
      */
     public static synchronized ArrayList<Disc> getDiscs() {
-        return discs;
+        return daoDiscs.getDiscs();
     }
 
     /**
@@ -110,7 +112,6 @@ public class Controller {
      */
     public static synchronized void setClient(int discID, int clientID) {
         daoDiscs.getDisc(discID).setClientID(clientID);
-        discs = daoDiscs.getDiscs();
     }
 
     /**
@@ -119,7 +120,6 @@ public class Controller {
      */
     public static synchronized void deleteDisc(int id) {
         daoDiscs.deleteDisc(id);
-        discs = daoDiscs.getDiscs();
     }
 
     /**
@@ -128,7 +128,6 @@ public class Controller {
      */
     public static synchronized void setDisc(Disc disc) {
         daoDiscs.setDisc(disc);
-        discs = daoDiscs.getDiscs();
     }
 
     /**
@@ -156,7 +155,6 @@ public class Controller {
         loadNewBase(filePath);
         daoDiscs = new IODAODisc();
         daoClients = new IODAOClient();
-        discs = daoDiscs.getDiscs();
     }
 
 
@@ -170,8 +168,6 @@ public class Controller {
 
         daoDiscs.updateDiscs(newData.getDiscs());
         daoClients.updateClients(newData.getClients());
-
-        discs = daoDiscs.getDiscs();
     }
 
 //    private static boolean checkNotEmpty(Disc disc) {

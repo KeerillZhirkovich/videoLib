@@ -56,8 +56,9 @@ public class Controller {
    * @param jTable Таблица типа JTable.
    * @return Обновленную таблицу типа JTable.
    */
-  public static JTable showDiscs(JTable jTable) {
-
+  public static JTable showDiscs(JTable jTable, String searchString) {
+      
+    search(searchString);
     Packet packet = new Packet();
 
     packet.setMethod("showDiscs");
@@ -117,7 +118,6 @@ public class Controller {
     packet.setInfo(searchString);
 
     packet = handle(packet);
-
   }
 
   /**
