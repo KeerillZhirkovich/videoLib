@@ -55,14 +55,19 @@ public class NetClient {
   }
 
   static {
-    try {
       readInfo();
+  }
+
+  public static String openConnection() {
+    try {
       socket = new Socket(ip, port);
       oos = new ObjectOutputStream(socket.getOutputStream());
       ois = new ObjectInputStream(socket.getInputStream());
-      notReceived = false;
+      System.out.println("Success");
+      return "Success";
     } catch (IOException e) {
       System.out.println("Server is not available");
+      return "Server is not available";
     }
   }
 
@@ -76,7 +81,6 @@ public class NetClient {
       oos.writeObject(data);
       oos.flush();
       //System.out.println("send");
-      notReceived = true;
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -100,13 +104,6 @@ public class NetClient {
   }
 
   public static Packet handle(Packet packet) {
-//    while (notReceived) {
-//      try {
-//        Thread.sleep(10);
-//      } catch (InterruptedException e) {
-//        e.printStackTrace();
-//      }
-//    }
     Packet gettingPacket;
     sendData(packet);
     gettingPacket = getData();
