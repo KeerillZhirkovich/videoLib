@@ -70,6 +70,30 @@ public class IoDaoDisc implements DaoDisc, Serializable {
     }
 
     /**
+     * @param id, disc
+     */
+    public void setDiscByID(Disc disc) {
+      ArrayList<Disc> discs = getDiscs();
+      for (int i = 0; i < discs.size(); i++) {
+        if (discs.get(i).getDiskID() == disc.getDiskID()) {
+          setDiscByIndex(i, disc);
+          break;
+        }
+      }
+    }
+
+    /**
+     * Служебный метод, заменяющий экземпляр Disc по его расположению в коллекции.
+     *
+     * @param index
+     */
+    public void setDiscByIndex(int index, Disc disc) {
+      ArrayList<Disc> discs = getDiscs();
+      discs.set(index, disc);
+      DataLoad.writeDiscs(discs);
+    }
+  
+    /**
      * @return
      */
     @Override

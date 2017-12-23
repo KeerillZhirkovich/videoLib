@@ -10,6 +10,9 @@ import model.Client;
 import model.Disc;
 
 import static controller.Controller.*;
+import controller.NetClient;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -33,6 +36,15 @@ public class MainForm extends javax.swing.JFrame {
    */
   public MainForm() {
     initComponents();
+    
+     this.addWindowListener(new WindowAdapter() {            
+            @Override
+            public void windowClosing(WindowEvent e) {
+              NetClient.closeConnection();
+              System.out.println("Connection closed.");
+            }
+        });
+    
     clientF.setText("");
 
     if (getClients().isEmpty()) {
@@ -112,6 +124,7 @@ public class MainForm extends javax.swing.JFrame {
     jLabel16 = new javax.swing.JLabel();
     clientPhoneF = new javax.swing.JTextField();
     clientNameF = new javax.swing.JTextField();
+    jButton2 = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     jMenu1 = new javax.swing.JMenu();
     openBase = new javax.swing.JMenuItem();
@@ -581,6 +594,13 @@ public class MainForm extends javax.swing.JFrame {
       }
     });
 
+    jButton2.setText("Сохранить");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2ActionPerformed(evt);
+      }
+    });
+
     jMenu1.setText("Файл");
 
     openBase.setText("Открыть базу");
@@ -613,7 +633,9 @@ public class MainForm extends javax.swing.JFrame {
           .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(127, 127, 127)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
               .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -656,38 +678,43 @@ public class MainForm extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jLabel14)
-              .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jLabel15)
-              .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jLabel16)
-              .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jButton5)
-              .addComponent(jButton6)
-              .addComponent(jButton10)))
-          .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+              .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jButton9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jButton1)
-              .addComponent(jButton3))))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                  .addComponent(jLabel14)
+                  .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(jLabel15)
+                  .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(jLabel16)
+                  .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(jButton5)
+                  .addComponent(jButton6)
+                  .addComponent(jButton10)))
+              .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                      .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jButton9))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(jButton1)
+                  .addComponent(jButton3))))
+            .addGap(36, 36, 36))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18))))
     );
 
     pack();
@@ -773,7 +800,10 @@ public class MainForm extends javax.swing.JFrame {
 //GEN-FIRST:event_jButton8ActionPerformed
     int x = jTable1.getSelectedRow();
     if (x != -1) {
-      setClient(getDisc((int) jTable1.getValueAt(x, firstColumn)).getDiskID(), firstColumn);
+      //setClient(getDisc((int) jTable1.getValueAt(x, firstColumn)).getDiskID(), firstColumn);
+      Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
+      disc.setClientID(firstColumn);
+      setDiscByIndex(disc);
       clientF.setText("Диск не на руках");
     }
   }
@@ -1099,7 +1129,9 @@ public class MainForm extends javax.swing.JFrame {
     int x = jTable1.getSelectedRow();
     int y = jTable2.getSelectedRow();
     if (x != -1 && y != -1) {
-      setClient((int) jTable1.getValueAt(x, firstColumn), (int) jTable2.getValueAt(y, firstColumn));
+      Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
+      disc.setClientID((int) jTable2.getValueAt(y, firstColumn));
+      setDiscByIndex(disc);
       showDiscFields();
     } else {
       JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
@@ -1408,6 +1440,10 @@ public class MainForm extends javax.swing.JFrame {
       jButton9.doClick();
   }//GEN-LAST:event_searchFKeyPressed
 
+  private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    setDiscByIndex(getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)));
+  }//GEN-LAST:event_jButton2ActionPerformed
+
   /**
    * @param args the command line arguments
    */
@@ -1456,6 +1492,7 @@ public class MainForm extends javax.swing.JFrame {
   private javax.swing.JTextField genreF;
   private javax.swing.JButton jButton1;
   private javax.swing.JButton jButton10;
+  private javax.swing.JButton jButton2;
   private javax.swing.JButton jButton3;
   private javax.swing.JButton jButton5;
   private javax.swing.JButton jButton6;
@@ -1543,7 +1580,12 @@ public class MainForm extends javax.swing.JFrame {
     clearDiscsList();
     jTable1 = showDiscs(jTable1, searchF.getText());
     if (x >= 0) {
-      jTable1.setRowSelectionInterval(x, x);
+      try {
+        jTable1.setRowSelectionInterval(x, x);
+      }
+      catch (Exception e) {
+        jTable1.setRowSelectionInterval(firstRow, firstRow);
+      }
     }
   }
 
@@ -1552,6 +1594,7 @@ public class MainForm extends javax.swing.JFrame {
    * в текстовые поля диска.
    */
   private void showDiscFields() {
+    clearDiscFields();
     int first = (int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn);
     if (first != 0) {
       Disc disc = getDiscByNumber(first);
