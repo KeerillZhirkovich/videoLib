@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.Server;
 
+import static server.Server.setCheck;
+
 /**
  *
  * @author SL3W
@@ -85,9 +87,10 @@ public class ServerStart extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //new Server();
-        //jTextField1.setText(Integer.toString(Server.getPort()));
-        Server.initServer();
+        jTextField1.setText(Integer.toString(Server.getPort()));
+        Server server = new Server();
+        Thread thread = new Thread(server);
+        thread.start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

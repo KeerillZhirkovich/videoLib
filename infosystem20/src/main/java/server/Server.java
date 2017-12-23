@@ -15,17 +15,25 @@ import static controller.Controller.*;
 /**
  * Created by Keerill on 15.12.2017.
  */
-public class Server {
+public class Server implements Runnable {
 
     private static int port;
+    private static boolean check;
 
     /**
      *
      */
     private static ServerSocket server;
- 
+
+
     static {
+//        check = true;
         readPort();
+//        go();
+    }
+
+    public static void setCheck(boolean check) {
+        Server.check = check;
     }
 
     private static void readPort() {
@@ -53,11 +61,23 @@ public class Server {
         return port;
     }
 
-    public static void initServer () {
-      start(port);
-      handle();
+    /**
+     * @param args
+     */
+    public static void go() {
+        while (check) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        start(port);
+        handle();
+        end();
     }
-    
+
+
     private static void start(int port) {
         try {
             server = new ServerSocket(port);
@@ -96,10 +116,11 @@ public class Server {
             e.printStackTrace();
         }
     }
-    
-//    @Override
-//    public void run () {
-//        Server.start(port);
-//        handle();
-//    }
+
+    @Override
+    public void run() {
+        start(port);
+        handle();
+        end();
+    }
 }
