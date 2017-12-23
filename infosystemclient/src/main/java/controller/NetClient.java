@@ -1,13 +1,11 @@
 /**
  * Created by Keerill on 15.12.2017.
  */
-
 package controller;
 
 import java.io.*;
 import java.net.Socket;
 import model.Packet;
-
 
 /**
  * Created by Keerill on 15.12.2017.
@@ -21,12 +19,24 @@ public class NetClient {
   private static int port;
   private static String ip;
 
+  static {
+    readInfo();
+  }
+  
   public static void setPort(int port) {
     NetClient.port = port;
   }
 
   public static void setIp(String ip) {
     NetClient.ip = ip;
+  }
+
+  public static int getPort() {
+    return port;
+  }
+
+  public static String getIp() {
+    return ip;
   }
 
   private static void readInfo() {
@@ -55,7 +65,7 @@ public class NetClient {
   }
 
   static {
-      readInfo();
+    readInfo();
   }
 
   public static String openConnection() {

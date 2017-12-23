@@ -23,8 +23,7 @@ public class Server {
      *
      */
     private static ServerSocket server;
-
-
+ 
     static {
         readPort();
     }
@@ -54,16 +53,11 @@ public class Server {
         return port;
     }
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        start(port);
-        handle();
-        end();
+    public static void initServer () {
+      start(port);
+      handle();
     }
-
-
+    
     private static void start(int port) {
         try {
             server = new ServerSocket(port);
@@ -102,4 +96,10 @@ public class Server {
             e.printStackTrace();
         }
     }
+    
+//    @Override
+//    public void run () {
+//        Server.start(port);
+//        handle();
+//    }
 }
