@@ -17,12 +17,17 @@ import static model.dao.tools.WorkWithStrings.splitData;
 /**
  * Класс, реализующий интерфейс DaoDisc. Работа @Override методов описана в интерфейсе.
  */
-public class IODAODisc implements DaoDisc, Serializable {
+public class IoDaoDisc implements DaoDisc, Serializable {
 
-    private ArrayList<Disc> discs = new ArrayList<>();
+    private IoDaoDisc() {
+    }
 
-    public IODAODisc() {
-        discs = DataLoad.getDiscs();
+    private static class IoDaoDiscHolder {
+        private final static IoDaoDisc IO_DAO_DISC_KEEPER = new IoDaoDisc();
+    }
+
+    public static IoDaoDisc getIoDaoDisc() {
+        return IoDaoDiscHolder.IO_DAO_DISC_KEEPER;
     }
 
     /**
@@ -30,6 +35,7 @@ public class IODAODisc implements DaoDisc, Serializable {
      */
     @Override
     public void setDisc(Disc disc) {
+        ArrayList<Disc> discs = getDiscs();
         int id;
         LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
 
@@ -46,6 +52,7 @@ public class IODAODisc implements DaoDisc, Serializable {
         temp.add(disc);
 
         discs = new ArrayList<>(temp);
+        DataLoad.writeDiscs(discs);
     }
 
     /**
@@ -53,6 +60,7 @@ public class IODAODisc implements DaoDisc, Serializable {
      */
     @Override
     public void deleteDisc(int id) {
+        ArrayList<Disc> discs = getDiscs();
         for (int i = 0; i < discs.size(); i++) {
             if (discs.get(i).getDiskID() == id) {
                 deleteDiscByIndex(i);
@@ -66,6 +74,8 @@ public class IODAODisc implements DaoDisc, Serializable {
      */
     @Override
     public ArrayList<Disc> getDiscs() {
+        ArrayList<Disc> discs;
+        discs = DataLoad.getDiscs();
         return discs;
     }
 
@@ -75,6 +85,7 @@ public class IODAODisc implements DaoDisc, Serializable {
      */
     @Override
     public Disc getDisc(int id) {
+        ArrayList<Disc> discs = getDiscs();
         Disc d = null;
         for (Disc disc : discs) {
             if (disc.getDiskID() == id) {
@@ -92,6 +103,7 @@ public class IODAODisc implements DaoDisc, Serializable {
     @Override
     public ArrayList<Disc> getDiscsOnTheDataSet(String searchString) {
 
+        ArrayList<Disc> discs = getDiscs();
         ArrayList<Disc> result = new ArrayList<>();
         ArrayList<String> keywords = splitData(searchString);
 
@@ -140,7 +152,7 @@ public class IODAODisc implements DaoDisc, Serializable {
      */
     @Override
     public void updateDiscs(ArrayList<Disc> newDiscs) {
-
+        ArrayList<Disc> discs = getDiscs();
         LinkedHashSet<Disc> updatedDiscs = new LinkedHashSet<>(discs);
         int last = discs.get(discs.size() - 1).getDiskID();
         ArrayList<Disc> temp;
@@ -153,22 +165,23 @@ public class IODAODisc implements DaoDisc, Serializable {
         }
 
         discs = new ArrayList<>(updatedDiscs);
+        DataLoad.writeDiscs(discs);
     }
 
     /**
      * Служебный метод, сортирующий коллекцию Discs по Id.
      */
-    private void sortDiscsByID() {
-        for (int i = 0; i < discs.size(); i++) {
-            for (int j = i + 1; j < discs.size(); j++) {
-                if (discs.get(i).getDiskID() > discs.get(j).getDiskID()) {
-                    int v = discs.get(i).getDiskID();
-                    discs.get(i).setDiskID(discs.get(j).getDiskID());
-                    discs.get(j).setDiskID(v);
-                }
-            }
-        }
-    }
+//    private void sortDiscsByID() {
+//        for (int i = 0; i < discs.size(); i++) {
+//            for (int j = i + 1; j < discs.size(); j++) {
+//                if (discs.get(i).getDiskID() > discs.get(j).getDiskID()) {
+//                    int v = discs.get(i).getDiskID();
+//                    discs.get(i).setDiskID(discs.get(j).getDiskID());
+//                    discs.get(j).setDiskID(v);
+//                }
+//            }
+//        }
+//    }
 
 
     /**
@@ -177,6 +190,7 @@ public class IODAODisc implements DaoDisc, Serializable {
      * @return
      */
     public Disc getDiscByIndex(int index) {
+        ArrayList<Disc> discs = getDiscs();
         return discs.get(index);
     }
 
@@ -185,7 +199,9 @@ public class IODAODisc implements DaoDisc, Serializable {
      * @param index
      */
     public void deleteDiscByIndex(int index) {
+        ArrayList<Disc> discs = getDiscs();
         discs.remove(index);
+        DataLoad.writeDiscs(discs);
     }
 
     /**
@@ -194,12 +210,14 @@ public class IODAODisc implements DaoDisc, Serializable {
      */
     @Override
     public void setClient(int discID, int clientID) {
+        ArrayList<Disc> discs = getDiscs();
         for (int i = 0; i < discs.size(); i++) {
             if (discs.get(i).getDiskID() == discID) {
                 discs.get(i).setClientID(clientID);
                 break;
             }
         }
+        DataLoad.writeDiscs(discs);
     }
 
 }

@@ -3,29 +3,25 @@ package controller;
 import model.Client;
 import model.Disc;
 import model.dao.EssenceForSave;
-import model.dao.io.IODAOClient;
-import model.dao.io.IODAODisc;
+import model.dao.io.IoDaoClient;
+import model.dao.io.IoDaoDisc;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Vector;
 
-import static model.dao.io.DataLoad.loadNewBase;
-import static model.dao.io.DataLoad.mergeBases;
-import static model.dao.io.DataLoad.writeData;
+import static model.dao.io.DataLoad.*;
 
 /**
  * Класс - контроллер, реализующий совместную работу View и Model.
  */
 public class Controller {
 
-    private static IODAOClient daoClients = new IODAOClient();
-    private static IODAODisc daoDiscs = new IODAODisc();
+    private static IoDaoClient daoClients = IoDaoClient.getIoDaoClient();
+    private static IoDaoDisc daoDiscs = IoDaoDisc.getIoDaoDisc();
     //private static ArrayList<Disc> discs = daoDiscs.getDiscs();
 
     /**
      * Метод, осуществляющий заполнение таблицы Client для вывода на MainForm.
+     *
      * @param jTable Таблица типа JTable.
      * @return Обновленную таблицу типа JTable.
      */
@@ -38,23 +34,25 @@ public class Controller {
 
     /**
      * Метод, осуществляющий заполнение таблицы Discs для вывода на MainForm.
+     *
      * @param jTable Таблица типа JTable.
      * @return Обновленную таблицу типа JTable.
      */
-    public static synchronized ArrayList<Disc> showDiscs(String searchString) {
-        daoDiscs.getDiscsOnTheDataSet(searchString);
-        return daoDiscs.getDiscs();
-    }
+//    public static synchronized ArrayList<Disc> showDiscs(String searchString) {
+//        daoDiscs.getDiscsOnTheDataSet(searchString);
+//        return daoDiscs.getDiscs();
+//    }
 
     /**
      * Метод, осуществляющий запись в файл текущих данных.
      */
-    public static synchronized void saveChanges() {
-        writeData(daoDiscs.getDiscs(), daoClients.getClients());
-    }
+//    public static synchronized void saveChanges() {
+//        writeData(daoDiscs.getDiscs(), daoClients.getClients());
+//    }
 
     /**
      * Метод, возвращающий экземпляр Disc по номеру.
+     *
      * @param number Номер диска.
      * @return Диск типа Disc.
      */
@@ -64,8 +62,9 @@ public class Controller {
 
     /**
      * Метод, запускающий поиск объектов Disc по данным из запроса пользователя.
+     *
      * @param searchString Строка, по которой осуществляется поиск.
-     * @return 
+     * @return
      */
     public static synchronized ArrayList<Disc> search(String searchString) {
         //discs = daoDiscs.getDiscsOnTheDataSet(searchString);
@@ -74,6 +73,7 @@ public class Controller {
 
     /**
      * Метод, возвращающий коллекцию Discs.
+     *
      * @return Список дисков.
      */
     public static synchronized ArrayList<Disc> getDiscs() {
@@ -82,6 +82,7 @@ public class Controller {
 
     /**
      * Метод, возвращающий коллекцию Clients.
+     *
      * @return Список клиентов из daoClients.
      */
     public static synchronized ArrayList<Client> getClients() {
@@ -90,6 +91,7 @@ public class Controller {
 
     /**
      * Метод, возвращающий экземпляр Client по номеру.
+     *
      * @param id ID клиента.
      * @return Клиент типа Client.
      */
@@ -99,6 +101,7 @@ public class Controller {
 
     /**
      * Метод, записывающий в коллекцию передаваемый экземпляр Client.(новый)
+     *
      * @param client Клиента типа Client.
      */
     public static synchronized void setClient(Client client) {
@@ -107,7 +110,8 @@ public class Controller {
 
     /**
      * Метод, записывающий в коллекцию передаваемый экземпляр Client по номеру.
-     * @param discID ID диска.
+     *
+     * @param discID   ID диска.
      * @param clientID ID клиента.
      */
     public static synchronized void setClient(int discID, int clientID) {
@@ -116,6 +120,7 @@ public class Controller {
 
     /**
      * Метод, удаляющий из коллекции экземпляр Disc по номеру.
+     *
      * @param id ID диска.
      */
     public static synchronized void deleteDisc(int id) {
@@ -124,6 +129,7 @@ public class Controller {
 
     /**
      * Метод, записывающий в коллекцию передаваемый экземпляр Disc. (новый)
+     *
      * @param disc Диск типа Disc.
      */
     public static synchronized void setDisc(Disc disc) {
@@ -132,6 +138,7 @@ public class Controller {
 
     /**
      * Метод, возвращающий экземпляр Disc по номеру.
+     *
      * @param id ID диска.
      * @return Диск по заданному ID типа Disc.
      */
@@ -141,6 +148,7 @@ public class Controller {
 
     /**
      * Метод, удаляющий экземпляр Client по номеру.
+     *
      * @param id ID клиента.
      */
     public static synchronized void deleteClient(int id) {
@@ -149,25 +157,25 @@ public class Controller {
 
     /**
      * Метод, загрущающий из файла коллекцию Disc и Client.
+     *
      * @param filePath Путь к файлу.
      */
-    public static synchronized void openBase(String filePath) {
-        loadNewBase(filePath);
-        daoDiscs = new IODAODisc();
-        daoClients = new IODAOClient();
+    public static synchronized void openBase(EssenceForSave data) {
+        backupBase();
+        writeData(data.getDiscs(), data.getClients());
     }
 
 
     /**
      * Метод, осуществляющий слияние двух баз.
+     *
      * @param filePath Путь к файлу.
      */
-    public static synchronized void mergeBase(String filePath) {
+    public static synchronized void mergeBase(EssenceForSave data) {
+        backupBase();
 
-        EssenceForSave newData = mergeBases(filePath);
-
-        daoDiscs.updateDiscs(newData.getDiscs());
-        daoClients.updateClients(newData.getClients());
+        daoDiscs.updateDiscs(data.getDiscs());
+        daoClients.updateClients(data.getClients());
     }
 
 //    private static boolean checkNotEmpty(Disc disc) {

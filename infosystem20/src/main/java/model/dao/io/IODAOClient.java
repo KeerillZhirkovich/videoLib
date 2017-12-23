@@ -17,12 +17,17 @@ import static model.dao.tools.WorkWithStrings.splitData;
 /**
  * Класс, реализующий интерфейс DaoClient. Работа @Override методов описана в интерфейсе.
  */
-public class IODAOClient implements DaoClient, Serializable {
+public class IoDaoClient implements DaoClient, Serializable {
 
-    private ArrayList<Client> clients = new ArrayList<>();
+    private IoDaoClient() {
+    }
 
-    public IODAOClient() {
-        clients = DataLoad.getClients();
+    private static class IoDaoClientHolder {
+        private final static IoDaoClient IO_DAO_CLIENT_KEEPER = new IoDaoClient();
+    }
+
+    public static IoDaoClient getIoDaoClient() {
+        return IoDaoClientHolder.IO_DAO_CLIENT_KEEPER;
     }
 
     /**
@@ -30,6 +35,7 @@ public class IODAOClient implements DaoClient, Serializable {
      */
     @Override
     public void setClient(Client client) {
+        ArrayList<Client> clients = getClients();
         int id;
         LinkedHashSet<Client> temp = new LinkedHashSet<>(clients);
 
@@ -46,6 +52,7 @@ public class IODAOClient implements DaoClient, Serializable {
         temp.add(client);
 
         clients = new ArrayList<>(temp);
+        DataLoad.writeClients(clients);
     }
 
     /**
@@ -53,11 +60,13 @@ public class IODAOClient implements DaoClient, Serializable {
      */
     @Override
     public void deleteClient(int id) {
+        ArrayList<Client> clients = getClients();
         for (int i = 0; i < clients.size(); i++) {
             if (clients.get(i).getClientID() == id) {
-                deleteByIndex(i);
+                clients = deleteByIndex(i, clients);
             }
         }
+        DataLoad.writeClients(clients);
     }
 
     /**
@@ -65,6 +74,8 @@ public class IODAOClient implements DaoClient, Serializable {
      */
     @Override
     public ArrayList<Client> getClients() {
+        ArrayList<Client> clients;
+        clients = DataLoad.getClients();
         return clients;
     }
 
@@ -74,6 +85,7 @@ public class IODAOClient implements DaoClient, Serializable {
      */
     @Override
     public Client getClient(int id) {
+        ArrayList<Client> clients = getClients();
 
         Client client = null;
 
@@ -91,6 +103,7 @@ public class IODAOClient implements DaoClient, Serializable {
      */
     @Override
     public ArrayList<Client> getClientsOnTheDataSet(String searchString) {
+        ArrayList<Client> clients = getClients();
 
         ArrayList<Client> result = new ArrayList<>();
         ArrayList<String> keywords = splitData(searchString);
@@ -125,32 +138,41 @@ public class IODAOClient implements DaoClient, Serializable {
      */
     @Override
     public void updateClients(ArrayList<Client> newClients) {
-
+        ArrayList<Client> clients = getClients();
         LinkedHashSet<Client> updatedClients = new LinkedHashSet<>(clients);
-
-        for (Client client : newClients) {
-            client.setClientID(client.getClientID() + clients.size());
-            updatedClients.add(client);
+        int last = clients.get(clients.size() - 1).getClientID();
+        ArrayList<Client> temp;
+        for (Client disc : newClients) {
+            if (updatedClients.add(disc)) {
+                temp = new ArrayList<>(updatedClients);
+                temp.get(temp.size() - 1).setClientID(++last);
+                updatedClients = new LinkedHashSet<>(temp);
+            }
         }
 
         clients = new ArrayList<>(updatedClients);
+        DataLoad.writeClients(clients);
     }
 
     /**
      * Служебный метод, возвращающий экземпляр Client по его расположению в коллекции.
+     *
      * @param index
      * @return
      */
     public Client getClientByIndex(int index) {
+        ArrayList<Client> clients = getClients();
         return clients.get(index);
     }
 
     /**
      * Служебный метод, удаляющий экземпляр Client по его расположению в коллекции.
+     *
      * @param index
      */
-    public void deleteByIndex(int index) {
+    public ArrayList<Client> deleteByIndex(int index, ArrayList<Client> clients) {
         clients.remove(index);
+        return clients;
     }
 
 }

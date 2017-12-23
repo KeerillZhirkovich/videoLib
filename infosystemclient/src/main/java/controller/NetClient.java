@@ -20,10 +20,20 @@ public class NetClient {
   private static ObjectOutputStream oos;
   private static ObjectInputStream ois;
   private static boolean notReceived;
+  private static int port = 1111;
+  private static String ip = "127.0.0.1";
+
+  public static void setPort(int port) {
+    NetClient.port = port;
+  }
+
+  public static void setIp(String ip) {
+    NetClient.ip = ip;
+  }
 
   static {
     try {
-      socket = new Socket("127.0.0.1", 1111);
+      socket = new Socket(ip, port);
       oos = new ObjectOutputStream(socket.getOutputStream());
       ois = new ObjectInputStream(socket.getInputStream());
       notReceived = false;
@@ -84,6 +94,11 @@ public class NetClient {
     packet.setCloseConnection(true);
     sendData(packet);
     getData();
+    try {
+      socket.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

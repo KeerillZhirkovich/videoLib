@@ -1,6 +1,7 @@
 package server;
 
 import model.Packet;
+import model.dao.EssenceForSave;
 
 import java.io.*;
 import java.net.Socket;
@@ -62,10 +63,6 @@ public class ClientHandler extends Thread {
             return packet;
         }
 
-        if (packet.getMethod().contains(showDiscs)) {
-            packet.setDiscs(getDiscs());
-            return packet;
-        }
 
         if (packet.getMethod().contains(getDiscs)) {
             packet.setDiscs(getDiscs());
@@ -77,10 +74,6 @@ public class ClientHandler extends Thread {
             return packet;
         }
 
-        if (packet.getMethod().contains(saveChanges)) {
-            saveChanges();
-            return packet;
-        }
 
         if (packet.getMethod().contains(getDiscByNumber)) {
             packet.setDisc(getDiscByNumber(packet.getNumber()));
@@ -88,7 +81,7 @@ public class ClientHandler extends Thread {
         }
 
         if (packet.getMethod().contains(search)) {
-            search(packet.getInfo());
+            packet.setDiscs(search(packet.getInfo()));
             return packet;
         }
 
@@ -113,7 +106,7 @@ public class ClientHandler extends Thread {
         }
 
         if (packet.getMethod().contains(setDisc)) {
-            deleteDisc(packet.getNumber());
+            setDisc(packet.getDisc());
             return packet;
         }
 
@@ -124,6 +117,18 @@ public class ClientHandler extends Thread {
 
         if (packet.getMethod().contains(deleteClient)) {
             deleteClient(packet.getNumber());
+            return packet;
+        }
+
+        if (packet.getMethod().contains(openBase)) {
+            EssenceForSave data = packet.getData();
+            openBase(data);
+            return packet;
+        }
+
+        if (packet.getMethod().contains(mergeBase)) {
+            EssenceForSave data = packet.getData();
+            mergeBase(data);
             return packet;
         }
 

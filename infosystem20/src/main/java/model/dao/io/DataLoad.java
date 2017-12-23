@@ -14,13 +14,16 @@ import static model.dao.tools.FileChecker.fileIsEmpty;
  */
 public class DataLoad implements Serializable {
 
+    private static boolean isRead;
+    private static boolean isWrite;
+
     private static String filePath;
-    private static EssenceForSave data;
+    //private static EssenceForSave data;
     public static final String file = "src\\main\\java\\model\\dao\\io\\lastdirectory";
 
     static {
         readLastDirectory();
-        data = readData(filePath);
+        //data = readData(filePath);
     }
 
 
@@ -57,8 +60,7 @@ public class DataLoad implements Serializable {
      * @param filePath
      * @return
      */
-    public static EssenceForSave readData(String filePath) {
-
+    public static EssenceForSave readData() {
         EssenceForSave data = new EssenceForSave();
 
         if (fileIsEmpty(filePath)) {
@@ -81,9 +83,12 @@ public class DataLoad implements Serializable {
      * Метод, записывающий изменения Discs в файл базы.
      * @param discs
      */
-    public static void writeDiscs(ArrayList<Disc> discs) {
+    public static boolean writeDiscs(ArrayList<Disc> discs) {
+        EssenceForSave data;
+        data = readData();
         data.setDiscs(discs);
-        writeData(DataLoad.filePath);
+        writeData(filePath, data);
+        return true;
     }
 
 
@@ -91,9 +96,12 @@ public class DataLoad implements Serializable {
      * Метод, записывающий изменения Clients в файл базы.
      * @param clients
      */
-    public static void writeClients(ArrayList<Client> clients) {
+    public static boolean writeClients(ArrayList<Client> clients) {
+        EssenceForSave data;
+        data = readData();
         data.setClients(clients);
-        writeData(DataLoad.filePath);
+        writeData(filePath, data);
+        return true;
     }
 
 
@@ -102,10 +110,13 @@ public class DataLoad implements Serializable {
      * @param discs
      * @param clients
      */
-    public static void writeData(ArrayList<Disc> discs, ArrayList<Client> clients) {
+    public static boolean writeData(ArrayList<Disc> discs, ArrayList<Client> clients) {
+        EssenceForSave data;
+        data = readData();
         data.setClients(clients);
         data.setDiscs(discs);
-        writeData(DataLoad.filePath);
+        writeData(filePath, data);
+        return true;
     }
 
 
@@ -113,13 +124,14 @@ public class DataLoad implements Serializable {
      * Метод, осуществляющий непосредственное сохранение базы в файл.
      * @param filePath
      */
-    private static void writeData(String filePath) {
+    private static boolean writeData(String filePath, EssenceForSave data) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
             ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
             oos.writeObject(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
     }
 
 
@@ -128,35 +140,30 @@ public class DataLoad implements Serializable {
      * @return
      */
     public static ArrayList<Disc> getDiscs() {
+        EssenceForSave data;
+        data = readData();
         return data.getDiscs();
     }
 
     /**
      * Метод, возвращающий коллекцию Client.
-     * @return
+     * @return ArrayList of Client
      */
     public static ArrayList<Client> getClients() {
+        EssenceForSave data;
+        data = readData();
         return data.getClients();
     }
 
     /**
      * Метод, загружающий новую базу из выбранной директории.
-     * @param filePath
+     * @return boolean checker
      */
-    public static void loadNewBase(String filePath) {
-        writeLastDirectory(filePath);
-        data = readData(DataLoad.filePath);
+    public static boolean backupBase() {
+        EssenceForSave data = readData();
+        data = readData();
+        writeData("database\\backup\\dataBackup", data);
+        return true;
     }
 
-    /**
-     * Метод, осуществляющий слияние двух баз.
-     * @param filePath
-     * @return
-     */
-    public static EssenceForSave mergeBases(String filePath) {
-
-        writeData("src\\database\\backup\\dataBackup");
-
-        return readData(filePath);
-    }
 }

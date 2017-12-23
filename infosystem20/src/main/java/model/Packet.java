@@ -6,6 +6,7 @@ package model;
 
 import model.Client;
 import model.Disc;
+import model.dao.EssenceForSave;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +25,15 @@ public class Packet implements Serializable {
     private String info;
     private String method;
     private boolean closeConnection = false;
+    private EssenceForSave data;
+
+    public EssenceForSave getData() {
+        return data;
+    }
+
+    public void setData(EssenceForSave data) {
+        this.data = data;
+    }
 
     public ArrayList<Disc> getDiscs() {
         return discs;

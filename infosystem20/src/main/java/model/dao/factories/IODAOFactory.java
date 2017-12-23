@@ -14,14 +14,14 @@ public class IODAOFactory implements DaoFactory {
      * @return
      */
     public DaoDisc getDaoDisc() {
-        return new IODAODisc();
+        return IoDaoDisc.getIoDaoDisc();
     }
 
     /**
      * @return
      */
     public DaoClient getDaoClient() {
-        return new IODAOClient();
+        return IoDaoClient.getIoDaoClient();
     }
 
 }

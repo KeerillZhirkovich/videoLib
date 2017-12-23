@@ -3,13 +3,17 @@ package controller;
 import model.Client;
 import model.Disc;
 import model.Packet;
+import model.dao.EssenceForSave;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import static controller.NetClient.handle;
+import static model.dao.tools.FileChecker.fileIsEmpty;
 
 /**
  * Класс - контроллер, реализующий совместную работу View и Model.
@@ -57,14 +61,8 @@ public class Controller {
    * @return Обновленную таблицу типа JTable.
    */
   public static JTable showDiscs(JTable jTable, String searchString) {
-      
-    search(searchString);
-    Packet packet = new Packet();
 
-    packet.setMethod("showDiscs");
-    packet = handle(packet);
-
-    ArrayList<Disc> discs = packet.getDiscs();
+    ArrayList<Disc> discs = search(searchString);
     DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
 
     for (int j = 0; j < discs.size(); j++) {
@@ -74,17 +72,6 @@ public class Controller {
     }
 
     return jTable;
-  }
-
-  /**
-   * Метод, осуществляющий запись в файл текущих данных.
-   */
-  public static void saveChanges() {
-    Packet packet = new Packet();
-
-    packet.setMethod("saveChanges");
-
-    packet = handle(packet);
   }
 
   /**
@@ -110,7 +97,7 @@ public class Controller {
    *
    * @param searchString Строка, по которой осуществляется поиск.
    */
-  public static void search(String searchString) {
+  public static ArrayList<Disc> search(String searchString) {
 
     Packet packet = new Packet();
 
@@ -118,6 +105,8 @@ public class Controller {
     packet.setInfo(searchString);
 
     packet = handle(packet);
+
+    return packet.getDiscs();
   }
 
   /**
@@ -267,9 +256,11 @@ public class Controller {
    * @param filePath Путь к файлу.
    */
   public static void openBase(String filePath) {
-//    sendData("openBase");
-//    getData();
-//    sendData(filePath);
+    Packet packet = new Packet();
+
+    packet.setMethod("openBase");
+    packet.setData(openFile(filePath));
+    packet = handle(packet);
   }
 
 
@@ -279,9 +270,30 @@ public class Controller {
    * @param filePath Путь к файлу.
    */
   public static void mergeBase(String filePath) {
-//    sendData("mergeBase");
-//    getData();
-//    sendData(filePath);
+    Packet packet = new Packet();
+
+    packet.setMethod("mergeBase");
+    packet.setData(openFile(filePath));
+    packet = handle(packet);
+  }
+
+
+  private static EssenceForSave openFile(String filePath) {
+    EssenceForSave data = new EssenceForSave();
+
+    if (fileIsEmpty(filePath)) {
+      return data;
+    } else {
+      try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
+        ObjectInputStream ois = new ObjectInputStream(fileInputStream);
+        data = (EssenceForSave) ois.readObject();
+        ois.close();
+        return data;
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return data;
+    }
   }
 
 
