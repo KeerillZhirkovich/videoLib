@@ -4,9 +4,7 @@
 
 package controller;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import model.Packet;
 
@@ -20,8 +18,8 @@ public class NetClient {
   private static ObjectOutputStream oos;
   private static ObjectInputStream ois;
   private static boolean notReceived;
-  private static int port = 1111;
-  private static String ip = "127.0.0.1";
+  private static int port;
+  private static String ip;
 
   public static void setPort(int port) {
     NetClient.port = port;
@@ -31,8 +29,34 @@ public class NetClient {
     NetClient.ip = ip;
   }
 
+  private static void readInfo() {
+    try {
+      Reader fileReader = new FileReader("serverinfo\\serverinfo");
+      StreamTokenizer streamTokenizer = new StreamTokenizer(fileReader);
+      streamTokenizer.nextToken();
+      ip = streamTokenizer.sval;
+      streamTokenizer.nextToken();
+      port = (int) streamTokenizer.nval;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void writeInfo(String newIp, int newPort) {
+    try {
+      Writer fileWriter = new FileWriter("serverinfo\\serverinfo");
+      PrintWriter printWriter = new PrintWriter(fileWriter);
+      printWriter.print(newIp);
+      printWriter.print(" ");
+      printWriter.print(newPort);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   static {
     try {
+      readInfo();
       socket = new Socket(ip, port);
       oos = new ObjectOutputStream(socket.getOutputStream());
       ois = new ObjectInputStream(socket.getInputStream());

@@ -44,7 +44,7 @@ public class Server {
         try {
             Writer fileWriter = new FileWriter("database\\port");
             PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.print(port);
+            printWriter.print(newPort);
         } catch (IOException e) {
             e.printStackTrace();
         }
