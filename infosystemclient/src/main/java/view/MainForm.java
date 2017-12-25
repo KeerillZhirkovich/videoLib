@@ -31,6 +31,9 @@ public class MainForm extends javax.swing.JFrame {
    */
   private static final int firstRow = 0;
 
+  private static boolean fixedDisc = false;
+  private static boolean fixedClient = false;
+  
   /**
    * Конструктор формы
    */
@@ -109,7 +112,6 @@ public class MainForm extends javax.swing.JFrame {
     clientPhoneF = new javax.swing.JTextField();
     clientNameF = new javax.swing.JTextField();
     jButton2 = new javax.swing.JButton();
-    jButton4 = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     jMenu1 = new javax.swing.JMenu();
     openBase = new javax.swing.JMenuItem();
@@ -191,6 +193,9 @@ public class MainForm extends javax.swing.JFrame {
       public void keyReleased(java.awt.event.KeyEvent evt) {
         origTittleFKeyReleased(evt);
       }
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        origTittleFKeyTyped(evt);
+      }
     });
 
     russTittleF.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -199,26 +204,26 @@ public class MainForm extends javax.swing.JFrame {
       }
     });
     russTittleF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        russTittleFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        russTittleFKeyTyped(evt);
       }
     });
 
     directorF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        directorFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        directorFKeyTyped(evt);
       }
     });
 
     genreF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        genreFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        genreFKeyTyped(evt);
       }
     });
 
     durationF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        durationFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        durationFKeyTyped(evt);
       }
     });
 
@@ -226,8 +231,8 @@ public class MainForm extends javax.swing.JFrame {
     jLabel6.setText("Год выхода:");
 
     releaseyearF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        releaseyearFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        releaseyearFKeyTyped(evt);
       }
     });
 
@@ -235,8 +240,8 @@ public class MainForm extends javax.swing.JFrame {
     jLabel7.setText("Рейтинг IMDb:");
 
     ratingF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        ratingFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        ratingFKeyTyped(evt);
       }
     });
 
@@ -244,8 +249,8 @@ public class MainForm extends javax.swing.JFrame {
     jLabel8.setText("Языки:");
 
     langF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        langFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        langFKeyTyped(evt);
       }
     });
 
@@ -253,8 +258,8 @@ public class MainForm extends javax.swing.JFrame {
     jLabel9.setText("Страна:");
 
     countryF.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        countryFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        countryFKeyTyped(evt);
       }
     });
 
@@ -272,6 +277,9 @@ public class MainForm extends javax.swing.JFrame {
       }
       public void keyReleased(java.awt.event.KeyEvent evt) {
         descriptionFKeyReleased(evt);
+      }
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        descriptionFKeyTyped(evt);
       }
     });
     jScrollPane2.setViewportView(descriptionF);
@@ -294,8 +302,8 @@ public class MainForm extends javax.swing.JFrame {
       public void keyPressed(java.awt.event.KeyEvent evt) {
         actorsFKeyPressed(evt);
       }
-      public void keyReleased(java.awt.event.KeyEvent evt) {
-        actorsFKeyReleased(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        actorsFKeyTyped(evt);
       }
     });
     jScrollPane3.setViewportView(actorsF);
@@ -324,17 +332,17 @@ public class MainForm extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel13))
-              .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(clientF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11))
+              .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clientF, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addContainerGap()
@@ -553,6 +561,9 @@ public class MainForm extends javax.swing.JFrame {
       public void keyReleased(java.awt.event.KeyEvent evt) {
         clientSurnameFKeyReleased(evt);
       }
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        clientSurnameFKeyTyped(evt);
+      }
     });
 
     jLabel16.setText("Телефон:");
@@ -566,6 +577,9 @@ public class MainForm extends javax.swing.JFrame {
       public void keyReleased(java.awt.event.KeyEvent evt) {
         clientPhoneFKeyReleased(evt);
       }
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        clientPhoneFKeyTyped(evt);
+      }
     });
 
     clientNameF.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -577,20 +591,16 @@ public class MainForm extends javax.swing.JFrame {
       public void keyReleased(java.awt.event.KeyEvent evt) {
         clientNameFKeyReleased(evt);
       }
-    });
-
-    jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-    jButton2.setText("Сохранить");
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButton2ActionPerformed(evt);
+      public void keyTyped(java.awt.event.KeyEvent evt) {
+        clientNameFKeyTyped(evt);
       }
     });
 
-    jButton4.setText("Обновить базу");
-    jButton4.addActionListener(new java.awt.event.ActionListener() {
+    jButton2.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+    jButton2.setText("Синхронизировать");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButton4ActionPerformed(evt);
+        jButton2ActionPerformed(evt);
       }
     });
 
@@ -628,29 +638,20 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
               .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .addGroup(layout.createSequentialGroup()
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)))
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addGap(9, 9, 9)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(9, 9, 9))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(102, 102, 102)))
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jButton5)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton6)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(114, 114, 114)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(9, 9, 9)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
               .addComponent(jLabel16)
@@ -658,23 +659,32 @@ public class MainForm extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        .addContainerGap())
+              .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+              .addComponent(jLabel14)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+              .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jButton5)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton6)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
+        .addGap(10, 10, 10))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jButton9))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1))
           .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel14)
@@ -688,29 +698,23 @@ public class MainForm extends javax.swing.JFrame {
               .addComponent(jLabel16)
               .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jButton5)
-              .addComponent(jButton6)
-              .addComponent(jButton10)))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jButton9))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton4)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jButton1)
-              .addComponent(jButton3)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton5)
+                .addComponent(jButton6)
+                .addComponent(jButton10))
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton1)
+                .addComponent(jButton3))))
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addGap(20, 20, 20))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap(9, Short.MAX_VALUE))
     );
 
     pack();
@@ -840,66 +844,16 @@ public class MainForm extends javax.swing.JFrame {
 //GEN-FIRST:event_origTittleFKeyReleased
     if (evt.getKeyChar() == KeyEvent.VK_TAB) {
       descriptionF.setText(trim(descriptionF.getText()));
-    } else {
-      try {
-        getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-            .setOriginalTitle(trim(origTittleF.getText()));
-      } catch (Exception e) {
-      }
     }
+//      else {
+//      try {
+//        getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
+//            .setOriginalTitle(trim(origTittleF.getText()));
+//      } catch (Exception e) {
+//      }
+//    }
   }
 //GEN-LAST:event_origTittleFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * russTittleF. Обновляет информацию в поле диска russianTitle на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void russTittleFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_russTittleFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setRussianTitle(trim(russTittleF.getText()));
-    } catch (Exception e) {
-    }
-  }
-//GEN-LAST:event_russTittleFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * directorF. Обновляет информацию в поле диска director на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void directorFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_directorFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setDirector(trim(directorF.getText()));
-    } catch (Exception e) {
-    }
-  }
-//GEN-LAST:event_directorFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * genreF. Обновляет информацию в поле диска genre на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void genreFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_genreFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setGenre(trim(genreF.getText()));
-    } catch (Exception e) {
-    }
-  }
-//GEN-LAST:event_genreFKeyReleased
 
   /**
    * Метод, отлавливающие отпускание клавиши в текстовом поле
@@ -940,76 +894,6 @@ public class MainForm extends javax.swing.JFrame {
 
   /**
    * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * ratingF. Обновляет информацию в поле диска rating на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void ratingFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_ratingFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setRating(Double.parseDouble(trim(ratingF.getText())));
-    } catch (NumberFormatException e) {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setRating(0);
-    }
-  }
-//GEN-LAST:event_ratingFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * langF. Обновляет информацию в поле диска languages на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void langFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_langFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)
-      ).setLanguages(trim(langF.getText()));
-    } catch (Exception e) {
-    }
-  }
-//GEN-LAST:event_langFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * countryF. Обновляет информацию в поле диска country на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void countryFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_countryFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setCountry(trim(countryF.getText()));
-    } catch (Exception e) {
-    }
-  }
-//GEN-LAST:event_countryFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
-   * actorsF. Обновляет информацию в поле диска actors на то, что введено
-   * в данном поле.
-   *
-   * @param evt
-   */
-  private void actorsFKeyReleased(java.awt.event.KeyEvent evt) {
-//GEN-FIRST:event_actorsFKeyReleased
-    try {
-      getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-          .setActors(trim(actorsF.getText()));
-    } catch (Exception e) {
-    }
-  }
-//GEN-LAST:event_actorsFKeyReleased
-
-  /**
-   * Метод, отлавливающие отпускание клавиши в текстовом поле
    * descriptionF.
    *
    * @param evt
@@ -1019,12 +903,6 @@ public class MainForm extends javax.swing.JFrame {
     if (evt.getKeyChar() == KeyEvent.VK_TAB) {
       actorsF.setText(trim(actorsF.getText()));
       descriptionF.setText(trim(descriptionF.getText()));
-    } else {
-      try {
-        getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn))
-            .setDescription(trim(descriptionF.getText()));
-      } catch (Exception e) {
-      }
     }
   }
 //GEN-LAST:event_descriptionFKeyReleased
@@ -1037,8 +915,6 @@ public class MainForm extends javax.swing.JFrame {
    */
   private void jTable1MousePressed(java.awt.event.MouseEvent evt) {
 //GEN-FIRST:event_jTable1MousePressed
-    jTable1.setRowSelectionInterval(jTable1.getSelectedRow(), 
-        jTable1.getSelectedRow());
     showDiscFields();
   }
 //GEN-LAST:event_jTable1MousePressed
@@ -1430,45 +1306,109 @@ public class MainForm extends javax.swing.JFrame {
   }//GEN-LAST:event_searchFKeyPressed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
-    disc.setOriginalTitle(origTittleF.getText());
-    disc.setRussianTitle(russTittleF.getText());
-    disc.setDirector(directorF.getText());
-    disc.setGenre(genreF.getText());
+    if (fixedDisc) {
+      Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
+      disc.setOriginalTitle(origTittleF.getText());
+      disc.setRussianTitle(russTittleF.getText());
+      disc.setDirector(directorF.getText());
+      disc.setGenre(genreF.getText());
+      try {
+        disc.setDuration(Integer.parseInt(durationF.getText()));
+      }
+      catch (NumberFormatException e) {     
+      }
+      try {
+        disc.setReleaseYear(Short.parseShort(releaseyearF.getText()));
+      }
+      catch (NumberFormatException e) {     
+      }
+      try {
+        disc.setRating(Double.parseDouble(ratingF.getText()));
+      }
+      catch (NumberFormatException e) {     
+      }
+      disc.setLanguages(langF.getText());
+      disc.setCountry(countryF.getText());
+      disc.setActors(actorsF.getText());
+      disc.setDescription(descriptionF.getText());
+      setDisc(disc);
+      showDiscsList();
+      fixedDisc = false;
+    }
+    if (fixedClient) {
+      Client client = getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn));
+      client.setName(clientNameF.getText());
+      client.setSurname(clientSurnameF.getText());
+      client.setPhone(clientPhoneF.getText());
+      setClient(client);
+      showClientsList();
+      fixedClient = false;
+    }
+    int x = jTable1.getSelectedRow();
+    start();
     try {
-      disc.setDuration(Integer.parseInt(durationF.getText()));
+      jTable1.setRowSelectionInterval(x, x);
+      showDiscFields();
     }
-    catch (NumberFormatException e) {     
+    catch (Exception e) {     
     }
-    try {
-      disc.setReleaseYear(Short.parseShort(releaseyearF.getText()));
-    }
-    catch (NumberFormatException e) {     
-    }
-    try {
-      disc.setRating(Double.parseDouble(ratingF.getText()));
-    }
-    catch (NumberFormatException e) {     
-    }
-    disc.setLanguages(langF.getText());
-    disc.setCountry(countryF.getText());
-    disc.setActors(actorsF.getText());
-    disc.setDescription(descriptionF.getText());
-    //deleteDisc(disc.getDiskID());
-    setDisc(disc);
-    showDiscsList();
-
-    Client client = getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn));
-    client.setName(clientNameF.getText());
-    client.setSurname(clientSurnameF.getText());
-    client.setPhone(clientPhoneF.getText());
-    setClient(client);
-    showClientsList();
   }//GEN-LAST:event_jButton2ActionPerformed
 
-  private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    start();
-  }//GEN-LAST:event_jButton4ActionPerformed
+  private void origTittleFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_origTittleFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_origTittleFKeyTyped
+
+  private void russTittleFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_russTittleFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_russTittleFKeyTyped
+
+  private void directorFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_directorFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_directorFKeyTyped
+
+  private void genreFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genreFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_genreFKeyTyped
+
+  private void durationFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_durationFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_durationFKeyTyped
+
+  private void releaseyearFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_releaseyearFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_releaseyearFKeyTyped
+
+  private void ratingFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ratingFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_ratingFKeyTyped
+
+  private void langFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_langFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_langFKeyTyped
+
+  private void countryFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_countryFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_countryFKeyTyped
+
+  private void actorsFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_actorsFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_actorsFKeyTyped
+
+  private void descriptionFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionFKeyTyped
+    fixedDisc = true;
+  }//GEN-LAST:event_descriptionFKeyTyped
+
+  private void clientNameFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientNameFKeyTyped
+    fixedClient = true;
+  }//GEN-LAST:event_clientNameFKeyTyped
+
+  private void clientSurnameFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientSurnameFKeyTyped
+    fixedClient = true;
+  }//GEN-LAST:event_clientSurnameFKeyTyped
+
+  private void clientPhoneFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientPhoneFKeyTyped
+    fixedClient = true;
+  }//GEN-LAST:event_clientPhoneFKeyTyped
 
   /**
    * @param args the command line arguments
@@ -1520,7 +1460,6 @@ public class MainForm extends javax.swing.JFrame {
   private javax.swing.JButton jButton10;
   private javax.swing.JButton jButton2;
   private javax.swing.JButton jButton3;
-  private javax.swing.JButton jButton4;
   private javax.swing.JButton jButton5;
   private javax.swing.JButton jButton6;
   private javax.swing.JButton jButton8;
@@ -1706,6 +1645,7 @@ public class MainForm extends javax.swing.JFrame {
    * в текстовые поля клиента.
    */
   private void showClientFields() {
+    clearClientFields();
     int first = (int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn);
     if (first != 0) {
       Client client = getClient(first);

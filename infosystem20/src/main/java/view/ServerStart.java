@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ public class ServerStart extends javax.swing.JFrame {
 
   private Server server;
   private Thread thread;
+  private boolean switchOf = false;
   
   /**
    * This method is called from within the constructor to initialize the form. WARNING: Do NOT
@@ -42,7 +44,6 @@ public class ServerStart extends javax.swing.JFrame {
     jLabel1 = new javax.swing.JLabel();
     jButton1 = new javax.swing.JButton();
     jLabel2 = new javax.swing.JLabel();
-    jButton2 = new javax.swing.JButton();
     jButton3 = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +52,7 @@ public class ServerStart extends javax.swing.JFrame {
 
     jLabel1.setText("Порт:");
 
+    jButton1.setBackground(new java.awt.Color(0, 255, 0));
     jButton1.setText("Запустить сервер");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,13 +61,6 @@ public class ServerStart extends javax.swing.JFrame {
     });
 
     jLabel2.setText("jLabel2");
-
-    jButton2.setText("Выключить сервер");
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButton2ActionPerformed(evt);
-      }
-    });
 
     jButton3.setText("Сохранить");
     jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -80,18 +75,17 @@ public class ServerStart extends javax.swing.JFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addGap(26, 26, 26)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addComponent(jLabel1)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(jLabel2)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jButton1)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton2)))
+            .addGap(65, 65, 65)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap(17, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -103,9 +97,7 @@ public class ServerStart extends javax.swing.JFrame {
           .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jButton3))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jButton1)
-          .addComponent(jButton2))
+        .addComponent(jButton1)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jLabel2)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -117,25 +109,33 @@ public class ServerStart extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-      server = new Server();
-      thread = new Thread(server);
-      thread.start();
-      jTextField1.setText(Integer.toString(Server.getPort()));
-      jLabel2.setText("Сервер запущен на порте: " + Server.getPort());
+      if (!switchOf) {
+        server = new Server();
+        thread = new Thread(server);
+        thread.start();
+        jLabel2.setText("Сервер запущен на порте: " + Server.getPort() + ".");
+        jButton1.setText("Выключить сервер");
+        jButton1.setBackground(Color.red);
+        jButton1.setForeground(Color.white);
+      }
+      else {
+        Server.end();
+        thread.interrupt();
+        jLabel2.setText("Сервер выключен.");
+        jButton1.setText("Запустить сервер");
+        jButton1.setBackground(Color.green);
+        jButton1.setForeground(Color.black);
+      }
+      switchOf = !switchOf;
     }//GEN-LAST:event_jButton1ActionPerformed
-
-  private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Server.end();
-    thread.interrupt();
-    jLabel2.setText("Сервер остановлен");
-  }//GEN-LAST:event_jButton2ActionPerformed
 
   private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     try {
       Server.writePort(Integer.parseInt(jTextField1.getText()));
+      jLabel2.setText("Указанный порт сохранен в файл.");
     }
     catch (NumberFormatException e) {
-      JOptionPane.showMessageDialog(this, "Указан неверный порт.");
+      jLabel2.setText("Указан неверный порт.");
     }
   }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -176,7 +176,6 @@ public class ServerStart extends javax.swing.JFrame {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButton1;
-  private javax.swing.JButton jButton2;
   private javax.swing.JButton jButton3;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;

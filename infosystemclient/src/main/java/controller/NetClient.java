@@ -49,6 +49,7 @@ public class NetClient {
       buffer = ip.split(" ");
       ip = buffer[0];
       port = Integer.parseInt(buffer[1]);
+      System.out.println();
     } catch (IOException e) {
       e.printStackTrace();
     }
