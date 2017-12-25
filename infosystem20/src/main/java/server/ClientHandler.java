@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.Socket;
 
 import static controller.Controller.*;
+import static server.Server.decAmount;
 
 /**
  * Created by Keerill on 16.12.2017.
@@ -16,6 +17,7 @@ public class ClientHandler extends Thread {
     private final Socket client;
     private String method;
     private String check;
+    private int index;
     private static final String showClients = "showClients";
     private static final String showDiscs = "showDiscs";
     private static final String saveChanges = "saveChanges";
@@ -45,6 +47,14 @@ public class ClientHandler extends Thread {
             e.printStackTrace();
         }
         start();
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     private void sendData(Object data, ObjectOutputStream objectOutputStream,
@@ -133,10 +143,16 @@ public class ClientHandler extends Thread {
         }
 
         if (packet.isCloseConnection()) {
-            stop();
+            closeConnection();
         }
 
         return packet;
+    }
+
+    private void closeConnection() {
+        interrupt();
+        System.out.println("Client №"+index+" has been leaved!");
+        decAmount();
     }
 
 
@@ -147,7 +163,9 @@ public class ClientHandler extends Thread {
                 check = (String) ois.readObject();
                 if (check.contains("ready")) {
                     packet = (Packet) ois.readObject();
-                    //System.out.println("get");
+                    System.out.println("Packet received from client №" + index);
+                    System.out.println(packet.toString());
+                    System.out.println();
                     packet = handler(packet);
                     oos.writeObject(packet);
                     oos.flush();
@@ -155,6 +173,11 @@ public class ClientHandler extends Thread {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
+                closeConnection();
+                break;
+            }
+            if (isInterrupted()) {
+                break;
             }
             try {
                 Thread.sleep(10);

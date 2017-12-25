@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import static controller.Controller.*;
 
@@ -19,17 +20,21 @@ public class Server implements Runnable {
 
     private static int port;
     private static boolean check;
-
+    private static int amount;
+    private static boolean isStarted;
     /**
      *
      */
     private static ServerSocket server;
 
-
     static {
 //        check = true;
         readPort();
 //        go();
+    }
+
+    public static void decAmount() {
+        amount--;
     }
 
     public static void setCheck(boolean check) {
@@ -58,6 +63,13 @@ public class Server implements Runnable {
     }
 
     public static int getPort() {
+        while (!isStarted) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return port;
     }
 
@@ -82,6 +94,7 @@ public class Server implements Runnable {
         try {
             server = new ServerSocket(port);
             System.out.println("Server is running on port: " + port);
+            isStarted = true;
         } catch (IOException e) {
             //e.printStackTrace();
             Server.port++;
@@ -92,14 +105,15 @@ public class Server implements Runnable {
     private static void handle() {
         while (true) {
             try {
-                if (server.isClosed()) {
-                    break;
-                }
                 Socket client = server.accept();
                 System.out.println("Connection is established");
-                new ClientHandler(client);
+                amount++;
+                new ClientHandler(client).setIndex(amount);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Server is closed!");
+            }
+            if (server.isClosed()) {
+                break;
             }
             try {
                 Thread.sleep(10);
@@ -112,10 +126,17 @@ public class Server implements Runnable {
     public static void end() {
         try {
             server.close();
+            isStarted = false;
+            readPort();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+//    public static void dropClient(int index) {
+//        clients.get(index).interrupt();
+//        clients.remove(index);
+//    }
 
     @Override
     public void run() {

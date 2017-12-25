@@ -136,6 +136,10 @@ public class Controller {
         daoDiscs.setDisc(disc);
     }
 
+    public static synchronized void setDiscByID(Disc disc) {
+        daoDiscs.setDisc(disc);
+    }
+
     /**
      * Метод, возвращающий экземпляр Disc по номеру.
      *

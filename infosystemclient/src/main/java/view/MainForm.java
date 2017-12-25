@@ -803,7 +803,7 @@ public class MainForm extends javax.swing.JFrame {
       //setClient(getDisc((int) jTable1.getValueAt(x, firstColumn)).getDiskID(), firstColumn);
       Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
       disc.setClientID(firstColumn);
-      setDiscByIndex(disc);
+      setDisc(disc);
       clientF.setText("Диск не на руках");
     }
   }
@@ -1131,7 +1131,7 @@ public class MainForm extends javax.swing.JFrame {
     if (x != -1 && y != -1) {
       Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
       disc.setClientID((int) jTable2.getValueAt(y, firstColumn));
-      setDiscByIndex(disc);
+      setDisc(disc);
       showDiscFields();
     } else {
       JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
@@ -1441,7 +1441,7 @@ public class MainForm extends javax.swing.JFrame {
   }//GEN-LAST:event_searchFKeyPressed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    setDiscByIndex(getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)));
+    setDisc(getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)));
   }//GEN-LAST:event_jButton2ActionPerformed
 
   /**

@@ -4,12 +4,15 @@ import model.Client;
 import model.Disc;
 import model.Packet;
 import model.dao.EssenceForSave;
+import model.dao.tools.CompareClients;
+import model.dao.tools.CompareDiscs;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 import static controller.NetClient.handle;
@@ -41,6 +44,8 @@ public class Controller {
       packet = handle(packet);
 
     ArrayList<Client> clients = packet.getClients();
+    CompareClients compareClients = new CompareClients();
+    Collections.sort(clients, compareClients);
     DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
 
     for (int j = 0; j < clients.size(); j++) {
@@ -63,6 +68,8 @@ public class Controller {
   public static JTable showDiscs(JTable jTable, String searchString) {
 
     ArrayList<Disc> discs = search(searchString);
+    CompareDiscs compareDiscs = new CompareDiscs();
+    Collections.sort(discs, compareDiscs);
     DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
 
     for (int j = 0; j < discs.size(); j++) {
@@ -213,6 +220,15 @@ public class Controller {
     Packet packet = new Packet();
 
     packet.setMethod("setDisc");
+    packet.setDisc(disc);
+
+    packet = handle(packet);
+  }
+
+  public static void setDiscByID(Disc disc) {
+    Packet packet = new Packet();
+
+    packet.setMethod("setDiscByID");
     packet.setDisc(disc);
 
     packet = handle(packet);

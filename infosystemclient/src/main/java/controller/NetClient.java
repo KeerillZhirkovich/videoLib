@@ -122,6 +122,7 @@ public class NetClient {
 
   public static void closeConnection() {
     Packet packet = new Packet();
+    packet.setMethod("Close");
     packet.setCloseConnection(true);
     sendData(packet);
     getData();

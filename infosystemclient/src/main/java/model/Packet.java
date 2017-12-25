@@ -106,4 +106,14 @@ public class Packet implements Serializable {
   public void setCloseConnection(boolean closeConnection) {
     this.closeConnection = closeConnection;
   }
+
+  @Override
+  public String toString() {
+    return "Packet{" +
+        "method='" + method + '\'' +
+        ", number=" + number +
+        ", oneMoreNumber=" + oneMoreNumber +
+        ", info='" + info + '\'' +
+        '}';
+  }
 }

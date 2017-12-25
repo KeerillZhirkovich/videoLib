@@ -105,15 +105,17 @@ public class ServerStart extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-      Server server = new Server();
-      Thread thread = new Thread(server);
-      jTextField1.setText(Integer.toString(Server.getPort()));
-      jLabel2.setText("Сервер запущен.");
+      server = new Server();
+      thread = new Thread(server);
+      jLabel2.setText("Сервер запущен");
       thread.start();
+      jTextField1.setText(Integer.toString(Server.getPort()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Server.end();
+    thread.interrupt();
+    jLabel2.setText("Сервер остановлен");
   }//GEN-LAST:event_jButton2ActionPerformed
 
   /**
@@ -157,5 +159,7 @@ public class ServerStart extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JTextField jTextField1;
+  private Server server;
+  private Thread thread;
   // End of variables declaration//GEN-END:variables
 }
