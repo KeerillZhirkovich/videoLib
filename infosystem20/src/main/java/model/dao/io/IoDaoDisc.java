@@ -51,8 +51,7 @@ public class IoDaoDisc implements DaoDisc, Serializable {
         
         boolean check = false;
         for (int i = 0; i < discs.size(); i++)
-          if (discs.get(i).getDiskID() == disc.getDiskID())
-          {
+          if (discs.get(i).getDiskID() == disc.getDiskID()) {
             discs.get(i).setOriginalTitle(disc.getOriginalTitle());
             discs.get(i).setRussianTitle(disc.getRussianTitle());
             discs.get(i).setDirector(disc.getDirector());

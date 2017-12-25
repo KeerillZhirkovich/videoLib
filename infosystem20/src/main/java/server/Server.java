@@ -57,6 +57,8 @@ public class Server implements Runnable {
             Writer fileWriter = new FileWriter("database\\port");
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.print(newPort);
+            printWriter.close();
+            port = newPort;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,6 +73,10 @@ public class Server implements Runnable {
             }
         }
         return port;
+    }
+    
+    public static int getPortFromFile() {
+      return port;
     }
 
     /**

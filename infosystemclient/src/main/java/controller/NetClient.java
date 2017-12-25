@@ -4,6 +4,7 @@
 package controller;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 import model.Packet;
 
@@ -39,14 +40,16 @@ public class NetClient {
     return ip;
   }
 
-  private static void readInfo() {
+ private static void readInfo() {
     try {
-      Reader fileReader = new FileReader("serverinfo\\serverinfo");
-      StreamTokenizer streamTokenizer = new StreamTokenizer(fileReader);
-      streamTokenizer.nextToken();
-      ip = streamTokenizer.sval;
-      streamTokenizer.nextToken();
-      port = (int) streamTokenizer.nval;
+      String[] buffer = new String[2];
+      InputStream in = new FileInputStream("serverinfo\\serverinfo");
+      DataInputStream dataInputStream = new DataInputStream(in);
+      ip = dataInputStream.readLine();
+      buffer = ip.split(" ");
+      ip = buffer[0];
+      port = Integer.parseInt(buffer[1]);
+      System.out.println();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -71,12 +74,13 @@ public class NetClient {
 
   public static String openConnection() {
     try {
-      socket = new Socket(ip, port);
+      socket = new Socket(InetAddress.getByName(ip), port);
       oos = new ObjectOutputStream(socket.getOutputStream());
       ois = new ObjectInputStream(socket.getInputStream());
       System.out.println("Success");
       return "Success";
     } catch (IOException e) {
+      //e.printStackTrace();
       System.out.println("Server is not available");
       return "Server is not available";
     }
