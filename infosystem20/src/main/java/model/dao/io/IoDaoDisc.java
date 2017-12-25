@@ -38,42 +38,24 @@ public class IoDaoDisc implements DaoDisc, Serializable {
         ArrayList<Disc> discs = getDiscs();
         int id;
 
-        if (discs.isEmpty()) {
-            id = 1;
+        if (disc.getDiskID() != 0) {
+            setDiscByID(disc);
         } else {
-            if (disc.getDiskID() == 0) {
-                id = discs.get(discs.size() - 1).getDiskID() + 1;
+            LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
+            if (discs.isEmpty()) {
+                id = 1;
             } else {
-                id = disc.getDiskID();
+                if (disc.getDiskID() == 0) {
+                    id = discs.get(discs.size() - 1).getDiskID() + 1;
+                } else {
+                    id = disc.getDiskID();
+                }
             }
+            disc.setDiskID(id);
+            temp.add(disc);
+            discs = new ArrayList<>(temp);
+            DataLoad.writeDiscs(discs);
         }
-        disc.setDiskID(id);
-        
-        boolean check = false;
-        for (int i = 0; i < discs.size(); i++)
-          if (discs.get(i).getDiskID() == disc.getDiskID()) {
-            discs.get(i).setOriginalTitle(disc.getOriginalTitle());
-            discs.get(i).setRussianTitle(disc.getRussianTitle());
-            discs.get(i).setDirector(disc.getDirector());
-            discs.get(i).setGenre(disc.getGenre());
-            discs.get(i).setDuration(disc.getDuration());
-            discs.get(i).setReleaseYear(disc.getReleaseYear());
-            discs.get(i).setRating(disc.getRating());
-            discs.get(i).setLanguages(disc.getLanguages());
-            discs.get(i).setCountry(disc.getCountry());
-            discs.get(i).setActors(disc.getActors());
-            discs.get(i).setDescription(disc.getDescription());
-            discs.get(i).setClientID(disc.getClientID());
-            check = true;
-            break;
-          }
-        
-        LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
-        if (!check)        
-          temp.add(disc);
-
-        discs = new ArrayList<>(temp);
-        DataLoad.writeDiscs(discs);
     }
 
     /**

@@ -37,21 +37,49 @@ public class IoDaoClient implements DaoClient, Serializable {
     public void setClient(Client client) {
         ArrayList<Client> clients = getClients();
         int id;
-        LinkedHashSet<Client> temp = new LinkedHashSet<>(clients);
 
-        if (clients.isEmpty()) {
-            id = 1;
+        if (client.getClientID() != 0) {
+            setClientByID(client);
         } else {
-            if (client.getClientID() == 0) {
-                id = clients.get(clients.size() - 1).getClientID() + 1;
+            LinkedHashSet<Client> temp = new LinkedHashSet<>(clients);
+            if (clients.isEmpty()) {
+                id = 1;
             } else {
-                id = client.getClientID();
+                if (client.getClientID() == 0) {
+                    id = clients.get(clients.size() - 1).getClientID() + 1;
+                } else {
+                    id = client.getClientID();
+                }
+            }
+            client.setClientID(id);
+            temp.add(client);
+
+            clients = new ArrayList<>(temp);
+            DataLoad.writeClients(clients);
+        }
+    }
+
+    /**
+     * @param id, disc
+     */
+    public void setClientByID(Client client) {
+        ArrayList<Client> clients = getClients();
+        for (int i = 0; i < clients.size(); i++) {
+            if (clients.get(i).getClientID() == client.getClientID()) {
+                setClientByIndex(i, client);
+                break;
             }
         }
-        client.setClientID(id);
-        temp.add(client);
+    }
 
-        clients = new ArrayList<>(temp);
+    /**
+     * Служебный метод, заменяющий экземпляр Disc по его расположению в коллекции.
+     *
+     * @param index
+     */
+    public void setClientByIndex(int index, Client disc) {
+        ArrayList<Client> clients = getClients();
+        clients.set(index, disc);
         DataLoad.writeClients(clients);
     }
 

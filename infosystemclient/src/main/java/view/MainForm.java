@@ -1457,6 +1457,13 @@ public class MainForm extends javax.swing.JFrame {
     //deleteDisc(disc.getDiskID());
     setDisc(disc);
     showDiscsList();
+
+    Client client = getClient((int) jTable2.getValueAt(jTable2.getSelectedRow(), firstColumn));
+    client.setName(clientNameF.getText());
+    client.setSurname(clientSurnameF.getText());
+    client.setPhone(clientPhoneF.getText());
+    setClient(client);
+    showClientsList();
   }//GEN-LAST:event_jButton2ActionPerformed
 
   private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
