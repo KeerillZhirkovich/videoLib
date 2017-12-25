@@ -47,23 +47,7 @@ public class MainForm extends javax.swing.JFrame {
     
     clientF.setText("");
 
-    if (getClients().isEmpty()) {
-      setClientFieldsEnable(false);
-    } else {
-      showClientsList();
-      jTable2.setRowSelectionInterval(firstRow, firstRow);
-      showClientFields();
-    }
-
-    if (getDiscs().isEmpty()) {
-      setDiscFieldsEnable(false);
-    } else {
-      showDiscsList();
-      jTable1.setRowSelectionInterval(firstRow, firstRow);
-      showDiscFields();
-    }
-
-    jTable1.requestFocus();
+    start();
     jDesktopPane1.setVisible(false);
   }
 
@@ -125,6 +109,7 @@ public class MainForm extends javax.swing.JFrame {
     clientPhoneF = new javax.swing.JTextField();
     clientNameF = new javax.swing.JTextField();
     jButton2 = new javax.swing.JButton();
+    jButton4 = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     jMenu1 = new javax.swing.JMenu();
     openBase = new javax.swing.JMenuItem();
@@ -594,10 +579,18 @@ public class MainForm extends javax.swing.JFrame {
       }
     });
 
+    jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
     jButton2.setText("Сохранить");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton2ActionPerformed(evt);
+      }
+    });
+
+    jButton4.setText("Обновить базу");
+    jButton4.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton4ActionPerformed(evt);
       }
     });
 
@@ -629,23 +622,28 @@ public class MainForm extends javax.swing.JFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+              .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+              .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGroup(layout.createSequentialGroup()
             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(127, 127, 127)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-              .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGap(9, 9, 9)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(9, 9, 9))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(102, 102, 102)))
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addComponent(jButton5)
@@ -678,61 +676,46 @@ public class MainForm extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(jLabel14)
-                  .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(jLabel15)
-                  .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(jLabel16)
-                  .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(jButton5)
-                  .addComponent(jButton6)
-                  .addComponent(jButton10)))
-              .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                      .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(jButton9))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(jButton1)
-                  .addComponent(jButton3))))
-            .addGap(36, 36, 36))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel14)
+              .addComponent(clientNameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel15)
+              .addComponent(clientSurnameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel16)
+              .addComponent(clientPhoneF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jButton5)
+              .addComponent(jButton6)
+              .addComponent(jButton10)))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jButton9))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton4)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jButton1)
+              .addComponent(jButton3)))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(20, 20, 20))
     );
 
     pack();
     setLocationRelativeTo(null);
   }// </editor-fold>//GEN-END:initComponents
-
-
-  /**
-   * Метод нажатия кнопки "Сохранить".
-   * Вызывается метод сохранения базы в файл.
-   *
-   * @param evt
-   */
-  private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-    // /GEN-FIRST:event_jButton4ActionPerformed
-    //saveChanges();
-  }
-
 
   /**
    * Метод нажатия кнопки "Удалить диск".
@@ -1132,7 +1115,13 @@ public class MainForm extends javax.swing.JFrame {
       Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
       disc.setClientID((int) jTable2.getValueAt(y, firstColumn));
       setDisc(disc);
-      showDiscFields();
+      try {
+        clientF.setText(getClient(disc.getClientID()).getName() + " "
+            + getClient(disc.getClientID()).getSurname());
+      } catch (Exception e) {
+        disc.setClientID(0);
+        clientF.setText("Диск не на руках");
+      }
     } else {
       JOptionPane.showMessageDialog(this, "Вы не выбрали клиента");
     }
@@ -1338,7 +1327,7 @@ public class MainForm extends javax.swing.JFrame {
    */
   private void russTittleFFocusLost(java.awt.event.FocusEvent evt) {
 //GEN-FIRST:event_russTittleFFocusLost
-    showDiscsList();
+    //showDiscsList();
   }
 //GEN-LAST:event_russTittleFFocusLost
 
@@ -1352,8 +1341,8 @@ public class MainForm extends javax.swing.JFrame {
    */
   private void clientNameFFocusLost(java.awt.event.FocusEvent evt) {
 //GEN-FIRST:event_clientNameFFocusLost
-    showDiscFields();
-    showClientsList();
+    //showDiscFields();
+    //showClientsList();
   }
 //GEN-LAST:event_clientNameFFocusLost
 
@@ -1367,8 +1356,8 @@ public class MainForm extends javax.swing.JFrame {
    */
   private void clientSurnameFFocusLost(java.awt.event.FocusEvent evt) {
 //GEN-FIRST:event_clientSurnameFFocusLost
-    showDiscFields();
-    showClientsList();
+    //showDiscFields();
+    //showClientsList();
   }
 //GEN-LAST:event_clientSurnameFFocusLost
 
@@ -1382,8 +1371,8 @@ public class MainForm extends javax.swing.JFrame {
    */
   private void clientPhoneFFocusLost(java.awt.event.FocusEvent evt) {
     // /GEN-FIRST:event_clientPhoneFFocusLost
-    showDiscFields();
-    showClientsList();
+    //showDiscFields();
+    //showClientsList();
   }
 
 
@@ -1441,8 +1430,38 @@ public class MainForm extends javax.swing.JFrame {
   }//GEN-LAST:event_searchFKeyPressed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    setDisc(getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn)));
+    Disc disc = getDisc((int) jTable1.getValueAt(jTable1.getSelectedRow(), firstColumn));
+    disc.setOriginalTitle(origTittleF.getText());
+    disc.setRussianTitle(russTittleF.getText());
+    disc.setDirector(directorF.getText());
+    disc.setGenre(genreF.getText());
+    try {
+      disc.setDuration(Integer.parseInt(durationF.getText()));
+    }
+    catch (NumberFormatException e) {     
+    }
+    try {
+      disc.setReleaseYear(Short.parseShort(releaseyearF.getText()));
+    }
+    catch (NumberFormatException e) {     
+    }
+    try {
+      disc.setRating(Double.parseDouble(ratingF.getText()));
+    }
+    catch (NumberFormatException e) {     
+    }
+    disc.setLanguages(langF.getText());
+    disc.setCountry(countryF.getText());
+    disc.setActors(actorsF.getText());
+    disc.setDescription(descriptionF.getText());
+    //deleteDisc(disc.getDiskID());
+    setDisc(disc);
+    showDiscsList();
   }//GEN-LAST:event_jButton2ActionPerformed
+
+  private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    start();
+  }//GEN-LAST:event_jButton4ActionPerformed
 
   /**
    * @param args the command line arguments
@@ -1494,6 +1513,7 @@ public class MainForm extends javax.swing.JFrame {
   private javax.swing.JButton jButton10;
   private javax.swing.JButton jButton2;
   private javax.swing.JButton jButton3;
+  private javax.swing.JButton jButton4;
   private javax.swing.JButton jButton5;
   private javax.swing.JButton jButton6;
   private javax.swing.JButton jButton8;
@@ -1728,5 +1748,25 @@ public class MainForm extends javax.swing.JFrame {
       jTable1.setRowSelectionInterval(firstRow, firstRow);
       showDiscFields();
     }
+  }
+
+  private void start() {
+    if (getClients().isEmpty()) {
+      setClientFieldsEnable(false);
+    } else {
+      showClientsList();
+      jTable2.setRowSelectionInterval(firstRow, firstRow);
+      showClientFields();
+    }
+
+    if (getDiscs().isEmpty()) {
+      setDiscFieldsEnable(false);
+    } else {
+      showDiscsList();
+      jTable1.setRowSelectionInterval(firstRow, firstRow);
+      showDiscFields();
+    }
+
+    jTable1.requestFocus();
   }
 }

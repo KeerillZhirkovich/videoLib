@@ -37,7 +37,6 @@ public class IoDaoDisc implements DaoDisc, Serializable {
     public void setDisc(Disc disc) {
         ArrayList<Disc> discs = getDiscs();
         int id;
-        LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
 
         if (discs.isEmpty()) {
             id = 1;
@@ -49,7 +48,30 @@ public class IoDaoDisc implements DaoDisc, Serializable {
             }
         }
         disc.setDiskID(id);
-        temp.add(disc);
+        
+        boolean check = false;
+        for (int i = 0; i < discs.size(); i++)
+          if (discs.get(i).getDiskID() == disc.getDiskID())
+          {
+            discs.get(i).setOriginalTitle(disc.getOriginalTitle());
+            discs.get(i).setRussianTitle(disc.getRussianTitle());
+            discs.get(i).setDirector(disc.getDirector());
+            discs.get(i).setGenre(disc.getGenre());
+            discs.get(i).setDuration(disc.getDuration());
+            discs.get(i).setReleaseYear(disc.getReleaseYear());
+            discs.get(i).setRating(disc.getRating());
+            discs.get(i).setLanguages(disc.getLanguages());
+            discs.get(i).setCountry(disc.getCountry());
+            discs.get(i).setActors(disc.getActors());
+            discs.get(i).setDescription(disc.getDescription());
+            discs.get(i).setClientID(disc.getClientID());
+            check = true;
+            break;
+          }
+        
+        LinkedHashSet<Disc> temp = new LinkedHashSet<>(discs);
+        if (!check)        
+          temp.add(disc);
 
         discs = new ArrayList<>(temp);
         DataLoad.writeDiscs(discs);
@@ -243,5 +265,4 @@ public class IoDaoDisc implements DaoDisc, Serializable {
         }
         DataLoad.writeDiscs(discs);
     }
-
 }
