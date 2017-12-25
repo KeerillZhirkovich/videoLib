@@ -59,6 +59,7 @@ public class NetClient {
       printWriter.print(newIp);
       printWriter.print(" ");
       printWriter.print(newPort);
+      fileWriter.close();
     } catch (IOException e) {
       e.printStackTrace();
     }

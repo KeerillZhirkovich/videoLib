@@ -96,12 +96,20 @@ public class ClientStart extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      if ("Success".equals(NetClient.openConnection())) {        
-        MainForm.main(new String [] {});
-        this.setVisible(false);
-      }
-      else
+      try {
+        NetClient.writeInfo(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+        NetClient.setIp(jTextField1.getText());
+        NetClient.setPort(Integer.parseInt(jTextField2.getText()));
+        if ("Success".equals(NetClient.openConnection())) {        
+          MainForm.main(new String [] {});
+          this.setVisible(false);
+        }
+        else
+          JOptionPane.showMessageDialog(this, "Сервер с указанным IP и/или портом не найден.");
+        }
+      catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Сервер с указанным IP и/или портом не найден.");
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
