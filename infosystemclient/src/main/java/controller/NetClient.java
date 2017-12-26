@@ -49,7 +49,6 @@ public class NetClient {
       buffer = ip.split(" ");
       ip = buffer[0];
       port = Integer.parseInt(buffer[1]);
-      System.out.println();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -97,7 +96,8 @@ public class NetClient {
       oos.flush();
       //System.out.println("send");
     } catch (IOException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
+      System.out.println("Server is not available!");
     }
   }
 
@@ -110,10 +110,9 @@ public class NetClient {
       //System.out.println("get");
       notReceived = false;
       return packet;
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
+    } catch (IOException | ClassNotFoundException e) {
+      //e.printStackTrace();
+      System.out.println("Server is not available!");
     }
     return null;
   }

@@ -20,8 +20,8 @@ public class Server implements Runnable {
 
     private static int port;
     private static boolean check;
-    private static int amount;
     private static boolean isStarted;
+    private static ArrayList<ClientHandler> clients;
     /**
      *
      */
@@ -31,10 +31,6 @@ public class Server implements Runnable {
 //        check = true;
         readPort();
 //        go();
-    }
-
-    public static void decAmount() {
-        amount--;
     }
 
     public static void setCheck(boolean check) {
@@ -100,6 +96,7 @@ public class Server implements Runnable {
         try {
             server = new ServerSocket(port);
             System.out.println("Server is running on port: " + port);
+            clients = new ArrayList<>();
             isStarted = true;
         } catch (IOException e) {
             //e.printStackTrace();
@@ -113,8 +110,8 @@ public class Server implements Runnable {
             try {
                 Socket client = server.accept();
                 System.out.println("Connection is established");
-                amount++;
-                new ClientHandler(client).setIndex(amount);
+                clients.add(new ClientHandler(client));
+                clients.get(clients.size()-1).setIndex(clients.size());
             } catch (IOException e) {
                 System.out.println("Server is closed!");
             }
@@ -131,6 +128,10 @@ public class Server implements Runnable {
 
     public static void end() {
         try {
+            for (ClientHandler client : clients) {
+                client.closeConnection();
+            }
+            clients.clear();
             server.close();
             isStarted = false;
             readPort();
@@ -139,15 +140,17 @@ public class Server implements Runnable {
         }
     }
 
-//    public static void dropClient(int index) {
-//        clients.get(index).interrupt();
-//        clients.remove(index);
-//    }
+    public static void dropClient(ClientHandler client) {
+        clients.remove(client);
+    }
+
 
     @Override
     public void run() {
         start(port);
         handle();
-        end();
+        if (isStarted) {
+            end();
+        }
     }
 }

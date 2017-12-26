@@ -7,7 +7,6 @@ import java.io.*;
 import java.net.Socket;
 
 import static controller.Controller.*;
-import static server.Server.decAmount;
 
 /**
  * Created by Keerill on 16.12.2017.
@@ -144,15 +143,15 @@ public class ClientHandler extends Thread {
 
         if (packet.isCloseConnection()) {
             closeConnection();
+            Server.dropClient(this);
         }
 
         return packet;
     }
 
-    private void closeConnection() {
+    public void closeConnection() {
         interrupt();
         System.out.println("Client №"+index+" has been leaved!");
-        decAmount();
     }
 
 
@@ -161,6 +160,13 @@ public class ClientHandler extends Thread {
         while (true) {
             try {
                 check = (String) ois.readObject();
+                if (isInterrupted()) {
+                    packet = (Packet) ois.readObject();
+                    oos.writeObject(packet);
+                    ois.close();
+                    oos.close();
+                    break;
+                }
                 if (check.contains("ready")) {
                     packet = (Packet) ois.readObject();
                     System.out.println("Packet received from client №" + index);
@@ -174,6 +180,7 @@ public class ClientHandler extends Thread {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 closeConnection();
+                Server.dropClient(this);
                 break;
             }
             if (isInterrupted()) {
