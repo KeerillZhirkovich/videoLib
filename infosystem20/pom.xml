@@ -32,7 +32,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>MainForm</mainClass>
+                            <mainClass>ServerStart</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -43,7 +43,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>server.Server</mainClass>
+                            <mainClass>view.ServerStart</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -75,7 +75,7 @@
                 </dependencies>
                 <configuration>
                     <configLocation>src/config/checkstyle2.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
+                    <consoleOutput>false</consoleOutput>
                 </configuration>
                 <executions>
                     <execution>
