@@ -15,6 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
@@ -116,6 +117,7 @@ public class MainForm extends javax.swing.JFrame {
     jMenu1 = new javax.swing.JMenu();
     openBase = new javax.swing.JMenuItem();
     mergeBase = new javax.swing.JMenuItem();
+    jMenuItem1 = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Видеотека");
@@ -622,6 +624,14 @@ public class MainForm extends javax.swing.JFrame {
     });
     jMenu1.add(mergeBase);
 
+    jMenuItem1.setText("Сохранить базу");
+    jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1ActionPerformed(evt);
+      }
+    });
+    jMenu1.add(jMenuItem1);
+
     jMenuBar1.add(jMenu1);
 
     setJMenuBar(jMenuBar1);
@@ -700,20 +710,16 @@ public class MainForm extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton5)
-                .addComponent(jButton6)
-                .addComponent(jButton10))
-              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton1)
-                .addComponent(jButton3))))
-          .addGroup(layout.createSequentialGroup()
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jButton5)
+            .addComponent(jButton6)
+            .addComponent(jButton10))
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jButton1)
+            .addComponent(jButton3))
+          .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap(9, Short.MAX_VALUE))
     );
 
@@ -1410,6 +1416,20 @@ public class MainForm extends javax.swing.JFrame {
     fixedClient = true;
   }//GEN-LAST:event_clientPhoneFKeyTyped
 
+  private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    JFileChooser dialog = new JFileChooser();
+    if (dialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+      File file = dialog.getSelectedFile();
+      if (!file.exists()) {
+        try {
+          file.createNewFile();
+        } catch (IOException ex) {
+        }
+      }
+      saveData(file.getPath());
+    }
+  }//GEN-LAST:event_jMenuItem1ActionPerformed
+
   /**
    * @param args the command line arguments
    */
@@ -1483,6 +1503,7 @@ public class MainForm extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel9;
   private javax.swing.JMenu jMenu1;
   private javax.swing.JMenuBar jMenuBar1;
+  private javax.swing.JMenuItem jMenuItem1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JScrollPane jScrollPane2;
