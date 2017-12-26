@@ -9,8 +9,7 @@ import model.dao.tools.CompareDiscs;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
@@ -97,6 +96,23 @@ public class Controller {
     packet = handle(packet);
 
     return packet.getDisc();
+  }
+
+  /**
+   * @param filePath
+   */
+  public static void saveData(String filePath) {
+    EssenceForSave essenceForSave = new EssenceForSave();
+    essenceForSave.setDiscs(getDiscs());
+    essenceForSave.setClients(getClients());
+    try {
+      FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+      ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+      objectOutputStream.writeObject(essenceForSave);
+      objectOutputStream.flush();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
